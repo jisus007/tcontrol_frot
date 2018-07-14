@@ -1,0 +1,18 @@
+<mat-grid-list cols="4" rowHeight="400" style="padding:10px; margin-top: 8%">
+    <mat-grid-tile *ngFor="let d of directorio;">
+        <mat-card class="example-card">
+          <mat-card-header>
+             <div mat-card-avatar class="example-header-image"></div>
+              <mat-card-title>{{d.nombre}}</mat-card-title>
+              <mat-card-subtitle> {{d.celular}}</mat-card-subtitle>
+            </mat-card-header>
+            <img mat-card-image src="https://imagineacademy.microsoft.com/content/images/microsoft-img.png" alt="Personal">
+            <mat-card-content>
+                <p>
+                 Analista
+                </p>
+              </mat-card-content>
+          </mat-card>
+      </mat-grid-tile>
+</mat-grid-list>
+
