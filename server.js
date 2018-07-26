@@ -8,8 +8,8 @@ const app = express();
 app.use(express.static(__dirname + '/dist/tcontrol-cliente'));
 
 app.get('/*', function(req,res) {
-    
-res.sendFile(path.join(__dirname+'/dist/tcontrol-cliente/index.html'));
+    const index = path.join(__dirname, 'build', 'index.html');
+res.sendFile(index)
 });
 
 // Start the app by listening on the default Heroku port
