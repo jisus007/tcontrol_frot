@@ -5,11 +5,11 @@ const path = require('path');
 const app = express();
 
 // Serve only the static files form the dist directory
-app.use(express.static(__dirname + '/dist/app-rastreo-web'));
+app.use(express.static(__dirname + '/dist/tcontrol_frot'));
 
 app.get('/*', function(req,res) {
     
-res.sendFile(path.join(__dirname+'/dist/app-rastreo-web/index.html'));
+res.sendFile(path.join(__dirname+'/dist/tcontrol_frot/index.html'));
 });
 
 // Start the app by listening on the default Heroku port
