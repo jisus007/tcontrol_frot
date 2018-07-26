@@ -33,6 +33,7 @@ import { DialogComponent } from './dialog/dialog.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DirectorioService } from './_services/directorio.service';
 import { PersonalComponent } from './personal/personal.component';
+import { ObjetoComponent } from './objeto/objeto.component';
 
 
 @NgModule({
@@ -44,6 +45,7 @@ import { PersonalComponent } from './personal/personal.component';
     TcontrolComponent,
     DialogComponent,
     PersonalComponent,
+    ObjetoComponent,
   ],
   imports: [
     BrowserModule,
@@ -73,6 +75,4 @@ import { PersonalComponent } from './personal/personal.component';
   exports: [ DialogComponent ]
 })
 export class AppModule {
-
-
  }

@@ -7,6 +7,7 @@ import { MainComponent } from './main/main.component';
 import { AppComponent } from './app.component';
 import { TcontrolComponent } from './tcontrol/tcontrol.component';
 import { PersonalComponent } from './personal/personal.component';
+import { ObjetoComponent } from './objeto/objeto.component';
 
 const routes: Routes = [
   { path: 'directorio', component: DirectorioComponent },
@@ -15,6 +16,7 @@ const routes: Routes = [
   { path: 'login', component: LoginComponent},
   { path: 'app', component: AppComponent},
   { path: 'personal', component: PersonalComponent},
+  { path: 'objeto', component: ObjetoComponent},
   { path: '', component: AppComponent},
   { path: '**', component: AppComponent},
 ];
