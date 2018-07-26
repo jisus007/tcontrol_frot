@@ -6,8 +6,7 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule }   from '@angular/common';
 import {MatTooltipModule} from '@angular/material/tooltip';
-//import { ChartistModules } from 'ng-chartist';
-//import { jqxChartComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxchart';
+
 // Angular Material Modules
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
@@ -77,4 +76,3 @@ import { ObjetoComponent } from './objeto/objeto.component';
 export class AppModule {
  }
 
- 
