@@ -39,6 +39,8 @@ export class DirectorioComponent implements OnInit {
       this.dataSource.paginator = this.paginator;
       this.dataSource.sort = this.sort
 
+
+      this.isloading = false;
   }
 
   public obtenerDirectorio(){
@@ -47,7 +49,7 @@ export class DirectorioComponent implements OnInit {
       this.dataSource.data = data;
     }
   );
-  this.isloading = false;
+
   }
 
  

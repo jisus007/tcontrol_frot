@@ -1,10 +1,11 @@
 
 <br><br><br><br><br>
-<mat-form-field>
-    <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Busqueda">
-  </mat-form-field>
-<div class="mat-elevation-z8">
-<table *ngIf="dataSource.data.length > 0 else noData" mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;" > 
+
+<div class="mat-elevation-z8" *ngIf="dataSource.data.length > 0 else noData" >
+    <mat-form-field>
+        <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Busqueda">
+      </mat-form-field>
+<table  mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;" > 
 
   <!--- Note that these columns can be defined in any order.
         The actual rendered columns are set as a property on the row definition" -->
@@ -77,9 +78,14 @@
 <mat-paginator [pageSizeOptions]="[5, 10, 20]" showFirstLastButtons></mat-paginator>
 </div>
 <ng-template #noData>
-    <div class="mat-elevation-z8 noData">
-  <mat-spinner *ngIf="isLoading" class="spinner"> </mat-spinner>
-  <h2 *ngIf="isLoading">Cargando Datos</h2>
-    <h2 *ngIf="!isLoading">No hay datos que mostrar</h2>
+    <div class="mat-elevation-z8 noData" >
+        <mat-spinner *ngIf="isLoading" style="margin: auto">
+            
+        </mat-spinner>
+        <div fxLayout fxLayoutAlign="center center" >
+        <h2 *ngIf="isLoading">Cargando Datos...</h2>
+        <h2 *ngIf="!isLoading ">No hay datos que mostrar</h2>
+      </div>
+      
   </div>
 </ng-template>
