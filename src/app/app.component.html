@@ -1,14 +1,14 @@
 
-<mat-toolbar  color="primary" class="main-menu class mat-elevation-z8"  ><i class="material-icons">location_searching</i>&nbsp;Rastreo&nbsp;&nbsp;&nbsp;&nbsp; 
-    
 
-<button mat-button routerLink="login"><i class="material-icons">person</i> Login</button>
-<button mat-button routerLink="objeto"><i class="material-icons">directions_car</i> Objeto</button>
-<button mat-button routerLink="objeto"><i class="material-icons">location_on</i> Ubicaciones</button>
-
+<mat-toolbar  color="primary" class="main-menu class mat-elevation-z8"  ><i class="material-icons">location_searching</i>&nbsp;Rastreo&nbsp;&nbsp;&nbsp;&nbsp;    
+    <div fxLayout="row"  fxLayoutAlign="end">
+        <button mat-button fxFlex="auto" routerLink="login"><i class="material-icons">person</i> Login</button>
+        <button mat-button fxFlex="auto" routerLink="objeto"><i class="material-icons">directions_car</i> Objeto</button>
+        <button mat-button fxFlex="auto" routerLink="objeto"><i class="material-icons">location_on</i> Ubicaciones</button>
+    </div>
 </mat-toolbar>
 
 
-<div class="contenedor">
+<div class="contenedor" >
     <router-outlet></router-outlet>
 </div>

@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import {FlexLayoutModule} from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -67,7 +68,8 @@ import { ObjetoComponent } from './objeto/objeto.component';
     MatTooltipModule,
     NgbModule,
     MatExpansionModule,
-    MatGridListModule
+    MatGridListModule,
+    FlexLayoutModule
   ],
   providers: [DirectorioService,DialogComponent],
   bootstrap: [AppComponent],
