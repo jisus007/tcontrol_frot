@@ -26,7 +26,7 @@ export class ObjetoComponent implements OnInit {
 
   //creamos variable datasource de tipo MatTableDataSource
   dataSource = new MatTableDataSource();
-
+  isloading: boolean;
   //en el constructor inicimos nuestro Objeto service
   constructor(private objetoService: ObjetoService) { }
 
@@ -35,6 +35,8 @@ export class ObjetoComponent implements OnInit {
     this.obtenerObjetos();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort
+
+    this.isloading = false;
   }
 
   //creamos metodo obtenerObjetos, este metodo obtiene todos los objetos
