@@ -79,12 +79,12 @@
 </div>
 <ng-template #noData>
     <div class="mat-elevation-z8 noData" >
-        <mat-spinner *ngIf="isLoading" style="margin: auto">
+        <mat-spinner *ngIf="!isLoading" style="margin: auto">
             
         </mat-spinner>
         <div fxLayout fxLayoutAlign="center center" >
-        <h2 *ngIf="isLoading">Cargando Datos...</h2>
+        <h2 *ngIf="!isLoading">Cargando Datos...</h2>
       </div>
-      <h2 *ngIf="!isLoading ">No hay datos que mostrar</h2>
+      <h2 *ngIf="isLoading ">No hay datos que mostrar</h2>
   </div>
 </ng-template>

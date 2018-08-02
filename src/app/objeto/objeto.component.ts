@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ObjetoService } from '../_services/objeto.service';
 import { Objeto } from '../_interfaces/objeto.interface';
@@ -26,8 +26,9 @@ export class ObjetoComponent implements OnInit {
 
   //creamos variable datasource de tipo MatTableDataSource
   dataSource = new MatTableDataSource();
-  
-  public isloading: boolean = true;
+
+ // @Input()
+ isloading: boolean = false;
 
   
   //en el constructor inicimos nuestro Objeto service
@@ -35,22 +36,24 @@ export class ObjetoComponent implements OnInit {
   
   //El metodo ngOnInit arranca al entrar a la pantalla
   ngOnInit() {
-    //this.isloading = true;
+    
     //this.isloading = false;
     this.obtenerObjetos();
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort
-
-    this.isloading = false;
   }
+  
 
   //creamos metodo obtenerObjetos, este metodo obtiene todos los objetos
   public obtenerObjetos(){
+    this.isloading = true;
     this.objetoService.obtenerTodo()
     .subscribe((data:any[])=> {
       this.dataSource.data = data;
     }
    );
+
+   this.isloading = false;
   }
 
   //metodo applyFilter, sirve para aplicar filtros en la pantalla
