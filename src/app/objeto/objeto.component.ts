@@ -26,7 +26,8 @@ export class ObjetoComponent implements OnInit {
 
   //creamos variable datasource de tipo MatTableDataSource
   dataSource = new MatTableDataSource();
-  isloading: boolean = true;
+  
+  public isloading: boolean = true;
 
   
   //en el constructor inicimos nuestro Objeto service
@@ -34,7 +35,7 @@ export class ObjetoComponent implements OnInit {
   
   //El metodo ngOnInit arranca al entrar a la pantalla
   ngOnInit() {
-
+    //this.isloading = true;
     //this.isloading = false;
     this.obtenerObjetos();
     this.dataSource.paginator = this.paginator;
