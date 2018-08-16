@@ -8,7 +8,7 @@ import { Observable } from '../../../node_modules/rxjs';
 })
 export class TipoService {
   //creamoms variable API, es la direccion donde consumiremos nuestro servicios.
-  public API = 'https://app-rastreo-web.herokuapp.com/';
+  public API = 'https://app-rastreo-services.herokuapp.com/';
   //public DIR_API = this.API + '/apicontroller';
 
 
