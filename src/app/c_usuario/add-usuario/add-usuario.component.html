@@ -1,0 +1,77 @@
+
+<br><br><br><br><br>
+
+<div class="example-container"  >
+    <mat-toolbar >
+        <div >
+          <h2>Agregar Usuario</h2>
+          </div>
+      </mat-toolbar>
+      <mat-card >
+          <mat-card-content>
+        <form   [formGroup]="formAddUsuario" >
+               <mat-form-field>
+                 <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
+              </mat-form-field>
+           <br>
+              <mat-form-field>
+                <input matInput [matDatepicker]="pickerfecha" placeholder="Fecha" type="fecha" formControlName="fecha"  name="fecha" class="form-control" id="fecha">
+                <mat-datepicker-toggle matSuffix [for]="pickerfecha"></mat-datepicker-toggle>
+                <mat-datepicker #pickerfecha></mat-datepicker>
+              </mat-form-field>
+          <br>
+            <mat-form-field>
+              <input matInput placeholder="Curp" type="curp" formControlName="curp"  name="curp" class="form-control" id="curp">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                    <input matInput placeholder="RFC" type="rfc" formControlName="rfc"  name="rfc" class="form-control" id="rfc">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                    <input matInput placeholder="numero licencia" type="numeroLic" formControlName="numeroLic"  name="numeroLic" class="form-control" id="numeroLic">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                    <input matInput placeholder="Tipo licencia" type="tipoLic" formControlName="tipoLic"  name="tipoLic" class="form-control" id="tipoLic">
+            </mat-form-field>
+            <br>
+             <mat-form-field>
+              <input matInput [matDatepicker]="picker" placeholder="Vigencia" type="vigencia" formControlName="vigencia"  name="vigencia" class="form-control" id="vigencia">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                    <input matInput placeholder="Correo" type="correo" formControlName="correo"  name="correo" class="form-control" id="correo">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                 <input matInput placeholder="Foto" type="foto" formControlName="foto"  name="foto" class="form-control" id="foto">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                    <input matInput placeholder="Estatus" type="estatus" formControlName="estatus"  name="estatus" class="form-control" id="estatus">
+            </mat-form-field>
+            <br>
+             <mat-form-field>
+                    <input matInput placeholder="Password" type="password" formControlName="password"  name="password" class="form-control" id="password">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+                    <input matInput placeholder="Perfil" type="perfil" formControlName="perfil"  name="perfil" class="form-control" id="perfil">
+            </mat-form-field>
+            <br>
+          <br>
+            <mat-card-actions >
+                <button mat-raised-button (click)="onSubmit()" color="theme">Guardar</button>
+                 &nbsp;
+                <button mat-raised-button (click)="cancel()" color="theme">Cancelar</button>
+                 &nbsp;
+                <button mat-raised-button (click)="clean()" color="theme">Limpiar</button>
+            </mat-card-actions>
+            </form>
+           </mat-card-content>
+    </mat-card>
+  </div>
+  

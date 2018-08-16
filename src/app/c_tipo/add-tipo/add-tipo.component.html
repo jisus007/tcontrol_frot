@@ -1,0 +1,37 @@
+
+<br><br><br><br><br>
+<div class="example-container"  >
+    <mat-toolbar >
+        <div >
+          <h2>Agregar Tipo</h2>
+          </div>
+      </mat-toolbar>
+      <mat-card >
+          <mat-card-content>
+        <form *ngIf="form"  [formGroup]="formAddTipo" >
+               <mat-form-field>
+                 <input matInput placeholder="Tipo" type="idTipo" formControlName="idTipo"  name="idTipo" class="form-control" id="idTipo">
+              </mat-form-field>
+           <br>
+           <mat-form-field>
+              <input matInput placeholder="Descripcion" type="descripcion" formControlName="descripcion"  name="descripcion" class="form-control" id="descripcion">
+           </mat-form-field>
+          <br>
+          <mat-form-field>
+            <input matInput [matDatepicker]="pickerfecha" placeholder="Fecha de Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
+            <mat-datepicker-toggle matSuffix [for]="pickerfecha"></mat-datepicker-toggle>
+            <mat-datepicker #pickerfecha></mat-datepicker>
+          </mat-form-field>
+          <br>
+            <mat-card-actions >
+                <button mat-raised-button (click)="onSubmit()" color="theme">Guardar</button>
+                 &nbsp;
+                <button mat-raised-button (click)="cancel()" color="theme">Cancelar</button>
+                 &nbsp;
+                <button mat-raised-button (click)="clean()" color="theme">Limpiar</button>
+            </mat-card-actions>
+            </form>
+           </mat-card-content>
+    </mat-card>
+  </div>
+  

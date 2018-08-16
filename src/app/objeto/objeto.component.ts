@@ -1,9 +1,9 @@
-import { Component, OnInit, ViewChild, Input } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ObjetoService } from '../_services/objeto.service';
 import { Objeto } from '../_interfaces/objeto.interface';
-import { MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
-
+import { MatPaginator, MatTableDataSource, MatSort, DateAdapter} from '@angular/material';
+import { Router } from "@angular/router";
 
 @Component({
   selector: 'app-objeto',
@@ -11,9 +11,6 @@ import { MatPaginator, MatTableDataSource, MatSort} from '@angular/material';
   styleUrls: ['./objeto.component.scss']
 })
 export class ObjetoComponent implements OnInit {
-
-  //Creamos varibale objetos de tipo interface Objeto
- // objectos : Objeto [] = [];
 
   //Creamos paginator de MatPaginator
   @ViewChild(MatPaginator) paginator: MatPaginator;
@@ -23,24 +20,27 @@ export class ObjetoComponent implements OnInit {
 
   //declaracion de columnas que se mostraran en la vista html : objeto.component.html
   displayedColumns: string[] = ['idObjeto','nombre', 'descripcion', 'serie','fecAlta', 'fecActualizacion','status','actions'];
+  
 
   //creamos variable datasource de tipo MatTableDataSource
   dataSource = new MatTableDataSource();
 
- // @Input()
+//creamos la varible isLoading para ver spinner
  isloading: boolean = false;
 
   
   //en el constructor inicimos nuestro Objeto service
-  constructor(private objetoService: ObjetoService) { }
+  constructor(private objetoService: ObjetoService, private router: Router) { }
   
   //El metodo ngOnInit arranca al entrar a la pantalla
   ngOnInit() {
     
     //this.isloading = false;
     this.obtenerObjetos();
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort
+
+    setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
+    setTimeout(() => this.dataSource.sort = this.sort);
+
   }
   
 
@@ -49,7 +49,7 @@ export class ObjetoComponent implements OnInit {
     this.isloading = true;
     this.objetoService.obtenerTodo()
     .subscribe((data:any[])=> {
-      this.dataSource.data = data;
+      this.dataSource.data = data["lista"];
     }
    );
 
@@ -61,6 +61,16 @@ export class ObjetoComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  //metodo para ir a ventana de agregar objeto
+  addObjeto(): void {
+    this.router.navigate(['add-objeto']);
+  };
+
+  editObjeto(objeto: Objeto): void{
+    localStorage.removeItem("editUserId");
+    localStorage.setItem("objId", objeto.idObjeto.toString());
+    this.router.navigate(['edit-objeto']);
+  }
 
 }
 

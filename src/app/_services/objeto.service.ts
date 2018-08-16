@@ -10,7 +10,7 @@ import { Observable } from '../../../node_modules/rxjs';
 export class ObjetoService {
 
   //creamoms variable API, es la direccion donde consumiremos nuestro servicios.
-  public API = 'https://app-rastreo-services.herokuapp.com';
+  public API = 'https://app-rastreo-web.herokuapp.com/';
   //public DIR_API = this.API + '/apicontroller';
 
   //Agregamos al constructor http de tipo HttpClient
@@ -19,5 +19,17 @@ export class ObjetoService {
   //Creamos el metodo obtenerTodo, este metodo obtiene todos los objetos
   obtenerTodo() {
     return this.http.get(this.API + '/objetos/');
+  }
+
+  createObjeto(objeto: Objeto): Observable<Objeto> {
+    return this.http.post<Objeto>(this.API+'/objeto', objeto);
+  }
+
+  getObjById(id: number) {
+    return this.http.get(this.API + '/objeto/'+id);
+  }
+
+  updateObj(objeto: Objeto): Observable<Objeto>  {
+    return this.http.post<Objeto>(this.API+'/objeto', objeto);
   }
 }

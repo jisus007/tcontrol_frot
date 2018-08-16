@@ -19,8 +19,9 @@ import { MatPaginatorModule, MatSortModule, MatTableDataSource} from '@angular/m
 import {MatIconModule} from '@angular/material/icon';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatGridListModule} from '@angular/material/grid-list';
-
-
+import {MatSelectModule} from '@angular/material/select';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material';
 
 import { AppComponent } from './app.component';
 import { DirectorioComponent } from './directorio/directorio.component';
@@ -34,6 +35,23 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { DirectorioService } from './_services/directorio.service';
 import { PersonalComponent } from './personal/personal.component';
 import { ObjetoComponent } from './objeto/objeto.component';
+import { AddObjetoComponent } from './c_objeto/add-objeto/add-objeto.component';
+import { EditObjetoComponent } from './c_objeto/edit-objeto/edit-objeto.component';
+import { ListUsuarioComponent } from './c_usuario/list-usuario/list-usuario.component';
+import { AddUsuarioComponent } from './c_usuario/add-usuario/add-usuario.component';
+import { EditUsuarioComponent } from './c_usuario/edit-usuario/edit-usuario.component';
+import { ListGrupoComponent } from './c_grupo/list-grupo/list-grupo.component';
+import { AddGrupoComponent } from './c_grupo/add-grupo/add-grupo.component';
+import { EditGrupoComponent } from './c_grupo/edit-grupo/edit-grupo.component';
+import { ListTipoComponent } from './c_tipo/list-tipo/list-tipo.component';
+import { AddTipoComponent } from './c_tipo/add-tipo/add-tipo.component';
+import { EditTipoComponent } from './c_tipo/edit-tipo/edit-tipo.component';
+import { EditParametroComponent } from './c_parametro/edit-parametro/edit-parametro.component';
+import { ListParametroComponent } from './c_parametro/list-parametro/list-parametro.component';
+import { AddParametroComponent } from './c_parametro/add-parametro/add-parametro.component';
+import { ListUbicacionComponent } from './c_ubicacion/list-ubicacion/list-ubicacion.component';
+import { AddUbicacionComponent } from './c_ubicacion/add-ubicacion/add-ubicacion.component';
+import { EditUbicacionComponent } from './c_ubicacion/edit-ubicacion/edit-ubicacion.component';
 
 
 @NgModule({
@@ -46,6 +64,23 @@ import { ObjetoComponent } from './objeto/objeto.component';
     DialogComponent,
     PersonalComponent,
     ObjetoComponent,
+    AddObjetoComponent,
+    EditObjetoComponent,
+    ListUsuarioComponent,
+    AddUsuarioComponent,
+    EditUsuarioComponent,
+    ListGrupoComponent,
+    AddGrupoComponent,
+    EditGrupoComponent,
+    ListTipoComponent,
+    AddTipoComponent,
+    EditTipoComponent,
+    EditParametroComponent,
+    ListParametroComponent,
+    AddParametroComponent,
+    ListUbicacionComponent,
+    AddUbicacionComponent,
+    EditUbicacionComponent,
   ],
   imports: [
     BrowserModule,
@@ -69,12 +104,20 @@ import { ObjetoComponent } from './objeto/objeto.component';
     NgbModule,
     MatExpansionModule,
     MatGridListModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    MatSelectModule,
+    ReactiveFormsModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
-  providers: [DirectorioService,DialogComponent],
+  providers: [DirectorioService,DialogComponent,MatDatepickerModule],
   bootstrap: [AppComponent],
   exports: [ DialogComponent ]
 })
 export class AppModule {
  }
 
+
+
+ 
+ 

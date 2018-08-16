@@ -1,0 +1,53 @@
+
+<br><br><br><br><br>
+
+<div class="example-container"  >
+    <mat-toolbar >
+        <div >
+          <h2>Agregar Objeto</h2>
+          </div>
+      </mat-toolbar>
+      <mat-card >
+          <mat-card-content>
+        <form *ngIf="form"  [formGroup]="formAddObjeto" >
+               <mat-form-field>
+                 <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
+              </mat-form-field>
+           <br>
+              <mat-form-field>
+                <input matInput placeholder="Descripcion" type="descripcion" formControlName="descripcion"  name="descripcion" class="form-control" id="descripcion">
+             </mat-form-field>
+          <br>
+            <mat-form-field>
+              <input matInput placeholder="Serie" type="serie" formControlName="serie"  name="serie" class="form-control" id="serie">
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+            
+              <input matInput [matDatepicker]="picker" placeholder="Fecha Alta" type="fecAlta" formControlName="fecAlta"  name="fecAlta" class="form-control" id="fecAlta">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput [matDatepicker]="picker2" placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
+            </mat-form-field>
+            <br>
+            <mat-form-field>
+              <input matInput placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status">
+            </mat-form-field>
+          <br>
+            <mat-card-actions >
+                <button mat-raised-button (click)="onSubmit()" color="theme">Guardar</button>
+                 &nbsp;
+                <button mat-raised-button (click)="cancel()" color="theme">Cancelar</button>
+                 &nbsp;
+                <button mat-raised-button (click)="clean()" color="theme">Limpiar</button>
+            </mat-card-actions>
+            </form>
+           </mat-card-content>
+    </mat-card>
+  </div>
+  

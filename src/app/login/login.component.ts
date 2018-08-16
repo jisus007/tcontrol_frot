@@ -25,11 +25,9 @@ export class LoginComponent implements OnInit{
   
      login()  {
     if(this.username == 'admin' && this.password == 'admin'){
-     
       console.log("activa bandera en true")
      this.loged = true;
-
-     this.router.navigate(["app"]);
+     this.router.navigate(["app",this.loged]);
     }else {
       alert("Usuario invalido");
       //this.openDialog();
