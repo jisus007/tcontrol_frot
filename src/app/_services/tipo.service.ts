@@ -8,15 +8,15 @@ import { Observable } from '../../../node_modules/rxjs';
 })
 export class TipoService {
   //creamoms variable API, es la direccion donde consumiremos nuestro servicios.
-  public API = 'https://app-rastreo-services.herokuapp.com/';
+  public API = 'https://app-rastreo-services.herokuapp.com';
   //public DIR_API = this.API + '/apicontroller';
 
 
   constructor(private http:HttpClient) { }
 
         //Creamos el metodo obtenerTodo, este metodo obtiene todos los objetos
-        obtenerTodo() {
-          return this.http.get(this.API + '/tipos/');
+        obtenerTodo():Observable<Tipo[]> {
+          return this.http.get<Tipo[]>(this.API + '/tipos/');
         }
       
         createTipo(tipo: Tipo): Observable<Tipo> {

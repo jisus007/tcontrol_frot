@@ -11,12 +11,18 @@ import { Grupo } from '../../_interfaces/grupo.interface';
   styleUrls: ['./list-grupo.component.scss']
 })
 export class ListGrupoComponent implements OnInit {
- //Creamos paginator de MatPaginator
- @ViewChild(MatPaginator) paginator: MatPaginator;
+  private paginator: MatPaginator;
+  private sort: MatSort;
 
- //Creamos sort de tipo MatSort
- @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
 
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
 //declaracion de columnas que se mostraran en la vista html : objeto.component.html
 displayedColumns: string[] = ['idGrupo','descripcion','actions'];
 
@@ -25,12 +31,17 @@ dataSource = new MatTableDataSource();
 
 //creamos la varible isLoading para ver spinner
    isloading: boolean = false;
+   setDataSourceAttributes() {
+    this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
+
+  }
   constructor(private grupoService: GrupoService, private router:Router ) { }
 
   ngOnInit() {
     this.obtenerUsuarios();
-    setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
-    setTimeout(() => this.dataSource.sort = this.sort);
+   // setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
+    //setTimeout(() => this.dataSource.sort = this.sort);
   }
 
   public obtenerUsuarios(){

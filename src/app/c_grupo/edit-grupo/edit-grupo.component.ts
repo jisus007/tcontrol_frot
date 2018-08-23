@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { GrupoService } from '../../_services/grupo.service';
 import {first} from "rxjs/operators";
 import { Grupo } from '../../_interfaces/grupo.interface';
+import { MatDialogRef, MatDialog } from '../../../../node_modules/@angular/material';
+import { DialogComponent } from '../../dialog/dialog.component';
 
 
 @Component({
@@ -13,8 +15,9 @@ import { Grupo } from '../../_interfaces/grupo.interface';
 })
 export class EditGrupoComponent implements OnInit {
 
-  constructor(private formBuilder: FormBuilder,private grupoService: GrupoService,private router: Router) { }
-
+  constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private grupoService: GrupoService,private router: Router) { }
+ 
+  dialogRef: MatDialogRef<DialogComponent>;
   formEditGrupo: FormGroup;
   submitted: boolean = false;
   form: boolean = true;
@@ -23,7 +26,7 @@ export class EditGrupoComponent implements OnInit {
   ngOnInit() {
  
     this.formEditGrupo = this.formBuilder.group({
-      idGrupo:                 [],
+      idGrupo:                 ['',Validators.required],
       descripcion:             ['',Validators.required],
 
    });
@@ -43,10 +46,28 @@ this.Id = localStorage.getItem("Id");
       this.formEditGrupo.setValue(<Grupo>data["lista"]);
     })
 
+
+    
   }
 
+  get f() { return this.formEditGrupo.controls; }
 
   onSubmit() {
+
+    if (this.formEditGrupo.invalid) {
+      return;
+  }
+
+  this.dialogRef = this.dialog.open(DialogComponent, {
+    disableClose: false
+  });
+
+  this.dialogRef.componentInstance.confirmMessage = "¿Desea realizar la actualización?"
+
+  this.dialogRef.componentInstance.title = "Confirmar acción";
+
+  this.dialogRef.afterClosed().subscribe(result => {
+    if(result) {
     this.grupoService.updateGrupo(<Grupo>this.formEditGrupo.value)
       .pipe(first())
       .subscribe(
@@ -56,6 +77,11 @@ this.Id = localStorage.getItem("Id");
         error => {
           alert(error);
         });
+      }else{
+        this.dialogRef = null;
+      }
+      this.dialogRef = null;
+    });  
   }
 
   cancel(){

@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ParametroService } from '../../_services/parametro.service';
 import { first} from "rxjs/operators";
 import { Parametro } from '../../_interfaces/parametro.interface';
+import { MatDialogRef, MatDialog } from '../../../../node_modules/@angular/material';
+import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
   selector: 'app-edit-parametro',
@@ -16,8 +18,10 @@ export class EditParametroComponent implements OnInit {
   submitted: boolean = false;
   form: boolean = true;
 
+  dialogRef: MatDialogRef<DialogComponent>;
 
-  constructor(private formBuilder: FormBuilder,private parametroService: ParametroService,private router: Router ) { }
+  status: string[] = ['A', 'B'];
+  constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private parametroService: ParametroService,private router: Router ) { }
   Id : String
   ngOnInit() {
     this.formEditParametro = this.formBuilder.group({
@@ -45,8 +49,25 @@ export class EditParametroComponent implements OnInit {
         })
   }
 
-  
+  get f() { return this.formEditParametro.controls; }
+
+
   onSubmit() {
+
+    if (this.formEditParametro.invalid) {
+      return;
+  }
+
+  this.dialogRef = this.dialog.open(DialogComponent, {
+    disableClose: false
+  });
+
+  this.dialogRef.componentInstance.confirmMessage = "¿Desea realizar la actualización?"
+
+  this.dialogRef.componentInstance.title = "Confirmar acción";
+
+  this.dialogRef.afterClosed().subscribe(result => {
+    if(result) {
     this.parametroService.updateParametro(<Parametro>this.formEditParametro.value)
       .pipe(first())
       .subscribe(
@@ -56,6 +77,11 @@ export class EditParametroComponent implements OnInit {
         error => {
           alert(error);
         });
+      }else{
+        this.dialogRef = null;
+      }
+      this.dialogRef = null;
+    });
   }
 
   cancel(){

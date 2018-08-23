@@ -1,18 +1,18 @@
 import { BrowserModule } from '@angular/platform-browser';
-import { NgModule } from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
+import { NgModule, OnInit } from '@angular/core';
+//import {FlexLayoutModule} from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
-import { CommonModule }   from '@angular/common';
-import {MatTooltipModule} from '@angular/material/tooltip';
+import { CommonModule, DatePipe }   from '@angular/common';
+
 
 // Angular Material Modules
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
-import {MatFormFieldModule, MatInputModule } from '@angular/material';
+import {MatFormFieldModule, MatInputModule, MAT_DATE_LOCALE } from '@angular/material';
 import {MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {MatTableModule} from '@angular/material/table';
 import { MatPaginatorModule, MatSortModule, MatTableDataSource} from '@angular/material';
@@ -22,6 +22,10 @@ import {MatGridListModule} from '@angular/material/grid-list';
 import {MatSelectModule} from '@angular/material/select';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
+import {MatAutocompleteModule} from '@angular/material/autocomplete';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import { MatFileUploadModule } from 'angular-material-fileupload';
+
 
 import { AppComponent } from './app.component';
 import { DirectorioComponent } from './directorio/directorio.component';
@@ -104,17 +108,23 @@ import { EditUbicacionComponent } from './c_ubicacion/edit-ubicacion/edit-ubicac
     NgbModule,
     MatExpansionModule,
     MatGridListModule,
-    FlexLayoutModule,
+  //  FlexLayoutModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    MatAutocompleteModule,
+    MatFileUploadModule
+
   ],
-  providers: [DirectorioService,DialogComponent,MatDatepickerModule],
+  providers: [DirectorioService,DialogComponent,MatDatepickerModule,{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},DatePipe],
   bootstrap: [AppComponent],
-  exports: [ DialogComponent ]
+  exports: [ DialogComponent ],
+  entryComponents: [DialogComponent]
 })
-export class AppModule {
+export class AppModule  {
+
+
  }
 
 

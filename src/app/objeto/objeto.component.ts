@@ -12,11 +12,18 @@ import { Router } from "@angular/router";
 })
 export class ObjetoComponent implements OnInit {
 
-  //Creamos paginator de MatPaginator
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  private paginator: MatPaginator;
+  private sort: MatSort;
 
-  //Creamos sort de tipo MatSort
-  @ViewChild(MatSort) sort: MatSort;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
 
   //declaracion de columnas que se mostraran en la vista html : objeto.component.html
   displayedColumns: string[] = ['idObjeto','nombre', 'descripcion', 'serie','fecAlta', 'fecActualizacion','status','actions'];
@@ -27,7 +34,11 @@ export class ObjetoComponent implements OnInit {
 
 //creamos la varible isLoading para ver spinner
  isloading: boolean = false;
+ setDataSourceAttributes() {
+  this.dataSource.paginator = this.paginator;
+  this.dataSource.sort = this.sort;
 
+}
   
   //en el constructor inicimos nuestro Objeto service
   constructor(private objetoService: ObjetoService, private router: Router) { }

@@ -4,6 +4,8 @@ import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { TipoService } from '../../_services/tipo.service';
 import {first} from "rxjs/operators";
 import { Tipo } from '../../_interfaces/tipo.interface';
+import { DialogComponent } from '../../dialog/dialog.component';
+import { MatDialog, MatDialogRef } from '../../../../node_modules/@angular/material';
 
 @Component({
   selector: 'app-edit-tipo',
@@ -15,13 +17,13 @@ export class EditTipoComponent implements OnInit {
   formEditTipo: FormGroup;
   submitted: boolean = false;
   form: boolean = true;
+  dialogRef: MatDialogRef<DialogComponent>;
 
-
-  constructor(private formBuilder: FormBuilder,private tipoService: TipoService,private router: Router ) { }
+  constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private tipoService: TipoService,private router: Router ) { }
   Id : String;
   ngOnInit() {
     this.formEditTipo = this.formBuilder.group({
-      idTipo:                 [],
+      idTipo:                  ['',Validators.required],
       descripcion:             ['',Validators.required],
 
     });
@@ -41,7 +43,23 @@ export class EditTipoComponent implements OnInit {
     })
   }
 
+  get f() { return this.formEditTipo.controls; }
+
   onSubmit() {
+
+    if (this.formEditTipo.invalid) {
+      return;
+  }
+  this.dialogRef = this.dialog.open(DialogComponent, {
+    disableClose: false
+  });
+
+  this.dialogRef.componentInstance.confirmMessage = "¿Desea realizar la actualización?"
+
+  this.dialogRef.componentInstance.title = "Confirmar acción";
+
+  this.dialogRef.afterClosed().subscribe(result => {
+    if(result) {
     this.tipoService.updateTipo(<Tipo>this.formEditTipo.value)
       .pipe(first())
       .subscribe(
@@ -51,6 +69,11 @@ export class EditTipoComponent implements OnInit {
         error => {
           alert(error);
         });
+      }else{
+        this.dialogRef = null;
+      }
+      this.dialogRef = null;
+    });  
   }
 
   cancel(){

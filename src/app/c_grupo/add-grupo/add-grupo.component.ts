@@ -21,11 +21,13 @@ export class AddGrupoComponent implements OnInit {
 
   ngOnInit() {
     this.formAddGrupo = this.formBuilder.group({
-      idGrupo:                 [],
+      idGrupo:                 ['',Validators.required],
       descripcion:             ['',Validators.required],
 
 });
   }
+
+  get f() { return this.formAddGrupo.controls; }
 
   cancel(): void {
     this.router.navigate(['list-grupo']);
@@ -37,6 +39,9 @@ export class AddGrupoComponent implements OnInit {
 
 
   onSubmit() {
+    if (this.formAddGrupo.invalid) {
+      return;
+  }
     console.log(this.formAddGrupo.value);
     this.grupoService.createGrupo(<Grupo>this.formAddGrupo.value)
       .subscribe( data => {

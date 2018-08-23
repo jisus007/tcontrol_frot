@@ -6,16 +6,12 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   templateUrl: './dialog.component.html',
   styleUrls: ['./dialog.component.scss']
 })
-export class DialogComponent implements OnInit {
+export class DialogComponent{
 
-  constructor(public thisDialogRef: MatDialogRef<DialogComponent>, @Inject(MAT_DIALOG_DATA) public data: string) { }
-  ngOnInit() {
-  }
-  onCloseConfirm() {
-    this.thisDialogRef.close('Confirm');
-  }
-  onCloseCancel() {
-    this.thisDialogRef.close('Cancel');
-  }
+  constructor(public dialogRef: MatDialogRef<DialogComponent>) { }
+
+  public confirmMessage:string;
+
+  public title:string;
 
 }

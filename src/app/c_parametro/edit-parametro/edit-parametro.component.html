@@ -9,23 +9,38 @@
       <mat-card >
           <mat-card-content>
         <form *ngIf="form"  [formGroup]="formEditParametro" >
-           <br>
-           <mat-form-field>
-              <input matInput placeholder="Codigo" type="codigo" formControlName="codigo"  name="codigo" class="form-control" id="codigo">
-           </mat-form-field>
-           <mat-form-field>
-               <input matInput placeholder="Valor" type="valor" formControlName="valor"  name="valor" class="form-control" id="valor">
-            </mat-form-field>
+            <br>
             <mat-form-field>
-              <input matInput placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status">
+               <input matInput placeholder="Codigo" type="codigo" formControlName="codigo"  name="codigo" class="form-control" id="codigo">
             </mat-form-field>
-          <br>
-            <mat-card-actions >
-                <button mat-raised-button (click)="onSubmit()" color="theme">Guardar</button>
-                 &nbsp;
-                <button mat-raised-button (click)="cancel()" color="theme">Cancelar</button>
-            </mat-card-actions>
-            </form>
-           </mat-card-content>
+            <br>
+            <mat-form-field>
+                <textarea matInput placeholder="Valor" type="valor" formControlName="valor"  name="valor" class="form-control" id="valor"></textarea>
+             </mat-form-field>
+             <br>
+             <mat-form-field>
+               <input matInput placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status" [matAutocomplete]="autostatus">
+               <mat-autocomplete #autostatus="matAutocomplete">
+                   <mat-option *ngFor="let stat of status" [value]="stat">
+                     {{stat}}
+                   </mat-option>
+                 </mat-autocomplete>
+             </mat-form-field>
+           <br>
+           <td>
+               <mat-form-field>
+                   <input matInput [matDatepicker]="picker" placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
+                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                   <mat-datepicker #picker></mat-datepicker>
+                 </mat-form-field>
+           </td>
+             <mat-card-actions >
+                 <button mat-raised-button (click)="onSubmit()" color="theme">Guardar</button>
+                  &nbsp;
+                 <button mat-raised-button (click)="cancel()" color="theme">Cancelar</button>
+ 
+             </mat-card-actions>
+             </form>
+            </mat-card-content>
     </mat-card>
   </div>

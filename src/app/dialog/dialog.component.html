@@ -1,3 +1,14 @@
-<p>
-  dialog works!
-</p>
+<h2 md-dialog-title>{{title}}</h2>
+<div md-dialog-content>{{confirmMessage}}</div>
+<div md-dialog-actions>
+  <br>
+  <table><tr>
+    <td>
+  <button mat-raised-button style="color: #fff;background-color: #153961;" (click)="dialogRef.close(true)">Confirmar</button>
+</td>
+<td>
+  <button mat-raised-button (click)="dialogRef.close(false)" color="theme">Cancelar</button>
+</td>
+</tr></table>
+ 
+</div>

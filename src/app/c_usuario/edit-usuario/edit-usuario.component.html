@@ -1,76 +1,144 @@
 
 <br><br><br><br><br>
 
-<div class="example-container"  >
+
     <mat-toolbar >
         <div >
           <h2>Editar Usuario</h2>
           </div>
       </mat-toolbar>
-      <mat-card >
+      <mat-grid-list cols="3" >
+        <mat-grid-tile >
+                <br><br><br><br><br><br><br>
+        <mat-card >
           <mat-card-content>
+            
         <form  [formGroup]="editFormUser" >
-               <mat-form-field>
+            <table class="example-full-width" cellspacing="0"><tr>
+          <td>   
+          <mat-form-field>
                  <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
               </mat-form-field>
-           <br>
+            </td> 
+            <td> 
               <mat-form-field>
                 <input matInput [matDatepicker]="pickerfecha" placeholder="Fecha" type="fecha" formControlName="fecha"  name="fecha" class="form-control" id="fecha">
                 <mat-datepicker-toggle matSuffix [for]="pickerfecha"></mat-datepicker-toggle>
                 <mat-datepicker #pickerfecha></mat-datepicker>
               </mat-form-field>
-          <br>
+            </td> 
+          </tr></table>
+          <table class="example-full-width" cellspacing="0"><tr>
+              <td> 
             <mat-form-field>
               <input matInput placeholder="Curp" type="curp" formControlName="curp"  name="curp" class="form-control" id="curp">
             </mat-form-field>
-            <br>
+            </td>
+            <td> 
             <mat-form-field>
                     <input matInput placeholder="RFC" type="rfc" formControlName="rfc"  name="rfc" class="form-control" id="rfc">
             </mat-form-field>
-            <br>
+          </td>
+          </tr></table>
+          <table class="example-full-width" cellspacing="0"><tr>
+            <td> 
             <mat-form-field>
                     <input matInput placeholder="numero licencia" type="numeroLic" formControlName="numeroLic"  name="numeroLic" class="form-control" id="numeroLic">
             </mat-form-field>
-            <br>
+            </td>
+            <td>
             <mat-form-field>
-                    <input matInput placeholder="Tipo licencia" type="tipoLic" formControlName="tipoLic"  name="tipoLic" class="form-control" id="tipoLic">
+                    <input matInput placeholder="Tipo licencia" type="tipoLic" formControlName="tipoLic"  name="tipoLic" class="form-control" id="tipoLic" [matAutocomplete]="autotipo">
+                    <mat-autocomplete #autotipo="matAutocomplete">
+                                <mat-option *ngFor="let tl of tipo" [value]="tl">
+                                  {{tl}}
+                                </mat-option>
+                              </mat-autocomplete>
             </mat-form-field>
-            <br>
-             <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder="Vigencia" type="vigencia" formControlName="vigencia"  name="vigencia" class="form-control" id="vigencia">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-            <br>
-            <mat-form-field>
+           </td>
+          </tr></table>
+
+          <table class="example-full-width" cellspacing="0"><tr>
+            <td>
+                <mat-form-field>
                     <input matInput placeholder="Correo" type="correo" formControlName="correo"  name="correo" class="form-control" id="correo">
             </mat-form-field>
-            <br>
+
+          </td>
+          <td>
+              <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="Vigencia" type="vigencia" formControlName="vigencia"  name="vigencia" class="form-control" id="vigencia">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+          </td>
+          </tr></table>
+
+          <table class="example-full-width" cellspacing="0"><tr>
+           
+           <td>
             <mat-form-field>
-                    <input matInput placeholder="Foto" type="foto" formControlName="foto"  name="foto" class="form-control" id="foto">
-            </mat-form-field>
-            <br>
-            <mat-form-field>
-                    <input matInput placeholder="Estatus" type="estatus" formControlName="estatus"  name="estatus" class="form-control" id="estatus">
-            </mat-form-field>
-            <br>
+                    <input matInput placeholder="Estatus" type="estatus" formControlName="estatus"  name="estatus" class="form-control" id="estatus"  [matAutocomplete]="autostatus">
+                    <mat-autocomplete #autostatus="matAutocomplete">
+                                <mat-option *ngFor="let stat of status" [value]="stat">
+                                  {{stat}}
+                                </mat-option>
+                              </mat-autocomplete>
+           </mat-form-field>
+          </td>
+          <td>
             <mat-form-field>
                     <input matInput placeholder="Password" type="password" formControlName="password"  name="password" class="form-control" id="password">
             </mat-form-field>
-            <br>
+          </td>
+          </tr></table>
             <mat-form-field>
-                    <input matInput placeholder="Perfil" type="perfil" formControlName="perfil"  name="perfil" class="form-control" id="perfil">
-            </mat-form-field>
-            <br>
+                        <input matInput placeholder="Perfil" type="perfil" formControlName="perfil"  name="perfil" class="form-control" id="perfil" [matAutocomplete]="auto">
+                        <mat-autocomplete #auto="matAutocomplete">
+                            <mat-option *ngFor="let option of options" [value]="option">
+                              {{option}}
+                            </mat-option>
+                          </mat-autocomplete>
+                </mat-form-field>
+         
           <br>
             <mat-card-actions >
-                <button mat-raised-button (click)="onSubmit()" color="theme">Guardar</button>
+                <button mat-raised-button (click)="onSubmit()" color="theme">Actualizar</button>
                  &nbsp;
                 <button mat-raised-button (click)="cancel()" color="theme">Cancelar</button>
                  &nbsp;
-            </mat-card-actions>
-            </form>
-           </mat-card-content>
-    </mat-card>
-  </div>
+                        </mat-card-actions>
+                        </form>
+                        </mat-card-content>
+                </mat-card>
+        </mat-grid-tile>
+        <mat-grid-tile >
+                <mat-card class="example-card">
+                                <mat-card-header>
+                                   <div mat-card-avatar class="example-header-image"></div>
+                                    <mat-card-title>{{nombreUser}}</mat-card-title>
+                                    <mat-card-subtitle></mat-card-subtitle>
+                                  </mat-card-header>
+                                  <img *ngIf="imageOn" mat-card-image [src]="imagePath"  >
+                                  <mat-card-content>
+                                      <p>
+                                      Perfil: {{perfilUser}}
+                                      </p>
+
+      
+                                      <td>
+         
+                                          <mat-icon style="color: rgb(128, 128, 128)">camera_alt</mat-icon>
+                                          <label class="fileContainer">
+                                              modificar imagen
+                                            <input type="file" (change)="handleFileSelect($event)" accept=".png, .jpg, .jpeg" />
+                                            </label>
+                                    
+                                      </td>
+
+                                    </mat-card-content>
+                                </mat-card>
+     </mat-grid-tile>
+ </mat-grid-list>
+
   

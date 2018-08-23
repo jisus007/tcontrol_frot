@@ -9,7 +9,7 @@ import { Observable } from '../../../node_modules/rxjs';
 export class GrupoService {
 
     //creamoms variable API, es la direccion donde consumiremos nuestro servicios.
-    public API = 'https://app-rastreo-services.herokuapp.com/';
+    public API = 'https://app-rastreo-services.herokuapp.com';
     //public DIR_API = this.API + '/apicontroller';
 
 
@@ -36,6 +36,6 @@ export class GrupoService {
 
       deleteGrupo(grupo: Grupo): Observable<Grupo>   {
         console.log("en servicio")
-        return this.http.post<Grupo>(this.API+'/grupoudpate/', grupo);
+        return this.http.post<Grupo>(this.API+'/grupo/delete/', grupo);
       }
 }

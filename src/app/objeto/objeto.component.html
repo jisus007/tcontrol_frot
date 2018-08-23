@@ -1,6 +1,10 @@
 
 <br><br><br><br><br>
-
+<mat-toolbar >
+    <div >
+      <h2>Lista de Objetos</h2>
+      </div>
+  </mat-toolbar>
 <div class="mat-elevation-z8" *ngIf="dataSource.data.length > 0 else noData" >
     <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Busqueda">

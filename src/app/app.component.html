@@ -1,16 +1,14 @@
 
-
 <mat-toolbar  color="primary" class="main-menu class mat-elevation-z8"  ><i class="material-icons">location_searching</i>&nbsp;Rastreo&nbsp;&nbsp;&nbsp;&nbsp;    
     <div fxLayout="row"  fxLayoutAlign="end">
         <button mat-button fxFlex="auto" routerLink="list-usuario"><i class="material-icons">person</i> Usuarios</button>
         <button mat-button fxFlex="auto" routerLink="objeto"><i class="material-icons">directions_car</i> Objeto</button>
-        <button mat-button fxFlex="auto" routerLink="objeto"><i class="material-icons">location_on</i> Ubicaciones</button>
+
         <button mat-button fxFlex="auto" routerLink="list-grupo"><i class="material-icons">library_books</i> Grupos de Objetos</button>
         <button mat-button fxFlex="auto" routerLink="list-tipo"><i class="material-icons">category</i> Tipos de Objeto</button>
         <button mat-button fxFlex="auto" routerLink="list-parametro"><i class="material-icons">settings</i>Parametros</button>
     </div>
 </mat-toolbar>
-
 
 <div class="contenedor" >
     <router-outlet></router-outlet>

@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '../../../node_modules/@angular/router';
+import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 import {MatDialog} from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
@@ -10,24 +10,31 @@ import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit{
-
-  ngOnInit() {
-    //this.loged = true;
-  }
-  constructor(private router : Router, public dialog: MatDialog) {
-  }
-
+  returnUrl: string;
   username : string
   password : string
   dialogResult : string
   loged  : boolean
 
+  constructor(private router : Router, private route: ActivatedRoute,public dialog: MatDialog) {
+  }
+  ngOnInit() {
+    //this.loged = true;
+
+    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+  }
+
   
      login()  {
     if(this.username == 'admin' && this.password == 'admin'){
       console.log("activa bandera en true")
-     this.loged = true;
-     this.router.navigate(["app",this.loged]);
+     //this.loged = true;
+   //  this.router.navigate(["app",this.loged]);
+       sessionStorage.setItem('user', this.username);
+      console.log(this.returnUrl);
+   this.router.navigate([this.returnUrl]);
+
+     
     }else {
       alert("Usuario invalido");
       //this.openDialog();

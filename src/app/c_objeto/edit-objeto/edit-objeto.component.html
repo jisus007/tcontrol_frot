@@ -7,34 +7,97 @@
           <h2>Editar Objeto</h2>
           </div>
       </mat-toolbar>
+      <mat-grid-list cols="2" >
+          <mat-grid-tile >
       <mat-card >
           <mat-card-content>
         <form [formGroup]="editFormObj" >
-
-               <mat-form-field>
-                 <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
-              </mat-form-field>
-           <br>
+            <table class="example-full-width" cellspacing="0"><tr>
+                <td>
+                  <mat-form-field>
+                     <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
+                  </mat-form-field>
+              </td>
+          <td>
               <mat-form-field>
                 <input matInput placeholder="Descripcion" type="descripcion" formControlName="descripcion"  name="descripcion" class="form-control" id="descripcion">
              </mat-form-field>
-          <br>
+          </td>
+         
+        </tr></table>
+        <table class="example-full-width" cellspacing="0"><tr>
+           <td>
             <mat-form-field>
               <input matInput placeholder="Serie" type="serie" formControlName="serie"  name="serie" class="form-control" id="serie">
             </mat-form-field>
-            <br>
+         </td>
+         <td>
             <mat-form-field>
-              <input matInput placeholder="Fecha Alta" type="fecAlta" formControlName="fecAlta"  name="fecAlta" class="form-control" id="fecAlta">
+              <input matInput [matDatepicker]="picker" placeholder="Fecha Alta" type="fecAlta" formControlName="fecAlta"  name="fecAlta" class="form-control" id="fecAlta">
+              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+              <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
-            <br>
+          </td>
+          </tr></table>
+          <table class="example-full-width" cellspacing="0"><tr>
+              <td>
+       
+                  <mat-form-field>
+                    <input matInput placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status" [matAutocomplete]="autostatus">
+                    <mat-autocomplete #autostatus="matAutocomplete">
+                        <mat-option *ngFor="let stat of status" [value]="stat">
+                          {{stat}}
+                        </mat-option>
+                      </mat-autocomplete>
+                  </mat-form-field>
+                  </td>
+            <td>
             <mat-form-field>
-              <input matInput placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
+              <input matInput [matDatepicker]="picker2" placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
+              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+              <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
-            <br>
-            <mat-form-field>
-              <input matInput placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status">
-            </mat-form-field>
-          <br>
+          </td>
+
+    
+        </tr></table>
+        <table class="example-full-width" cellspacing="0"><tr>
+            <td>
+     
+                <mat-form-field>
+                  <input matInput placeholder="Placas" type="placas" formControlName="placas"  name="placas" class="form-control" id="placas">
+                </mat-form-field>
+            </td>
+            <td>
+     
+                <mat-form-field>              
+                  <mat-select placeholder="Tipo" type="tipo" formControlName="tipo"  name="tipo" class="form-control" id="tipo">
+                    
+                      <mat-option value="AUT">Automoviles</mat-option>
+                      <mat-option value="CEL">Celulares</mat-option>
+
+                  </mat-select>
+                </mat-form-field>
+            </td>
+
+  
+      </tr></table>
+      <table class="example-full-width" cellspacing="0"><tr>
+          <td>
+   
+              <mat-form-field>
+                  <mat-select placeholder="Grupo" type="grupo" formControlName="grupo"  name="grupo" class="form-control" id="grupo">
+                      <mat-option value="QRO">Flotilla Queretaro</mat-option>
+                      <mat-option value="CDMX">Flotilla Mexico</mat-option>
+                  </mat-select>
+              </mat-form-field>
+          </td>
+
+
+
+    </tr></table>
+
+    <br>
             <mat-card-actions >
                 <button mat-raised-button (click)="onSubmit()" color="theme">Actualizar</button>
                  &nbsp;
@@ -44,5 +107,36 @@
             </form>
            </mat-card-content>
     </mat-card>
-  </div>
-  
+
+
+</mat-grid-tile>
+<mat-grid-tile >
+    <mat-card class="example-card">
+                    <mat-card-header>
+                       <div mat-card-avatar class="example-header-image"></div>
+                        <mat-card-title>{{nombreUser}}</mat-card-title>
+                        <mat-card-subtitle></mat-card-subtitle>
+                      </mat-card-header>
+                      <img *ngIf="imageOn" mat-card-image [src]="imagePath"  >
+                      <mat-card-content>
+                          <p>
+                          Objeto: {{nombreObjeto}}
+                          </p>
+           <td>
+                                          <mat-icon style="color: rgb(128, 128, 128)">camera_alt</mat-icon>
+                                          <label class="fileContainer">
+                                             
+                                              modificar imagen
+                                            <input type="file" (change)="handleFileSelect($event)" accept=".png, .jpg, .jpeg" />
+                                            </label>
+                                      </td>
+
+                          <td>
+                     
+                        
+                          </td>
+
+                        </mat-card-content>
+                    </mat-card>
+  </mat-grid-tile>
+</mat-grid-list>

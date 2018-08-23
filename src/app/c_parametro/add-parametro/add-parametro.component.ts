@@ -16,7 +16,7 @@ export class AddParametroComponent implements OnInit {
   formAddParametro: FormGroup;
   submitted: boolean = false;
   form: boolean = true;
-
+  status: string[] = ['A', 'B'];
 
   constructor(private formBuilder: FormBuilder,private parametroService: ParametroService,private router: Router ) { }
 
@@ -32,6 +32,9 @@ export class AddParametroComponent implements OnInit {
       });
   }
 
+  get f() { return this.formAddParametro.controls; }
+
+
   cancel(): void {
     this.router.navigate(['list-parametro']);
   };
@@ -42,6 +45,9 @@ export class AddParametroComponent implements OnInit {
 
 
   onSubmit() {
+    if (this.formAddParametro.invalid) {
+      return;
+  }
     console.log(this.formAddParametro.value);
     this.parametroService.createParametro(<Parametro>this.formAddParametro.value)
       .subscribe( data => {

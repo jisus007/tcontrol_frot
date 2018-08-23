@@ -1,6 +1,10 @@
 
-<br><br><br><br><br>
-
+<br><br><br><br>
+<mat-toolbar >
+  <div >
+    <h2>Lista de Usuario</h2>
+    </div>
+</mat-toolbar>
 <div class="mat-elevation-z8" *ngIf="dataSource.data.length > 0 else noData" >
     <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Busqueda">
@@ -23,7 +27,7 @@
 
   <!-- descripcion  -->
   <ng-container matColumnDef="fecha">
-    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha Nacimiento </th>
+    <th mat-header-cell *matHeaderCellDef mat-sort-header> Fecha de Nacimiento </th>
     <td mat-cell *matCellDef="let element"> {{element.fecha}} </td>
   </ng-container>
 
@@ -34,16 +38,17 @@
   </ng-container>
 
   <!-- Fecha de Alta -->
+  <!--
   <ng-container matColumnDef="rfc">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> RFC </th>
     <td mat-cell *matCellDef="let element"> {{element.rfc}} </td>
   </ng-container>
-
+ -->
    <!--  Fecha de actualizacion -->
-  <ng-container matColumnDef="numeroLic">
+  <!--   <ng-container matColumnDef="numeroLic">
     <th mat-header-cell *matHeaderCellDef mat-sort-header> Numero de Lincia </th>
     <td mat-cell *matCellDef="let element"> {{element.numeroLic}} </td>
-  </ng-container>
+  </ng-container>-->
 
      <!-- Estatus -->
      <ng-container matColumnDef="tipoLic">
@@ -64,10 +69,10 @@
       </ng-container>
 
            <!-- Estatus -->
-     <ng-container matColumnDef="foto">
+     <!--<ng-container matColumnDef="foto">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Foto</th>
         <td mat-cell *matCellDef="let element"> {{element.foto}} </td>
-      </ng-container>
+      </ng-container>-->
 
                  <!-- Estatus -->
      <ng-container matColumnDef="estatus">
@@ -76,10 +81,11 @@
       </ng-container>
 
                  <!-- Estatus -->
+                 <!--
      <ng-container matColumnDef="password">
         <th mat-header-cell *matHeaderCellDef mat-sort-header> Password</th>
         <td mat-cell *matCellDef="let element"> {{element.password}} </td>
-      </ng-container>
+      </ng-container>-->
 
                        <!-- Estatus -->
      <ng-container matColumnDef="perfil">

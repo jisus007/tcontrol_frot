@@ -1,6 +1,10 @@
 
 <br><br><br><br><br>
-
+<mat-toolbar >
+    <div >
+      <h2>Lista de Grupos</h2>
+      </div>
+  </mat-toolbar>
 <div class="mat-elevation-z8" *ngIf="dataSource.data.length > 0 else noData" >
     <mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Busqueda">
@@ -34,11 +38,6 @@
               <mat-icon>mode_edit</mat-icon>
             </span>
           </button>
-          <button mat-icon-button (click)="eliminarGrupo(row)">
-              <span matTooltip="Eliminar">
-              <mat-icon>delete</mat-icon>
-              </span>
-            </button>  
         </mat-cell>
       </ng-container>
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>

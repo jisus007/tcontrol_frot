@@ -9,32 +9,49 @@ import { Usuario } from '../../_interfaces/usuario.interface';
   templateUrl: './list-usuario.component.html',
   styleUrls: ['./list-usuario.component.scss']
 })
-export class ListUsuarioComponent implements OnInit {
+export class ListUsuarioComponent implements OnInit{
+
+  private paginator: MatPaginator;
+  private sort: MatSort;
+
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
+
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
 
     //Creamos paginator de MatPaginator
-    @ViewChild(MatPaginator) paginator: MatPaginator;
+  //  @ViewChild(MatPaginator) paginator: MatPaginator;
 
     //Creamos sort de tipo MatSort
-    @ViewChild(MatSort) sort: MatSort;
+    //@ViewChild(MatSort) sort: MatSort;
 
    //declaracion de columnas que se mostraran en la vista html : objeto.component.html
-   displayedColumns: string[] = ['idUsuario','nombre','fecha','curp','rfc','numeroLic','tipoLic','vigencia','correo','foto','estatus','password','perfil','actions']     ;
+   displayedColumns: string[] = ['idUsuario','nombre','fecha','curp','tipoLic','vigencia','correo','estatus','perfil','actions']     ;
   
    //creamos variable datasource de tipo MatTableDataSource
    dataSource = new MatTableDataSource();
  
  //creamos la varible isLoading para ver spinner
       isloading: boolean = false;
-    
+      setDataSourceAttributes() {
+        this.dataSource.paginator = this.paginator;
+        this.dataSource.sort = this.sort;
+
+      }
   constructor(private usuarioService: UsuarioService, private router:Router) { }
 
   ngOnInit() {
-
     this.obtenerUsuarios();
-    setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
-    setTimeout(() => this.dataSource.sort = this.sort);
-  }
+   // setTimeout(() => {this.dataSource.paginator = this.paginator});//se agrego el metodo setTimeout() ya que no estaba funcionando
+    //setTimeout(() => this.dataSource.sort = this.sort);
 
+
+  }  
   public obtenerUsuarios(){
     this.isloading = true;
     this.usuarioService.obtenerTodo()

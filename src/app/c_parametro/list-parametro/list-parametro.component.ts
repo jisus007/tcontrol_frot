@@ -11,13 +11,18 @@ import { Parametro } from '../../_interfaces/parametro.interface';
   styleUrls: ['./list-parametro.component.scss']
 })
 export class ListParametroComponent implements OnInit {
+  private paginator: MatPaginator;
+  private sort: MatSort;
 
-  //Creamos paginator de MatPaginator
-  @ViewChild(MatPaginator) paginator: MatPaginator;
+  @ViewChild(MatSort) set matSort(ms: MatSort) {
+    this.sort = ms;
+    this.setDataSourceAttributes();
+  }
 
-  //Creamos sort de tipo MatSort
-  @ViewChild(MatSort) sort: MatSort;
- 
+  @ViewChild(MatPaginator) set matPaginator(mp: MatPaginator) {
+    this.paginator = mp;
+    this.setDataSourceAttributes();
+  }
  //declaracion de columnas que se mostraran en la vista html : objeto.component.html
  displayedColumns: string[] = ['idParametro','codigo','valor','status','fecActualizacion','actions'];
  
@@ -26,12 +31,17 @@ export class ListParametroComponent implements OnInit {
  
  //creamos la varible isLoading para ver spinner
     isloading: boolean = false;
+    setDataSourceAttributes() {
+      this.dataSource.paginator = this.paginator;
+      this.dataSource.sort = this.sort;
+  
+    }
    constructor(private parametroService: ParametroService, private router:Router ) { }
 
    ngOnInit() {
     this.obtenerParametro();
-    setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
-    setTimeout(() => this.dataSource.sort = this.sort);
+    //setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
+    //setTimeout(() => this.dataSource.sort = this.sort);
   }
 
   public obtenerParametro(){

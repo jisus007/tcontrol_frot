@@ -3,7 +3,11 @@ export interface Objeto {
     nombre                 :String
     descripcion            :String
     serie                  :String
-    fecAlta                :String
-    fecActualizacion       :String
+    fecAlta                :Date
+    fecActualizacion       :Date
     status                 :String
+    placas                 :String
+    tipo                   :String
+    grupo                  :String
+    foto                   :String
 }
