@@ -24,7 +24,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip';
-import { MatFileUploadModule } from 'angular-material-fileupload';
+
 
 
 import { AppComponent } from './app.component';
@@ -113,8 +113,8 @@ import { EditUbicacionComponent } from './c_ubicacion/edit-ubicacion/edit-ubicac
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule,
-    MatFileUploadModule
+    MatAutocompleteModule
+
 
   ],
   providers: [DirectorioService,DialogComponent,MatDatepickerModule,{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},DatePipe],
