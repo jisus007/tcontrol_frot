@@ -22,7 +22,7 @@
             </td> 
             <td> 
               <mat-form-field>
-                <input matInput [matDatepicker]="pickerfecha" placeholder="Fecha" type="fecha" formControlName="fecha"  name="fecha" class="form-control" id="fecha">
+                <input matInput [matDatepicker]="pickerfecha" readonly placeholder="Fecha" type="fecha" formControlName="fecha"  name="fecha" class="form-control" id="fecha">
                 <mat-datepicker-toggle matSuffix [for]="pickerfecha"></mat-datepicker-toggle>
                 <mat-datepicker #pickerfecha></mat-datepicker>
               </mat-form-field>
@@ -31,29 +31,28 @@
           <table class="example-full-width" cellspacing="0"><tr>
               <td> 
             <mat-form-field>
-              <input matInput placeholder="Curp" type="curp" formControlName="curp"  name="curp" class="form-control" id="curp">
+              <input matInput placeholder="Curp"   type="curp" maxlength="18" minlength="18" formControlName="curp"  name="curp" class="form-control" id="curp">
             </mat-form-field>
             </td>
             <td> 
             <mat-form-field>
-                    <input matInput placeholder="RFC" type="rfc" formControlName="rfc"  name="rfc" class="form-control" id="rfc">
+                    <input matInput placeholder="RFC" type="rfc" maxlength="13" minlength="13" formControlName="rfc"  name="rfc" class="form-control" id="rfc">
             </mat-form-field>
           </td>
           </tr></table>
           <table class="example-full-width" cellspacing="0"><tr>
             <td> 
             <mat-form-field>
-                    <input matInput placeholder="numero licencia" type="numeroLic" formControlName="numeroLic"  name="numeroLic" class="form-control" id="numeroLic">
+                    <input matInput placeholder="numero licencia"  type="numeroLic" maxlength="10" minlength="10" formControlName="numeroLic"  name="numeroLic" class="form-control" id="numeroLic">
             </mat-form-field>
             </td>
             <td>
             <mat-form-field>
-                    <input matInput placeholder="Tipo licencia" type="tipoLic" formControlName="tipoLic"  name="tipoLic" class="form-control" id="tipoLic" [matAutocomplete]="autotipo">
-                    <mat-autocomplete #autotipo="matAutocomplete">
-                                <mat-option *ngFor="let tl of tipo" [value]="tl">
-                                  {{tl}}
-                                </mat-option>
-                              </mat-autocomplete>
+                <mat-select placeholder="Tipo licencia" type="tipoLic" formControlName="tipoLic"  name="tipoLic" class="form-control" id="tipoLic">
+                    <mat-option *ngFor="let tl of tipo" [value]="tl">
+                      {{tl}}
+                    </mat-option>
+                </mat-select>
             </mat-form-field>
            </td>
           </tr></table>
@@ -67,7 +66,7 @@
           </td>
           <td>
               <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="Vigencia" type="vigencia" formControlName="vigencia"  name="vigencia" class="form-control" id="vigencia">
+                  <input matInput [matDatepicker]="picker" readonly placeholder="Vigencia" type="vigencia" formControlName="vigencia"  name="vigencia" class="form-control" id="vigencia">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
                 </mat-form-field>
@@ -78,12 +77,11 @@
            
            <td>
             <mat-form-field>
-                    <input matInput placeholder="Estatus" type="estatus" formControlName="estatus"  name="estatus" class="form-control" id="estatus"  [matAutocomplete]="autostatus">
-                    <mat-autocomplete #autostatus="matAutocomplete">
-                                <mat-option *ngFor="let stat of status" [value]="stat">
-                                  {{stat}}
-                                </mat-option>
-                              </mat-autocomplete>
+                <mat-select placeholder="Estatus" type="estatus" formControlName="estatus"  name="estatus" class="form-control" id="estatus" >
+                    <mat-option *ngFor="let stat of status" [value]="stat">
+                        {{stat}}
+                      </mat-option>
+           </mat-select>
            </mat-form-field>
           </td>
           <td>
@@ -93,12 +91,11 @@
           </td>
           </tr></table>
             <mat-form-field>
-                        <input matInput placeholder="Perfil" type="perfil" formControlName="perfil"  name="perfil" class="form-control" id="perfil" [matAutocomplete]="auto">
-                        <mat-autocomplete #auto="matAutocomplete">
-                            <mat-option *ngFor="let option of options" [value]="option">
-                              {{option}}
-                            </mat-option>
-                          </mat-autocomplete>
+                <mat-select placeholder="Perfil" type="perfil" formControlName="perfil"  name="perfil" class="form-control" id="perfil" >
+                    <mat-option *ngFor="let option of options" [value]="option">
+                        {{option}}
+                      </mat-option>
+            </mat-select>
                 </mat-form-field>
          
           <br>

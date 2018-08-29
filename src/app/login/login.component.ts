@@ -3,6 +3,10 @@ import { Router, ActivatedRoute } from '../../../node_modules/@angular/router';
 import {MatDialog} from '@angular/material';
 import { DialogComponent } from '../dialog/dialog.component';
 import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material';
+import { UsuarioService } from '../_services/usuario.service';
+import { Usuario } from '../_interfaces/usuario.interface';
+import { FormGroup, FormBuilder, Validators } from '../../../node_modules/@angular/forms';
+import { AlertComponent } from '../alert/alert.component';
 
 @Component({
   selector: 'app-login',
@@ -15,31 +19,77 @@ export class LoginComponent implements OnInit{
   password : string
   dialogResult : string
   loged  : boolean
-
-  constructor(private router : Router, private route: ActivatedRoute,public dialog: MatDialog) {
+  
+  dialogRef: MatDialogRef<AlertComponent>;
+  formLogin: FormGroup;
+  constructor(private formBuilder: FormBuilder,private usuarioService: UsuarioService,private router : Router, private route: ActivatedRoute,public dialog: MatDialog) {
   }
   ngOnInit() {
-    //this.loged = true;
+              
+    //this.dialogRef.componentInstance.title = "Informacion";
+    localStorage.removeItem("loged");
+    this.formLogin = this.formBuilder.group({
+    
+      username:             ['',Validators.required],
+      password:              ['',Validators.required],
+    });
 
-    this.returnUrl = this.route.snapshot.queryParams['returnUrl'] || '';
+
   }
+
+ 
+
+
+
+  
 
   
      login()  {
-    if(this.username == 'admin' && this.password == 'admin'){
-      console.log("activa bandera en true")
-     //this.loged = true;
-   //  this.router.navigate(["app",this.loged]);
-       sessionStorage.setItem('user', this.username);
-      console.log(this.returnUrl);
-   this.router.navigate([this.returnUrl]);
+      if (this.formLogin.invalid) {
+        return;
+      }
+      this.usuarioService.getUserByEmail(this.username).subscribe(
+        (result: any) => { 
+          localStorage.removeItem("loged");
+          if(result["lista"]!=null){
+            if(this.password == result["lista"].password){
+              localStorage.setItem("email", result["lista"].correo.toString());
+              localStorage.setItem("perfil", result["lista"].perfil.toString());
+              localStorage.setItem("loged", "true");
+              this.router.navigate(['app']);
+            }else{
+              this.dialogRef = this.dialog.open(AlertComponent, {
+                disableClose: false
+              });
+                    
+              this.dialogRef.componentInstance.title = "Notificación";
+              this.dialogRef.componentInstance.confirmMessage = "Verifique la información"
+          
+  
+            }
+        }else{
 
-     
-    }else {
-      alert("Usuario invalido");
-      //this.openDialog();
-      this.loged = false;
-    }
+          this.dialogRef = this.dialog.open(AlertComponent, {
+            disableClose: false
+          });
+          
+          this.dialogRef.componentInstance.title = "Notificación";
+          this.dialogRef.componentInstance.confirmMessage = "El usuario no existe "
+
+
+         // alert("Verifique la informacion");
+        }
+        },
+        (error: any) => { 
+          console.log('error', error);
+          this.dialogRef = this.dialog.open(AlertComponent, {
+            disableClose: false
+          });
+          
+          this.dialogRef.componentInstance.title = "Notificación";
+          this.dialogRef.componentInstance.confirmMessage = "El servicio no esta disponible "
+        },
+      )
   }
 
 

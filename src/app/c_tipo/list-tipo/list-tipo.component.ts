@@ -41,6 +41,11 @@ dataSource = new MatTableDataSource();
   constructor(private tipoService: TipoService, private router:Router ) { }
 
   ngOnInit() {
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
     this.obtenerTipos();
     //setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
     //setTimeout(() => this.dataSource.sort = this.sort);
@@ -65,20 +70,20 @@ dataSource = new MatTableDataSource();
 
     //metodo para ir a ventana de agregar objeto
     addTipo(): void {
-      this.router.navigate(['add-tipo']);
+      this.router.navigate(['app/add-tipo']);
     };
   
     editTipo(tipo: Tipo): void{
 
       localStorage.removeItem("Id");
       localStorage.setItem("Id", tipo.idTipo.toString());
-      this.router.navigate(['edit-tipo']);
+      this.router.navigate(['app/edit-tipo']);
     }
 
     eliminarTipo(tipo: Tipo): void{
         console.log("eliminando grupo");
         this.tipoService.deleteTipo(tipo);
-        this.router.navigate(['list-tipo']);
+        this.router.navigate(['app/list-tipo']);
     }
 
 }

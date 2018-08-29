@@ -1,3 +1,16 @@
-<p>
-  list-ubicacion works!
-</p>
+<br>
+<br>
+<br>
+<br>
+<nav mat-tab-nav-bar>
+  <a mat-tab-link
+     *ngFor="let link of navLinks"
+     [routerLink]="['/app/list-ubicacion',{ outlets: { aux: [link.path] } }]"
+     >
+    {{link.label}}
+  </a>
+  <a mat-tab-link disabled class="color"><h4>OBJETO: {{nombre}}</h4></a>
+  <a mat-tab-link disabled class="color"><h4>ESTATUS: {{status}}</h4></a>
+
+</nav>
+  <router-outlet name="aux"></router-outlet>

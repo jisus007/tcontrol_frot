@@ -9,6 +9,8 @@ import { TipoService } from '../../_services/tipo.service';
 import { SafeResourceUrl, DomSanitizer } from '../../../../node_modules/@angular/platform-browser';
 import { MatDialogRef, MatDialog } from '../../../../node_modules/@angular/material';
 import { DialogComponent } from '../../dialog/dialog.component';
+import { Grupo } from '../../_interfaces/grupo.interface';
+import { GrupoService } from '../../_services/grupo.service';
 
 
 @Component({
@@ -26,10 +28,20 @@ export class EditObjetoComponent implements OnInit {
   imageOn : boolean = false;
   status: string[] = ['A', 'B'];
   imagePath: SafeResourceUrl;
-  constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private objetoService: ObjetoService,private router: Router, private tipoService: TipoService,private _sanitizer: DomSanitizer) { }
+  private tipos : Tipo[];
+
+  private grupos : Grupo[];
+  constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private objetoService: ObjetoService,private router: Router, private tipoService: TipoService,private _sanitizer: DomSanitizer, private grupoService: GrupoService) { }
 
   ngOnInit() {
- 
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+
+    this.obtenerTipos();
+    this.obtenerGrupos();
 
     this.editFormObj = this.formBuilder.group({
       idObjeto: [],
@@ -48,7 +60,7 @@ export class EditObjetoComponent implements OnInit {
 let objId = localStorage.getItem("objId");
   if(!objId) {
     alert("Invalid action.")
-    this.router.navigate(['objeto']);
+    this.router.navigate(['app/objeto']);
      return;
     }
 
@@ -77,16 +89,20 @@ let objId = localStorage.getItem("objId");
 
   }
 
-  public obtenerTipos(){
-    
+  obtenerTipos(){
     this.tipoService.obtenerTodo()
-    .subscribe((data:Tipo[])=> {
-      this.tipo = data["lista"];
-    }
-   );
+    .subscribe((res : Tipo[]) => {
+     this.tipos = res["lista"];
+      return this.tipos
+    })
+}
 
-
-   ///this.isloading = false;
+obtenerGrupos(){
+  this.grupoService.obtenerTodo()
+  .subscribe((res : Grupo[]) => {
+   this.grupos = res["lista"];
+    return this.grupos
+  })
 }
   onSubmit() {
     if (this.editFormObj.invalid) {
@@ -114,7 +130,7 @@ let objId = localStorage.getItem("objId");
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['objeto']);
+          this.router.navigate(['app/objeto']);
         },
         error => {
           alert(error);
@@ -127,7 +143,7 @@ let objId = localStorage.getItem("objId");
   }
 
   cancel(){
-    this.router.navigate(['objeto']);
+    this.router.navigate(['app/objeto']);
   }
 
 

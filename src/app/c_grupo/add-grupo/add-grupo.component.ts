@@ -20,6 +20,11 @@ export class AddGrupoComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private grupoService: GrupoService,private router: Router ) { }
 
   ngOnInit() {
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
     this.formAddGrupo = this.formBuilder.group({
       idGrupo:                 ['',Validators.required],
       descripcion:             ['',Validators.required],
@@ -30,11 +35,11 @@ export class AddGrupoComponent implements OnInit {
   get f() { return this.formAddGrupo.controls; }
 
   cancel(): void {
-    this.router.navigate(['list-grupo']);
+    this.router.navigate(['app/list-grupo']);
   };
 
   clean(): void {
-    this.router.navigate(['list-grupo']);
+    this.router.navigate(['app/list-grupo']);
   };
 
 
@@ -45,7 +50,7 @@ export class AddGrupoComponent implements OnInit {
     console.log(this.formAddGrupo.value);
     this.grupoService.createGrupo(<Grupo>this.formAddGrupo.value)
       .subscribe( data => {
-        this.router.navigate(['list-grupo']);
+        this.router.navigate(['app/list-grupo']);
       });
     }
 }

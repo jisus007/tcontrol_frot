@@ -44,8 +44,23 @@ export class ObjetoComponent implements OnInit {
   constructor(private objetoService: ObjetoService, private router: Router) { }
   
   //El metodo ngOnInit arranca al entrar a la pantalla
+  loged  : boolean = false;
+  isLoged : String;
+  perfil : String;
   ngOnInit() {
     
+    //localStorage.removeItem("loged");
+    let loged = localStorage.getItem("loged");
+    let perfil = localStorage.getItem("perfil");
+
+    console.log(loged)
+    
+    this.isLoged = loged;
+    if(loged == "true"){
+      console.log("loged")
+     this.perfil = perfil;
+      this.loged=true;
+    }
     //this.isloading = false;
     this.obtenerObjetos();
 
@@ -74,13 +89,21 @@ export class ObjetoComponent implements OnInit {
 
   //metodo para ir a ventana de agregar objeto
   addObjeto(): void {
-    this.router.navigate(['add-objeto']);
+    this.router.navigate(['app/add-objeto']);
   };
 
   editObjeto(objeto: Objeto): void{
     localStorage.removeItem("editUserId");
     localStorage.setItem("objId", objeto.idObjeto.toString());
-    this.router.navigate(['edit-objeto']);
+    this.router.navigate(['app/edit-objeto']);
+  }
+
+
+  showUbication(objeto: Objeto): void{
+    localStorage.setItem("objId", objeto.idObjeto.toString());
+    localStorage.setItem("nombre", objeto.nombre.toString());
+    localStorage.setItem("status", objeto.status.toString());
+    this.router.navigate(['app/list-ubicacion']);
   }
 
 }

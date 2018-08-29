@@ -39,6 +39,11 @@ export class ListParametroComponent implements OnInit {
    constructor(private parametroService: ParametroService, private router:Router ) { }
 
    ngOnInit() {
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
     this.obtenerParametro();
     //setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
     //setTimeout(() => this.dataSource.sort = this.sort);
@@ -63,20 +68,20 @@ applyFilter(filterValue: string) {
 
   //metodo para ir a ventana de agregar objeto
   addParametro(): void {
-    this.router.navigate(['add-parametro']);
+    this.router.navigate(['app/add-parametro']);
   };
 
   editParametro(parametro: Parametro): void{
 
     localStorage.removeItem("Id");
     localStorage.setItem("Id", parametro.idParametro.toString());
-    this.router.navigate(['edit-parametro']);
+    this.router.navigate(['app/edit-parametro']);
   }
 
   eliminarParametro(parametro: Parametro): void{
       console.log("eliminando grupo");
       this.parametroService.deleteParametro(parametro);
-      this.router.navigate(['list-parametro']);
+      this.router.navigate(['app/list-parametro']);
   }
 
 }

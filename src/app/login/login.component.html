@@ -9,19 +9,19 @@
    <mat-card-header>
    </mat-card-header>
    <mat-card-content>
-     <form class="example-form">
+     <form [formGroup]="formLogin" class="example-form">
        <table  cellspacing="0">
          <tr>
            <td>
              <mat-form-field >
                
-             <input matInput placeholder="Username" [(ngModel)]="username" name="username" required>
+             <input matInput formControlName="username" placeholder="Usuario" [(ngModel)]="username" name="username" required>
              </mat-form-field>
            </td>
          </tr>
          <tr>
          <td><mat-form-field >
-           <input matInput placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
+           <input matInput formControlName="password" placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
          </mat-form-field></td>
        </tr></table>
      </form>

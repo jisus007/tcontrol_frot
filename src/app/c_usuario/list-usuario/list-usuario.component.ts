@@ -46,6 +46,12 @@ export class ListUsuarioComponent implements OnInit{
   constructor(private usuarioService: UsuarioService, private router:Router) { }
 
   ngOnInit() {
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+
     this.obtenerUsuarios();
    // setTimeout(() => {this.dataSource.paginator = this.paginator});//se agrego el metodo setTimeout() ya que no estaba funcionando
     //setTimeout(() => this.dataSource.sort = this.sort);
@@ -71,13 +77,13 @@ export class ListUsuarioComponent implements OnInit{
 
     //metodo para ir a ventana de agregar objeto
     addUsuario(): void {
-      this.router.navigate(['add-usuario']);
+      this.router.navigate(['app/add-usuario']);
     };
   
     editUser(usuario: Usuario): void{
       localStorage.removeItem("userId");
       localStorage.setItem("userId", usuario.idUsuario.toString());
-      this.router.navigate(['edit-usuario']);
+      this.router.navigate(['app/edit-usuario']);
     }
 
 }

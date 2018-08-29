@@ -32,7 +32,7 @@
          </td>
          <td>
             <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder="Fecha Alta" type="fecAlta" formControlName="fecAlta"  name="fecAlta" class="form-control" id="fecAlta">
+              <input matInput [matDatepicker]="picker" readonly placeholder="Fecha Alta" type="fecAlta" formControlName="fecAlta"  name="fecAlta" class="form-control" id="fecAlta">
               <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
               <mat-datepicker #picker></mat-datepicker>
             </mat-form-field>
@@ -42,17 +42,16 @@
               <td>
        
                   <mat-form-field>
-                    <input matInput placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status" [matAutocomplete]="autostatus">
-                    <mat-autocomplete #autostatus="matAutocomplete">
-                        <mat-option *ngFor="let stat of status" [value]="stat">
-                          {{stat}}
-                        </mat-option>
-                      </mat-autocomplete>
+                    <mat-select placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status" >
+                            <mat-option *ngFor="let stat of status" [value]="stat">
+                                {{stat}}
+                              </mat-option>
+                 </mat-select>
                   </mat-form-field>
                   </td>
             <td>
             <mat-form-field>
-              <input matInput [matDatepicker]="picker2" placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
+              <input matInput [matDatepicker]="picker2" readonly placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
               <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
               <mat-datepicker #picker2></mat-datepicker>
             </mat-form-field>
@@ -64,7 +63,7 @@
             <td>
      
                 <mat-form-field>
-                  <input matInput placeholder="Placas" type="placas" formControlName="placas"  name="placas" class="form-control" id="placas">
+                  <input matInput placeholder="Placas" type="placas" maxlength="9" minlength="9" formControlName="placas"  name="placas" class="form-control" id="placas">
                 </mat-form-field>
             </td>
             <td>
@@ -72,10 +71,10 @@
                 <mat-form-field>
                   
                   <mat-select placeholder="Tipo" type="tipo" formControlName="tipo"  name="tipo" class="form-control" id="tipo">
-                    
-                      <mat-option value="AUT">Automoviles</mat-option>
-                      <mat-option value="CEL">Celulares</mat-option>
-
+                
+                      <mat-option *ngFor="let tl of tipos"  [value]="tl.idTipo">
+                            {{tl.descripcion}}
+                          </mat-option>
                   </mat-select>
                 </mat-form-field>
             </td>
@@ -87,8 +86,9 @@
               <mat-form-field>
           
                 <mat-select placeholder="Grupo" type="grupo" formControlName="grupo"  name="grupo" class="form-control" id="grupo">
-                    <mat-option value="QRO">Flotilla Queretaro</mat-option>
-                    <mat-option value="CDMX">Flotilla Mexico</mat-option>
+                        <mat-option *ngFor="let tl of grupos"  [value]="tl.idGrupo">
+                                {{tl.descripcion}}
+                              </mat-option>
                 </mat-select>
               </mat-form-field>
           </td>

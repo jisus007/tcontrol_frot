@@ -39,6 +39,11 @@ dataSource = new MatTableDataSource();
   constructor(private grupoService: GrupoService, private router:Router ) { }
 
   ngOnInit() {
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
     this.obtenerUsuarios();
    // setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
     //setTimeout(() => this.dataSource.sort = this.sort);
@@ -63,7 +68,7 @@ dataSource = new MatTableDataSource();
 
     //metodo para ir a ventana de agregar objeto
     addGrupo(): void {
-      this.router.navigate(['add-grupo']);
+      this.router.navigate(['app/add-grupo']);
     };
   
     editGrupo(grupo: Grupo): void{
@@ -75,12 +80,12 @@ dataSource = new MatTableDataSource();
 
       localStorage.removeItem("Id");
       localStorage.setItem("Id", grupo.idGrupo.toString());
-      this.router.navigate(['edit-grupo']);
+      this.router.navigate(['app/edit-grupo']);
     }
 
     eliminarGrupo(grupo: Grupo): void{
         console.log("eliminando grupo");
         this.grupoService.deleteGrupo(grupo);
-        this.router.navigate(['list-grupo']);
+        this.router.navigate(['app/list-grupo']);
     }
 }

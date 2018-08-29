@@ -4,6 +4,7 @@ import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { UsuarioService } from '../../_services/usuario.service';
 import {first} from "rxjs/operators";
 import { Usuario } from '../../_interfaces/usuario.interface';
+import { MatDialog } from '../../../../node_modules/@angular/material';
 
 @Component({
   selector: 'app-add-usuario',
@@ -27,16 +28,21 @@ export class AddUsuarioComponent implements OnInit {
 
   base64textString : String;
 
-  constructor(private formBuilder: FormBuilder,private usuarioService: UsuarioService,private router: Router) { }
+  constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private usuarioService: UsuarioService,private router: Router) { }
 
   ngOnInit() {
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
     this.formAddUsuario = this.formBuilder.group({
       idUsuario:          [],
       nombre:             ['',Validators.required],
       fecha:              ['',Validators.required],
-      curp:               ['',Validators.required],
-      rfc:                ['',Validators.required],
-      numeroLic:          ['',Validators.required],
+      curp:               ['',Validators.required,Validators.maxLength(18)],
+      rfc:                ['',Validators.required,Validators.maxLength(13)],
+      numeroLic:          ['',Validators.required,Validators.maxLength(10)],
       tipoLic:            ['',Validators.required],
       vigencia:           ['',Validators.required],
       correo:             ['',Validators.required],
@@ -51,11 +57,11 @@ export class AddUsuarioComponent implements OnInit {
 
   //metodo para ir a ventana de agregar objeto
   cancel(): void {
-    this.router.navigate(['list-usuario']);
+    this.router.navigate(['app/list-usuario']);
   };
 
   clean(): void {
-    this.router.navigate(['objeto']);
+    this.router.navigate(['app/objeto']);
   };
 
 
@@ -68,7 +74,7 @@ export class AddUsuarioComponent implements OnInit {
     this.formAddUsuario.value.foto = this.base64textString;
     this.usuarioService.createUser(<Usuario>this.formAddUsuario.value)
       .subscribe( data => {
-        this.router.navigate(['list-usuario']);
+        this.router.navigate(['app/list-usuario']);
       });
     }
 

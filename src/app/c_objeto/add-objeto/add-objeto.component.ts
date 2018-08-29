@@ -2,10 +2,12 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from "@angular/router";
 import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ObjetoService } from '../../_services/objeto.service';
-import {first} from "rxjs/operators";
+import {first, max} from "rxjs/operators";
 import { Objeto } from '../../_interfaces/objeto.interface';
 import { Tipo } from '../../_interfaces/tipo.interface';
 import { TipoService } from '../../_services/tipo.service';
+import { GrupoService } from '../../_services/grupo.service';
+import { Grupo } from '../../_interfaces/grupo.interface';
 
 @Component({
   selector: 'app-add-objeto',
@@ -23,9 +25,11 @@ export class AddObjetoComponent implements OnInit {
   status: string[] = ['A', 'B'];
   public data:Array<Tipo>=[];
 
-  private tipos : Tipo[] = [];
+  private tipos : Tipo[];
 
-  constructor(private formBuilder: FormBuilder,private objetoService: ObjetoService,private router: Router, private tipoService: TipoService) { }
+  private grupos : Grupo[];
+
+  constructor(private formBuilder: FormBuilder,private objetoService: ObjetoService,private router: Router, private tipoService: TipoService,  private grupoService: GrupoService) { }
 
 
   //obj: Objeto = {nombre: '', descripcion: 0, serie: 0,fecAlta: '14/08/2018'};
@@ -33,8 +37,15 @@ export class AddObjetoComponent implements OnInit {
   
   
   ngOnInit() {
+    let loged = localStorage.getItem("loged");
 
-    this.tipos = this.obtenerTipos();
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+    this.obtenerTipos();
+
+    this.obtenerGrupos();
+
     this.formAddObjeto = this.formBuilder.group({
            idObjeto: [],
            nombre:           ['', Validators.required],
@@ -43,7 +54,7 @@ export class AddObjetoComponent implements OnInit {
            fecAlta:          ['', Validators.required],
            fecActualizacion: ['', Validators.required],
            status:           ['', Validators.required],
-           placas:           ['', Validators.required],
+           placas:           ['', Validators.required, Validators.maxLength(9), Validators.minLength(9)],
            tipo:             ['', Validators.required],
            grupo:            ['', Validators.required],
            foto:             [''],
@@ -56,11 +67,11 @@ export class AddObjetoComponent implements OnInit {
 
   //metodo para ir a ventana de agregar objeto
   cancel(): void {
-    this.router.navigate(['objeto']);
+    this.router.navigate(['app/objeto']);
   };
 
   clean(): void {
-    this.router.navigate(['objeto']);
+    this.router.navigate(['app/objeto']);
   };
 
 
@@ -73,28 +84,26 @@ export class AddObjetoComponent implements OnInit {
     this.formAddObjeto.value.foto = this.base64textString;
     this.objetoService.createObjeto(<Objeto>this.formAddObjeto.value)
       .subscribe( data => {
-        this.router.navigate(['objeto']);
+        this.router.navigate(['app/objeto']);
       });
     }
 
 
  obtenerTipos(){
-    this.tipos;
-     let tipos2 : Tipo[] = [];
-
       this.tipoService.obtenerTodo()
       .subscribe((res : Tipo[]) => {
-        tipos2 = res["lista"];
-        console.log(res["lista"])
-
-        console.log(this.tipos);
-
+       this.tipos = res["lista"];
         return this.tipos
       })
-
-      console.log(tipos2);
-      return tipos2
   }
+
+  obtenerGrupos(){
+    this.grupoService.obtenerTodo()
+    .subscribe((res : Grupo[]) => {
+     this.grupos = res["lista"];
+      return this.grupos
+    })
+}
 
 
   handleFileSelect(evt){

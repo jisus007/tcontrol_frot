@@ -22,6 +22,11 @@ export class EditTipoComponent implements OnInit {
   constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private tipoService: TipoService,private router: Router ) { }
   Id : String;
   ngOnInit() {
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
     this.formEditTipo = this.formBuilder.group({
       idTipo:                  ['',Validators.required],
       descripcion:             ['',Validators.required],
@@ -31,7 +36,7 @@ export class EditTipoComponent implements OnInit {
     this.Id = localStorage.getItem("Id");
   if(!this.Id) {
     alert("Invalid action.")
-    this.router.navigate(['list-tipo']);
+    this.router.navigate(['app/list-tipo']);
      return;
     }
     console.log("recuperando id")
@@ -64,7 +69,7 @@ export class EditTipoComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['list-tipo']);
+          this.router.navigate(['app/list-tipo']);
         },
         error => {
           alert(error);
@@ -77,7 +82,7 @@ export class EditTipoComponent implements OnInit {
   }
 
   cancel(){
-    this.router.navigate(['list-tipo']);
+    this.router.navigate(['app/list-tipo']);
   }
 
   

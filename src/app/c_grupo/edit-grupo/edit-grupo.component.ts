@@ -24,7 +24,11 @@ export class EditGrupoComponent implements OnInit {
 
   Id : String;
   ngOnInit() {
- 
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
     this.formEditGrupo = this.formBuilder.group({
       idGrupo:                 ['',Validators.required],
       descripcion:             ['',Validators.required],
@@ -35,7 +39,7 @@ export class EditGrupoComponent implements OnInit {
 this.Id = localStorage.getItem("Id");
   if(!this.Id) {
     alert("Invalid action.")
-    this.router.navigate(['list-grupo']);
+    this.router.navigate(['app/list-grupo']);
      return;
     }
     console.log("recuperando id")
@@ -72,7 +76,7 @@ this.Id = localStorage.getItem("Id");
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['list-grupo']);
+          this.router.navigate(['app/list-grupo']);
         },
         error => {
           alert(error);
@@ -85,6 +89,6 @@ this.Id = localStorage.getItem("Id");
   }
 
   cancel(){
-    this.router.navigate(['list-grupo']);
+    this.router.navigate(['app/list-grupo']);
   }
 }

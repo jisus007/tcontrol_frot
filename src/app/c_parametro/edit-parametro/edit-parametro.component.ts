@@ -24,6 +24,12 @@ export class EditParametroComponent implements OnInit {
   constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private parametroService: ParametroService,private router: Router ) { }
   Id : String
   ngOnInit() {
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+    
     this.formEditParametro = this.formBuilder.group({
       idParametro:                 [],
       codigo:                     ['',Validators.required],
@@ -37,7 +43,7 @@ export class EditParametroComponent implements OnInit {
       this.Id = localStorage.getItem("Id");
       if(!this.Id) {
         alert("Invalid action.")
-        this.router.navigate(['list-parametro']);
+        this.router.navigate(['app/list-parametro']);
          return;
         }
         console.log("recuperando id")
@@ -72,7 +78,7 @@ export class EditParametroComponent implements OnInit {
       .pipe(first())
       .subscribe(
         data => {
-          this.router.navigate(['list-parametro']);
+          this.router.navigate(['app/list-parametro']);
         },
         error => {
           alert(error);
@@ -85,6 +91,6 @@ export class EditParametroComponent implements OnInit {
   }
 
   cancel(){
-    this.router.navigate(['list-parametro']);
+    this.router.navigate(['app/list-parametro']);
   }
 }

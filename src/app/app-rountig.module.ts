@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { NgModule, ModuleWithProviders } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 
 import { DirectorioComponent } from './directorio/directorio.component';
@@ -22,39 +22,55 @@ import { EditParametroComponent } from './c_parametro/edit-parametro/edit-parame
 import { ListTipoComponent } from './c_tipo/list-tipo/list-tipo.component';
 import { AddTipoComponent } from './c_tipo/add-tipo/add-tipo.component';
 import { EditTipoComponent } from './c_tipo/edit-tipo/edit-tipo.component';
+import { ListUbicacionComponent } from './c_ubicacion/list-ubicacion/list-ubicacion.component';
+import { AddUbicacionComponent } from './c_ubicacion/add-ubicacion/add-ubicacion.component';
+import { EditUbicacionComponent } from './c_ubicacion/edit-ubicacion/edit-ubicacion.component';
+import { TrayectoDiaComponent } from './c_ubicacion/trayecto-dia/trayecto-dia.component';
+import { LastUbicacionComponent } from './c_ubicacion/last-ubicacion/last-ubicacion.component';
+import { TrayectoFechasComponent } from './c_ubicacion/trayecto-fechas/trayecto-fechas.component';
 
 const routes: Routes = [
   { path: 'directorio', component: DirectorioComponent },
   { path: 'main', component: MainComponent},
   { path: 'tcontrol', component: TcontrolComponent},
+ 
+  { path: 'app', component: AppComponent, children:[
+    { path: 'list-usuario', component: ListUsuarioComponent },
+    { path: 'edit-usuario', component: EditUsuarioComponent },
+    { path: 'add-usuario', component: AddUsuarioComponent },
+    { path: 'personal', component: PersonalComponent},
+
+    { path: 'objeto', component: ObjetoComponent},
+    { path: 'add-objeto', component: AddObjetoComponent },
+    { path: 'edit-objeto', component: EditObjetoComponent },
+  
+  
+  
+    { path: 'list-grupo', component: ListGrupoComponent },
+    { path: 'add-grupo', component: AddGrupoComponent },
+    { path: 'edit-grupo', component: EditGrupoComponent },
+  
+    { path: 'list-parametro', component: ListParametroComponent },
+    { path: 'add-parametro', component: AddParametroComponent },
+    { path: 'edit-parametro', component: EditParametroComponent },
+  
+    { path: 'list-tipo', component: ListTipoComponent },
+    { path: 'add-tipo', component: AddTipoComponent },
+    { path: 'edit-tipo', component: EditTipoComponent },
+  
+    { path: 'list-ubicacion', component: ListUbicacionComponent, children:[
+        { path: 'last-ubicacion', component: LastUbicacionComponent, outlet: 'aux'},
+        { path: 'trayecto-dia', component: TrayectoDiaComponent, outlet: 'aux'},
+        { path: 'trayecto-fechas', component: TrayectoFechasComponent, outlet: 'aux'},
+      ]},
+  ]},
+
   { path: 'login', component: LoginComponent},
-  { path: 'app', component: AppComponent},
-  { path: 'personal', component: PersonalComponent},
-
-  { path: 'objeto', component: ObjetoComponent},
-  { path: 'add-objeto', component: AddObjetoComponent },
-  { path: 'edit-objeto', component: EditObjetoComponent },
-
-  { path: 'list-usuario', component: ListUsuarioComponent },
-  { path: 'edit-usuario', component: EditUsuarioComponent },
-  { path: 'add-usuario', component: AddUsuarioComponent },
-
-  { path: 'list-grupo', component: ListGrupoComponent },
-  { path: 'add-grupo', component: AddGrupoComponent },
-  { path: 'edit-grupo', component: EditGrupoComponent },
-
-  { path: 'list-parametro', component: ListParametroComponent },
-  { path: 'add-parametro', component: AddParametroComponent },
-  { path: 'edit-parametro', component: EditParametroComponent },
-
-  { path: 'list-tipo', component: ListTipoComponent },
-  { path: 'add-tipo', component: AddTipoComponent },
-  { path: 'edit-tipo', component: EditTipoComponent },
-
-  { path: '', component: AppComponent},
-  { path: '**', component: AppComponent},
+  { path: '', component: LoginComponent},
+  { path: '**', component: LoginComponent},
 ];
 
+export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);
 @NgModule({
   imports: [
     RouterModule.forRoot(routes)

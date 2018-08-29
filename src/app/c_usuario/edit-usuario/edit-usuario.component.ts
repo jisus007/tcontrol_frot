@@ -24,7 +24,8 @@ export class EditUsuarioComponent implements OnInit {
   perfilUser: String;
   imageOn : boolean = false;
 
-  constructor(public dialog: MatDialog,private formBuilder: FormBuilder, private usuarioService : UsuarioService,private router: Router,private datePipe: DatePipe,private _sanitizer: DomSanitizer) { }
+  constructor(public dialog: MatDialog,private formBuilder: FormBuilder, private usuarioService : UsuarioService,
+    private router: Router,private datePipe: DatePipe,private _sanitizer: DomSanitizer) { }
 
   options: string[] = ['Administrador', 'Localizador', 'Usuario'];
 
@@ -36,6 +37,13 @@ export class EditUsuarioComponent implements OnInit {
   base64textString : String;
 
   ngOnInit() {
+
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+    
     this.editFormUser = this.formBuilder.group({
       idUsuario:          [],
       nombre:             ['',Validators.required],
@@ -123,7 +131,7 @@ let userId = localStorage.getItem("userId");
           .pipe(first())
           .subscribe(
             data => {
-              this.router.navigate(['list-usuario']);
+              this.router.navigate(['app/list-usuario']);
             },
             error => {
               alert(error);
@@ -137,7 +145,7 @@ let userId = localStorage.getItem("userId");
   }
 
   cancel(){
-    this.router.navigate(['list-usuario']);
+    this.router.navigate(['app/list-usuario']);
   }
 
 

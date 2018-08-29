@@ -21,6 +21,11 @@ export class AddParametroComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private parametroService: ParametroService,private router: Router ) { }
 
   ngOnInit() {
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
     this.formAddParametro = this.formBuilder.group({
       idParametro:                 [],
       codigo:             ['',Validators.required],
@@ -36,11 +41,11 @@ export class AddParametroComponent implements OnInit {
 
 
   cancel(): void {
-    this.router.navigate(['list-parametro']);
+    this.router.navigate(['app/list-parametro']);
   };
 
   clean(): void {
-    this.router.navigate(['list-parametro']);
+    this.router.navigate(['app/list-parametro']);
   };
 
 
@@ -51,7 +56,7 @@ export class AddParametroComponent implements OnInit {
     console.log(this.formAddParametro.value);
     this.parametroService.createParametro(<Parametro>this.formAddParametro.value)
       .subscribe( data => {
-        this.router.navigate(['list-parametro']);
+        this.router.navigate(['app/list-parametro']);
       });
     }
 

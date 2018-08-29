@@ -12,90 +12,91 @@
       <mat-card >
           <mat-card-content>
         <form [formGroup]="editFormObj" >
-            <table class="example-full-width" cellspacing="0"><tr>
-                <td>
-                  <mat-form-field>
-                     <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
-                  </mat-form-field>
-              </td>
-          <td>
-              <mat-form-field>
-                <input matInput placeholder="Descripcion" type="descripcion" formControlName="descripcion"  name="descripcion" class="form-control" id="descripcion">
-             </mat-form-field>
-          </td>
-         
-        </tr></table>
-        <table class="example-full-width" cellspacing="0"><tr>
-           <td>
-            <mat-form-field>
-              <input matInput placeholder="Serie" type="serie" formControlName="serie"  name="serie" class="form-control" id="serie">
-            </mat-form-field>
-         </td>
-         <td>
-            <mat-form-field>
-              <input matInput [matDatepicker]="picker" placeholder="Fecha Alta" type="fecAlta" formControlName="fecAlta"  name="fecAlta" class="form-control" id="fecAlta">
-              <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-              <mat-datepicker #picker></mat-datepicker>
-            </mat-form-field>
-          </td>
-          </tr></table>
-          <table class="example-full-width" cellspacing="0"><tr>
-              <td>
-       
-                  <mat-form-field>
-                    <input matInput placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status" [matAutocomplete]="autostatus">
-                    <mat-autocomplete #autostatus="matAutocomplete">
-                        <mat-option *ngFor="let stat of status" [value]="stat">
-                          {{stat}}
-                        </mat-option>
-                      </mat-autocomplete>
-                  </mat-form-field>
+                <table class="example-full-width" cellspacing="0"><tr>
+                        <td>
+                          <mat-form-field>
+                             <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
+                          </mat-form-field>
+                      </td>
+                  <td>
+                      <mat-form-field>
+                        <input matInput placeholder="Descripcion" type="descripcion" formControlName="descripcion"  name="descripcion" class="form-control" id="descripcion">
+                     </mat-form-field>
                   </td>
-            <td>
-            <mat-form-field>
-              <input matInput [matDatepicker]="picker2" placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
-              <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
-              <mat-datepicker #picker2></mat-datepicker>
-            </mat-form-field>
-          </td>
-
-    
-        </tr></table>
-        <table class="example-full-width" cellspacing="0"><tr>
-            <td>
-     
-                <mat-form-field>
-                  <input matInput placeholder="Placas" type="placas" formControlName="placas"  name="placas" class="form-control" id="placas">
-                </mat-form-field>
-            </td>
-            <td>
-     
-                <mat-form-field>              
-                  <mat-select placeholder="Tipo" type="tipo" formControlName="tipo"  name="tipo" class="form-control" id="tipo">
-                    
-                      <mat-option value="AUT">Automoviles</mat-option>
-                      <mat-option value="CEL">Celulares</mat-option>
-
-                  </mat-select>
-                </mat-form-field>
-            </td>
-
-  
-      </tr></table>
-      <table class="example-full-width" cellspacing="0"><tr>
-          <td>
-   
-              <mat-form-field>
-                  <mat-select placeholder="Grupo" type="grupo" formControlName="grupo"  name="grupo" class="form-control" id="grupo">
-                      <mat-option value="QRO">Flotilla Queretaro</mat-option>
-                      <mat-option value="CDMX">Flotilla Mexico</mat-option>
-                  </mat-select>
-              </mat-form-field>
-          </td>
-
-
-
-    </tr></table>
+                 
+                </tr></table>
+                <table class="example-full-width" cellspacing="0"><tr>
+                   <td>
+                    <mat-form-field>
+                      <input matInput placeholder="Serie" type="serie" formControlName="serie"  name="serie" class="form-control" id="serie">
+                    </mat-form-field>
+                 </td>
+                 <td>
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="picker" readonly placeholder="Fecha Alta" type="fecAlta" formControlName="fecAlta"  name="fecAlta" class="form-control" id="fecAlta">
+                      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                      <mat-datepicker #picker></mat-datepicker>
+                    </mat-form-field>
+                  </td>
+                  </tr></table>
+                  <table class="example-full-width" cellspacing="0"><tr>
+                      <td>
+               
+                          <mat-form-field>
+                            <mat-select placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status" >
+                                    <mat-option *ngFor="let stat of status" [value]="stat">
+                                        {{stat}}
+                                      </mat-option>
+                         </mat-select>
+                          </mat-form-field>
+                          </td>
+                    <td>
+                    <mat-form-field>
+                      <input matInput [matDatepicker]="picker2" readonly placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
+                      <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                      <mat-datepicker #picker2></mat-datepicker>
+                    </mat-form-field>
+                  </td>
+        
+            
+                </tr></table>
+                <table class="example-full-width" cellspacing="0"><tr>
+                    <td>
+             
+                        <mat-form-field>
+                          <input matInput placeholder="Placas" type="placas" maxlength="9" minlength="9" formControlName="placas"  name="placas" class="form-control" id="placas">
+                        </mat-form-field>
+                    </td>
+                    <td>
+             
+                        <mat-form-field>
+                          
+                          <mat-select placeholder="Tipo" type="tipo" formControlName="tipo"  name="tipo" class="form-control" id="tipo">
+                        
+                              <mat-option *ngFor="let tl of tipos"  [value]="tl.idTipo">
+                                    {{tl.descripcion}}
+                                  </mat-option>
+                          </mat-select>
+                        </mat-form-field>
+                    </td>
+        
+          
+              </tr></table>
+              <table class="example-full-width" cellspacing="0"><tr>
+                  <td>
+                      <mat-form-field>
+                  
+                        <mat-select placeholder="Grupo" type="grupo" formControlName="grupo"  name="grupo" class="form-control" id="grupo">
+                                <mat-option *ngFor="let tl of grupos"  [value]="tl.idGrupo">
+                                        {{tl.descripcion}}
+                                      </mat-option>
+                        </mat-select>
+                      </mat-form-field>
+                  </td>
+        
+        
+        
+            </tr></table>
 
     <br>
             <mat-card-actions >
@@ -117,7 +118,8 @@
                   
                         <mat-card-subtitle></mat-card-subtitle>
                       </mat-card-header>
-                      <img *ngIf="imageOn" mat-card-image [src]="imagePath"  >
+
+                      <img style="width: 380px; height: 200px;" *ngIf="imageOn" mat-card-image [src]="imagePath"  >
                       <mat-card-content>
                           <p>
                           Objeto: {{nombreObjeto}}
@@ -127,7 +129,7 @@
                                           <label class="fileContainer">
                                              
                                               modificar imagen
-                                            <input type="file" (change)="handleFileSelect($event)" accept=".png, .jpg, .jpeg" />
+                                            <input type="file" (change)="handleFileSelect($event)" accept=".png, .jpg, .jpeg" data-max-size="200" />
                                             </label>
                                       </td>
 

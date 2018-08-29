@@ -6,7 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import { CommonModule, DatePipe }   from '@angular/common';
-
+import { AgmCoreModule } from '@agm/core';
 
 // Angular Material Modules
 import {MatToolbarModule} from '@angular/material/toolbar';
@@ -24,7 +24,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip';
-
+import {MatTabsModule} from '@angular/material/tabs';
 
 
 import { AppComponent } from './app.component';
@@ -56,6 +56,10 @@ import { AddParametroComponent } from './c_parametro/add-parametro/add-parametro
 import { ListUbicacionComponent } from './c_ubicacion/list-ubicacion/list-ubicacion.component';
 import { AddUbicacionComponent } from './c_ubicacion/add-ubicacion/add-ubicacion.component';
 import { EditUbicacionComponent } from './c_ubicacion/edit-ubicacion/edit-ubicacion.component';
+import { LastUbicacionComponent } from './c_ubicacion/last-ubicacion/last-ubicacion.component';
+import { TrayectoDiaComponent } from './c_ubicacion/trayecto-dia/trayecto-dia.component';
+import { TrayectoFechasComponent } from './c_ubicacion/trayecto-fechas/trayecto-fechas.component';
+import { AlertComponent } from './alert/alert.component';
 
 
 @NgModule({
@@ -85,6 +89,10 @@ import { EditUbicacionComponent } from './c_ubicacion/edit-ubicacion/edit-ubicac
     ListUbicacionComponent,
     AddUbicacionComponent,
     EditUbicacionComponent,
+    LastUbicacionComponent,
+    TrayectoDiaComponent,
+    TrayectoFechasComponent,
+    AlertComponent,
   ],
   imports: [
     BrowserModule,
@@ -113,14 +121,20 @@ import { EditUbicacionComponent } from './c_ubicacion/edit-ubicacion/edit-ubicac
     ReactiveFormsModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    MatAutocompleteModule
+    MatAutocompleteModule,
+    MatTabsModule,
+    AgmCoreModule.forRoot({
+      apiKey: 'AIzaSyDukpIc-86ezs8umS8kOxxRz5yc8HpxVWg'
+    })
+
+
 
 
   ],
-  providers: [DirectorioService,DialogComponent,MatDatepickerModule,{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},DatePipe],
+  providers: [DirectorioService,DialogComponent,AlertComponent,MatDatepickerModule,{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},DatePipe],
   bootstrap: [AppComponent],
-  exports: [ DialogComponent ],
-  entryComponents: [DialogComponent]
+  exports: [ DialogComponent,AlertComponent ],
+  entryComponents: [DialogComponent,AlertComponent]
 })
 export class AppModule  {
 

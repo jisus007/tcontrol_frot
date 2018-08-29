@@ -6,7 +6,7 @@
       </div>
   </mat-toolbar>
 <div class="mat-elevation-z8" *ngIf="dataSource.data.length > 0 else noData" >
-    <mat-form-field>
+    &nbsp;&nbsp;<mat-form-field>
         <input matInput (keyup)="applyFilter($event.target.value)" placeholder="Busqueda">
       </mat-form-field>
 <table  mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;" > 
@@ -56,17 +56,22 @@
       </ng-container>
 
    <!-- Acciones -->
-  <ng-container matColumnDef="actions">
+  <ng-container  matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> <br>Acciones</mat-header-cell>
         <mat-cell *matCellDef="let row" style="white-space: nowrap">  
-          <button mat-icon-button (click)="addObjeto()">
+          <button *ngIf="perfil == 'Administrador'" mat-icon-button (click)="addObjeto()">
             <span matTooltip="Agregar">
             <mat-icon style="color: rgb(128, 128, 128)">assignment</mat-icon>
             </span>
           </button>  
-          <button mat-icon-button (click)="editObjeto(row)">
+          <button *ngIf="perfil == 'Administrador'" mat-icon-button (click)="editObjeto(row)">
             <span matTooltip="Editar">
               <mat-icon>mode_edit</mat-icon>
+            </span>
+          </button>  
+          <button mat-icon-button (click)="showUbication(row)">
+            <span matTooltip="Ver ubicaciones">
+              <mat-icon>location_on</mat-icon>
             </span>
           </button>  
         </mat-cell>
