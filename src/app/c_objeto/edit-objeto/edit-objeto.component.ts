@@ -28,9 +28,9 @@ export class EditObjetoComponent implements OnInit {
   imageOn : boolean = false;
   status: string[] = ['A', 'B'];
   imagePath: SafeResourceUrl;
-  private tipos : Tipo[];
+  public tipos : Tipo[];
 
-  private grupos : Grupo[];
+  public grupos : Grupo[];
   constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private objetoService: ObjetoService,private router: Router, private tipoService: TipoService,private _sanitizer: DomSanitizer, private grupoService: GrupoService) { }
 
   ngOnInit() {

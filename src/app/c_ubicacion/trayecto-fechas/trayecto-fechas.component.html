@@ -33,7 +33,7 @@
 <div *ngIf="error.isError" class="alert alert-danger">
     {{ error.errorMessage }}
  </div>
-<div class="mat-elevation-z8" *ngIf="dataSource.data.length > 0 else noData" >
+<div class="mat-elevation-z8" *ngIf="dataSource.data.length " >
 
   <table  mat-table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;" > 
   

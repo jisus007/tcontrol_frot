@@ -25,9 +25,9 @@ export class AddObjetoComponent implements OnInit {
   status: string[] = ['A', 'B'];
   public data:Array<Tipo>=[];
 
-  private tipos : Tipo[];
+  public tipos : Tipo[];
 
-  private grupos : Grupo[];
+  public grupos : Grupo[];
 
   constructor(private formBuilder: FormBuilder,private objetoService: ObjetoService,private router: Router, private tipoService: TipoService,  private grupoService: GrupoService) { }
 
