@@ -5,6 +5,7 @@ import { Router } from '../../../../node_modules/@angular/router';
 import { Ubicacion } from '../../_interfaces/ubicacion.interface';
 import { DatePipe } from '../../../../node_modules/@angular/common';
 import { AlertComponent } from '../../alert/alert.component';
+import { AgmMap } from '../../../../node_modules/@agm/core';
 
 @Component({
   selector: 'app-last-ubicacion',
@@ -14,6 +15,8 @@ import { AlertComponent } from '../../alert/alert.component';
 export class LastUbicacionComponent implements OnInit {
   private paginator: MatPaginator;
   private sort: MatSort;
+
+  @ViewChild('map') map: AgmMap;   
 
   public latitude: number;
   public longitude: number;
@@ -49,6 +52,9 @@ export class LastUbicacionComponent implements OnInit {
   constructor(public dialog: MatDialog,private datePipe: DatePipe,private ubicacionService : UbicacionService, private router:Router) { }
 
   ngOnInit() {
+    
+    //this.resizeMap();
+
     let loged = localStorage.getItem("loged");
 
     if(loged==null){
@@ -60,7 +66,9 @@ export class LastUbicacionComponent implements OnInit {
     this.getById(objId);
 
   }
-
+resizeMap() {
+        this.map.triggerResize();
+    }
 
   getById(objId : String){
     this.ubicacionService.getUbicacionById(+objId)

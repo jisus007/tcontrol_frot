@@ -12,7 +12,7 @@ import { Objeto } from '../_interfaces/objeto.interface';
 export class UbicacionService {
   
 //creamoms variable API, es la direccion donde consumiremos nuestro servicios.
-public API = 'https://app-rastreo-services.herokuapp.com';
+public API = 'http://localhost:5000';
 //public DIR_API = this.API + '/apicontroller';
 data:String;
 //Agregamos al constructor http de tipo HttpClient

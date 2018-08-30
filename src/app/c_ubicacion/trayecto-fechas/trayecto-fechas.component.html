@@ -93,21 +93,11 @@
   </table>
   <mat-paginator [pageSizeOptions]="[1]" showFirstLastButtons></mat-paginator>
 <div *ngIf="isSearch" class="container">
+
+  <ng-container>
   <agm-map [latitude]="ConvertString(latitude)" [longitude]="ConvertString(longitude)" [scrollwheel]="false" [zoom]="zoom">
-    <ng-container>
-        <agm-circle [latitude]="ConvertString(rows[0].latitud)" [longitude]="ConvertString(rows[0].longitud)" 
-        [fillOpacity]="0.5" [radius]="100" [fillColor]="red" ></agm-circle>
-        <agm-circle [latitude]="ConvertString(rows[rows.length - 1].latitud)" [longitude]="ConvertString(rows[rows.length - 1].longitud)" 
-        [fillOpacity]="0.5" [radius]="100" [fillColor]="blue"></agm-circle>
-      <agm-polyline *ngFor="let point of rows;let i = index;" [strokeColor]="point.speed < 50 ? '#2196f3': 'red'">
-         <agm-polyline-point [latitude]="ConvertString(point.latitud)" [longitude]="ConvertString(point.longitud)">
-         </agm-polyline-point>
-         <ng-container *ngIf="rows[i+1]">
-           <agm-polyline-point [latitude]="ConvertString(rows[i+1].latitud)" [longitude]="ConvertString(rows[i+1].longitud)">
-           </agm-polyline-point>
-         </ng-container>
-     </agm-polyline>
-   </ng-container>
+      <agm-direction *ngFor="let dir of dirArr" [origin]="dir.origin" [markerOptions]="markerOptions"  [destination]="dir.destination" [waypoints]="waypoints"></agm-direction>
  </agm-map>
+</ng-container>
 </div>
 

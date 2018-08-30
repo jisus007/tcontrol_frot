@@ -9,6 +9,7 @@ import { DialogComponent } from '../../dialog/dialog.component';
 import { Router } from '../../../../node_modules/@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 
+
 @Component({
   selector: 'app-trayecto-fechas',
   templateUrl: './trayecto-fechas.component.html',
@@ -41,6 +42,9 @@ export class TrayectoFechasComponent implements OnInit {
   isSearch: boolean = false;
   fechaCovert : String;
 
+  public origin: any
+public destination: any ;
+ 
   error:any={isError:false,errorMessage:''};
 
   displayedColumns: string[] = ['fecha','descripcion','pais','latitud','longitud','actions'];
@@ -50,7 +54,22 @@ export class TrayectoFechasComponent implements OnInit {
   isloading: boolean = false;
 
   dialogRef: MatDialogRef<AlertComponent>;
+  public dir : any;
+
+
+  public locations = [];
+
+  public locationsbuild = [];
+  public locationsbuild2 = [];
+  public locationsbuild3 = [];
+
+  public destinos = [];
   
+
+  public dirArr = [];
+
+  public dirArrOrder = [];
+  public waypoints: any = []
   setDataSourceAttributes() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -66,8 +85,12 @@ export class TrayectoFechasComponent implements OnInit {
   ) {  }
   
   ngOnInit() {
+  //this.origin = { lat: 24.799448, lng: 120.979021 }
+  //this.destination = { lat: 24.799524, lng: 120.975017 }
+  //this.dir = {};
     let loged = localStorage.getItem("loged");
 
+    
     if(loged==null){
       this.router.navigate(['login']);
     }
@@ -129,6 +152,14 @@ export class TrayectoFechasComponent implements OnInit {
     });
   }
   
+  public markerOptions = {
+    origin: {
+        icon: '../../../assets/Map-Pin.png',
+    },
+    destination: {
+        icon: '../../../assets/Map-Pin.png',
+    },
+}
  /* private setCurrentPosition() {
     if ("geolocation" in navigator) {
       navigator.geolocation.watchPosition((position) => {
@@ -188,11 +219,38 @@ export class TrayectoFechasComponent implements OnInit {
     this.ubicacionService.getUbicacionByFecha(<Ubicacion>this.formSearch.value, objId)
     .subscribe(
       (result: Array<Ubicacion>) => { 
+      
         console.log('success', result["lista"]);
         this.rows = result["lista"];
+        if(this.rows.length>0){
         this.dataSource.data = result["lista"];
         this.buildLocation(this.rows);
-        if(this.rows.length>0){
+        this.origin = { lat: Number(this.rows[0].latitud), lng: Number(this.rows[0].longitud) }
+        this.destination = { lat: Number(this.rows[this.rows.length-1].latitud), lng: Number(this.rows[this.rows.length-1].longitud) }
+
+        //this.dir.push(this.origin);
+        //this.dir.push(this.destination);
+
+        this.locaciones(this.rows);
+        this.buildDirection(this.locations);
+
+        this.buildDirectionFinal(this.locationsbuild);
+
+       // this.buildDirectionOrder(this.dirArr);
+        //this.dirArr.push(this.origin);
+       /* this.dirArr.push({
+          origin: { lat: 21.6120628, lng: -100.400509 },
+          destination: { lat: 20.61160, lng: -100.4940730 },
+          visible: false,
+        });*/
+        
+        //console.log(this.origin);
+        //console.log(this.destination);
+        console.log(this.locaciones);
+        console.log(this.dirArr);
+       
+        this.dirArr;
+        //.push = , this.rows[0].longitud
           this.isSearch = true;
         }else{
          
@@ -230,5 +288,62 @@ export class TrayectoFechasComponent implements OnInit {
 
   }
 
+
+  locaciones(rows: Array<Ubicacion>){
+    for (let i=0; i < this.rows.length; i++){
+      this.locations.push({ lat:Number(this.rows[i].latitud), lng: Number(this.rows[i].longitud) })
+    }
+    
+  }
+
+  buildDirection(any){
+      for(let i=0; i<any.length; i++){
+
+        this.locationsbuild.push({
+          location: { lat:Number(any[i].lat), lng: Number(any[i].lng) }
+        });
+
+        this.locationsbuild2.push({
+          location: { lat:Number(any[i].lat), lng: Number(any[i].lng) }
+        });
+      }    
+    }      
+  
+
+    buildDirectionFinal(conjunto1 : any){
+      let j=0;
+        for(let i=-1; i<conjunto1.length; i++){
+         
+          if(conjunto1[i+1]!=undefined
+            &&conjunto1[i+2]!=undefined
+            &&conjunto1[i+1]!=undefined
+            &&conjunto1[i+2]!=undefined
+              ){
+                console.log(conjunto1[i+1].location.lat);
+                console.log(conjunto1[i+1].location.lng);
+                console.log(conjunto1[i+2].location.lat);
+                console.log(conjunto1[i+2].location.lng);
+          this.dirArr.push( {
+            id:  {j},
+            origin: { lat: conjunto1[i+1].location.lat, lng: conjunto1[i+1].location.lng },
+            destination: { lat: conjunto1[i+2].location.lat, lng: conjunto1[i+2].location.lng }
+          })      
+          
+          j++;
+        }
+        }
+    } 
+
+
+    buildDirectionOrder(conjuntoDesorde : any){
+        for(let i=-1; i<conjuntoDesorde.length; i++){
+          
+          console.log(conjuntoDesorde);
+          //this.dirArrOrder.push({
+           // origin: { lat: conjuntoDesorde[i+1].location.lat, lng: conjuntoDesorde[i+1].location.lng },
+           // destination: { lat: conjuntoDesorde[i+2].location.lat, lng: conjuntoDesorde[i+2].location.lng }
+          //})
+    }
+  }
 
 }

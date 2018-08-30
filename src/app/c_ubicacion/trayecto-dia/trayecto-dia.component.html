@@ -49,7 +49,8 @@
   <tr style="height: 20px;" mat-row *matRowDef="let row; columns: displayedColumns;"></tr>  
   </table>
   <mat-paginator [pageSizeOptions]="[1]" showFirstLastButtons></mat-paginator>
-<div class="container">
+<div class="container" >
+
   <agm-map [latitude]="ConvertString(latitude)" [longitude]="ConvertString(longitude)" [scrollwheel]="false" [zoom]="zoom">
     <ng-container>
         <agm-circle [latitude]="ConvertString(rows[0].latitud)" [longitude]="ConvertString(rows[0].longitud)" 
