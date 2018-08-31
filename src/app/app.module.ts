@@ -130,8 +130,6 @@ import { AlertComponent } from './alert/alert.component';
     })
 
 
-
-
   ],
   providers: [DirectorioService,DialogComponent,AlertComponent,MatDatepickerModule,{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},DatePipe],
   bootstrap: [AppComponent],
