@@ -9,7 +9,7 @@ import { Observable } from '../../../node_modules/rxjs';
 export class UsuarioService {
 
     //creamoms variable API, es la direccion donde consumiremos nuestro servicios.
-    public API = 'http://localhost:5000';
+    public API = 'https://app-rastreo-services.herokuapp.com';
     //public DIR_API = this.API + '/apicontroller';
 
 

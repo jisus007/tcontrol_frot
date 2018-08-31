@@ -21,23 +21,27 @@ export class AppComponent implements OnInit{
     //localStorage.removeItem("loged");
     let loged = localStorage.getItem("loged");
     let perfil = localStorage.getItem("perfil");
-
-    console.log(loged)
-    
-    this.isLoged = loged;
+    this.loged = false;
+   // this.isLoged = loged;
     if(loged == "true"){
       console.log("loged")
      this.perfil = perfil;
       this.loged=true;
+    }else{
+      this.loged=false;
+      this.loged=false;
+      this.router.navigate(['login']);
     }
-
   
   }
 
   logout(){
     this.loged=false;
-    localStorage.removeItem("loged");
-    localStorage.removeItem("perfil");
+    
+    localStorage.setItem("loged", undefined);
+    localStorage.setItem("perfil", undefined);
+    //localStorage.removeItem("perfil");
+   // localStorage.removeItem("loged");
 
     this.router.navigate(['login']);
   }
@@ -48,6 +52,9 @@ export class AppComponent implements OnInit{
       console.log("loged in checkValue")
       this.logedAux=true;
       this.loged=true;
+    }else{
+      this.loged=false;
+      this.loged=false;
     }
   }
 

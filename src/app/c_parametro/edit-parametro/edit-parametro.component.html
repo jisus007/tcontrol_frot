@@ -19,12 +19,12 @@
              </mat-form-field>
              <br>
              <mat-form-field>
-               <input matInput placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status" [matAutocomplete]="autostatus">
-               <mat-autocomplete #autostatus="matAutocomplete">
-                   <mat-option *ngFor="let stat of status" [value]="stat">
-                     {{stat}}
-                   </mat-option>
-                 </mat-autocomplete>
+              
+               <mat-select placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status" >
+                    <mat-option *ngFor="let stat of status" [value]="stat">
+                        {{stat}}
+                      </mat-option>
+                  </mat-select>
              </mat-form-field>
            <br>
            <td>

@@ -32,8 +32,6 @@ export class TrayectoFechasComponent implements OnInit {
     this.setDataSourceAttributes();
   }
 
-  //public latitude: number;
-  //public longitude: number;
   public maxSpeed: number;
   public zoom: number;
   public polyline: Array<any>;
@@ -85,9 +83,10 @@ public destination: any ;
   ) {  }
   
   ngOnInit() {
-  //this.origin = { lat: 24.799448, lng: 120.979021 }
-  //this.destination = { lat: 24.799524, lng: 120.975017 }
-  //this.dir = {};
+    this.dirArr = [];
+    this.locationsbuild = [];
+    this.locations = [];
+   
     let loged = localStorage.getItem("loged");
 
     
@@ -99,76 +98,29 @@ public destination: any ;
       fechaInicio:          ['',Validators.required],
       fechaFin:             ['',Validators.required],
 
-});
+    });
 
-    console.log("maps");
-    //set google maps defaults
     this.zoom = 12;
     this.maxSpeed = 10;
-    //this.latitude = 20.6122851;
-    //this.longitude = -100.4033382;
 
     let objId = localStorage.getItem("objId");
 
-    //this.getByDay(objId);
-    /*
-    this.polyline = [
-    {
-        latitude:  20.6122851,
-        longitude: -100.4033382,
-        speed: 50
-    },
-    {
-        latitude:  20.6179661,
-        longitude: -100.4125606,
-        speed: 50
-    },
-    {
-        latitude: 20.6116701,
-        longitude: -100.445911,
-        speed: 100
-    },
-    {
-      latitude: 21.3198211,
-      longitude: -101.1149297,
-      speed: 50
-    },
-    {
-      latitude: 20.9150524,
-      longitude: -100.762212,
-      speed: 50
-    },
-
-  
-    ]*/
- 
-    
-    //set current position
-    ///this.setCurrentPosition();
-    
-    //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
 
     });
+
+    this.markerOptions
   }
   
   public markerOptions = {
     origin: {
-        icon: '../../../assets/Map-Pin.png',
+        icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
     },
     destination: {
-        icon: '../../../assets/Map-Pin.png',
+        icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
     },
 }
- /* private setCurrentPosition() {
-    if ("geolocation" in navigator) {
-      navigator.geolocation.watchPosition((position) => {
-        this.latitude = position.coords.latitude;
-        this.longitude = position.coords.longitude;
-        this.zoom = 12;
-      });
-    }
-  }*/
+
   getByDay(objId : String){
 
     
@@ -192,9 +144,6 @@ public destination: any ;
       rows.forEach(item=>{
           this.latitude = <number>item.latitud;
           this.longitude = <number>item.longitud;
-     //     this.polyline.push(item);
-
-       //   console.log(this.polyline);
       })
     }
 
@@ -204,7 +153,11 @@ public destination: any ;
 
 
    onSearch() {
-
+    //this.dirArr.;
+    this.dirArr = [];
+    this.locationsbuild = [];
+    this.locations = [];
+   
     if (this.formSearch.invalid) {
       return;
   }
@@ -228,30 +181,15 @@ public destination: any ;
         this.origin = { lat: Number(this.rows[0].latitud), lng: Number(this.rows[0].longitud) }
         this.destination = { lat: Number(this.rows[this.rows.length-1].latitud), lng: Number(this.rows[this.rows.length-1].longitud) }
 
-        //this.dir.push(this.origin);
-        //this.dir.push(this.destination);
-
         this.locaciones(this.rows);
         this.buildDirection(this.locations);
 
         this.buildDirectionFinal(this.locationsbuild);
 
-       // this.buildDirectionOrder(this.dirArr);
-        //this.dirArr.push(this.origin);
-       /* this.dirArr.push({
-          origin: { lat: 21.6120628, lng: -100.400509 },
-          destination: { lat: 20.61160, lng: -100.4940730 },
-          visible: false,
-        });*/
-        
-        //console.log(this.origin);
-        //console.log(this.destination);
-        console.log(this.locaciones);
         console.log(this.dirArr);
        
         this.dirArr;
-        //.push = , this.rows[0].longitud
-          this.isSearch = true;
+        this.isSearch = true;
         }else{
          
           this.dialogRef = this.dialog.open(AlertComponent, {
@@ -303,9 +241,6 @@ public destination: any ;
           location: { lat:Number(any[i].lat), lng: Number(any[i].lng) }
         });
 
-        this.locationsbuild2.push({
-          location: { lat:Number(any[i].lat), lng: Number(any[i].lng) }
-        });
       }    
     }      
   
@@ -319,10 +254,10 @@ public destination: any ;
             &&conjunto1[i+1]!=undefined
             &&conjunto1[i+2]!=undefined
               ){
-                console.log(conjunto1[i+1].location.lat);
-                console.log(conjunto1[i+1].location.lng);
-                console.log(conjunto1[i+2].location.lat);
-                console.log(conjunto1[i+2].location.lng);
+                //console.log(conjunto1[i+1].location.lat);
+                //console.log(conjunto1[i+1].location.lng);
+                //console.log(conjunto1[i+2].location.lat);
+                //console.log(conjunto1[i+2].location.lng);
           this.dirArr.push( {
             id:  {j},
             origin: { lat: conjunto1[i+1].location.lat, lng: conjunto1[i+1].location.lng },
@@ -333,17 +268,5 @@ public destination: any ;
         }
         }
     } 
-
-
-    buildDirectionOrder(conjuntoDesorde : any){
-        for(let i=-1; i<conjuntoDesorde.length; i++){
-          
-          console.log(conjuntoDesorde);
-          //this.dirArrOrder.push({
-           // origin: { lat: conjuntoDesorde[i+1].location.lat, lng: conjuntoDesorde[i+1].location.lng },
-           // destination: { lat: conjuntoDesorde[i+2].location.lat, lng: conjuntoDesorde[i+2].location.lng }
-          //})
-    }
-  }
 
 }
