@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, OnInit } from '@angular/core';
-import {FlexLayoutModule} from '@angular/flex-layout';
+//import { FlexLayoutModule} from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -117,7 +117,7 @@ import { AlertComponent } from './alert/alert.component';
     NgbModule,
     MatExpansionModule,
     MatGridListModule,
-    FlexLayoutModule,
+    //FlexLayoutModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatDatepickerModule,
