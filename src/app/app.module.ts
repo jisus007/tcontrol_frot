@@ -1,6 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule, OnInit } from '@angular/core';
-//import { FlexLayoutModule} from '@angular/flex-layout';
+import { FlexLayoutModule} from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -26,7 +26,8 @@ import {MatNativeDateModule} from '@angular/material';
 import {MatAutocompleteModule} from '@angular/material/autocomplete';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTabsModule} from '@angular/material/tabs';
-
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatMenuModule} from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
 import { DirectorioComponent } from './directorio/directorio.component';
@@ -117,7 +118,7 @@ import { AlertComponent } from './alert/alert.component';
     NgbModule,
     MatExpansionModule,
     MatGridListModule,
-    //FlexLayoutModule,
+    FlexLayoutModule,
     MatSelectModule,
     ReactiveFormsModule,
     MatDatepickerModule,
@@ -125,6 +126,8 @@ import { AlertComponent } from './alert/alert.component';
     MatAutocompleteModule,
     MatTabsModule,
     AgmDirectionModule,
+    MatSidenavModule,
+    MatMenuModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDukpIc-86ezs8umS8kOxxRz5yc8HpxVWg'
     })

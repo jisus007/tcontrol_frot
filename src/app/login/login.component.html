@@ -8,26 +8,23 @@
  <mat-card class="example-card">
    <mat-card-header>
    </mat-card-header>
-   <mat-card-content>
-     <form [formGroup]="formLogin" class="example-form">
-       <table  cellspacing="0">
-         <tr>
-           <td>
-             <mat-form-field >
-               
-             <input matInput formControlName="username" placeholder="Usuario" [(ngModel)]="username" name="username" required>
-             </mat-form-field>
-           </td>
-         </tr>
-         <tr>
-         <td><mat-form-field >
-           <input matInput formControlName="password" placeholder="Password" [(ngModel)]="password"type="password" name="password" required>
-         </mat-form-field></td>
-       </tr></table>
-     </form>
+   <mat-card-content fxFlex="100%;" fxFlex.xs="100%">
+     <form [formGroup]="formLogin" fxLayout="column" >
+        <div class="input-row example-container" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+                      <mat-form-field fxFlex>
+                           <input matInput placeholder="Usuario" type="username" [(ngModel)]="username" formControlName="username"  name="username" class="form-control" id="username" >
+                      </mat-form-field>
+                    </div>
+        <div class="input-row example-container" fxLayout="row" fxLayout.lt-md="column">          
+                  <mat-form-field fxFlex>
+                         <input matInput  placeholder="Password" type="password" [(ngModel)]="password" formControlName="password"  name="password" class="form-control" id="password" >
+                  </mat-form-field> 
+        </div>
+    </form>
+     <mat-card-actions fxLayoutAlign="center" >
+        <button mat-raised-button (click)="login()" color="primary" >Login</button>
+      </mat-card-actions>
    </mat-card-content>
-   <mat-card-actions style="margin-left: 25%">
-     <button mat-raised-button (click)="login()" color="primary">Login</button>
-   </mat-card-actions>
+
  </mat-card>
 </div>

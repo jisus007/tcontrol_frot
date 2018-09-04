@@ -1,3 +1,66 @@
+#map {
+  height: calc(100vh - 290px);
+}
 agm-map {
-    height: 420px;
+  height: 100%;
+}
+
+  .mat-table {
+    overflow: auto;
+    max-height: 500px;
+  }
+  
+  .mobile-label {
+    display: none;
+  }
+  
+  @media(max-width: 600px) {
+    .mobile-label {
+      width: 100px;
+      display: inline-block;
+          font-weight: bold;
+    }
+  
+    .mat-header-row {
+      display: none;
+    }
+  
+    .mat-row { 
+      flex-direction: column;
+      align-items: start;
+      padding: 8px 24px;
+    }
+  }
+
+
+  .outer-wrapper {
+    height: 100%;
+    width: 100%;
+    padding: 0;
+    margin: 0;
+  
+    .map-wrapper {
+      height: 400px;
+  
+      agm-map {
+        height: 100%;
+        width: 100%;
+        margin: 0;
+        padding: 0;
+      }
+    }
+  }
+
+
+  .map-wrapper {
+    position: relative;
+    height: calc(100vh - 4em - 64px);
+  }
+  
+  .angular-google-map-container {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
   }

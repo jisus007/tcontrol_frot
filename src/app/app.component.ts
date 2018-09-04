@@ -38,10 +38,10 @@ export class AppComponent implements OnInit{
   logout(){
     this.loged=false;
     
-    localStorage.setItem("loged", undefined);
-    localStorage.setItem("perfil", undefined);
-    //localStorage.removeItem("perfil");
-   // localStorage.removeItem("loged");
+    //localStorage.setItem("loged", undefined);
+    //localStorage.setItem("perfil", undefined);
+    localStorage.removeItem("perfil");
+    localStorage.removeItem("loged");
 
     this.router.navigate(['login']);
   }

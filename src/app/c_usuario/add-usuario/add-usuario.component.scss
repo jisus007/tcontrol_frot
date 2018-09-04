@@ -16,3 +16,11 @@
    //text-align: right;
     top: 0;
 }
+
+
+.example-container {
+    display: flex;
+    flex-direction: column;
+    max-height: 500px;
+    min-width: 300px;
+  }

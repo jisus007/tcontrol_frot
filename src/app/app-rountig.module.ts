@@ -66,8 +66,8 @@ const routes: Routes = [
   ]},
 
   { path: 'login', component: LoginComponent},
-  { path: '', component: LoginComponent},
-  { path: '**', component: LoginComponent},
+  { path: '', component: AppComponent},
+  { path: '**', component: AppComponent},
 ];
 
 export const routingModule: ModuleWithProviders = RouterModule.forRoot(routes);

@@ -2,7 +2,7 @@
 <br>
 <br>
 <br>
-<nav mat-tab-nav-bar>
+<nav mat-tab-nav-bar class="mat-tab-nav-bar" fxLayout="row">
   <a mat-tab-link
      *ngFor="let link of navLinks"
      [routerLink]="['/app/list-ubicacion',{ outlets: { aux: [link.path] } }]"

@@ -23,7 +23,7 @@ export class EditUsuarioComponent implements OnInit {
   nombreUser: String;
   perfilUser: String;
   imageOn : boolean = false;
-
+  breakpoint: number;
   constructor(public dialog: MatDialog,private formBuilder: FormBuilder, private usuarioService : UsuarioService,
     private router: Router,private datePipe: DatePipe,private _sanitizer: DomSanitizer) { }
 
@@ -37,6 +37,9 @@ export class EditUsuarioComponent implements OnInit {
   base64textString : String;
 
   ngOnInit() {
+
+    this.breakpoint = (window.innerWidth <= 750) ? 1 : 2;
+
 
     let loged = localStorage.getItem("loged");
 
@@ -176,5 +179,10 @@ _handleReaderLoaded(readerEvt) {
           this.base64textString= btoa(binaryString);
           console.log(this.base64textString);
           alert("imagen cargada")
+  }
+
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 750) ? 1 : 2;
   }
 }

@@ -7,6 +7,7 @@ import { UsuarioService } from '../_services/usuario.service';
 import { Usuario } from '../_interfaces/usuario.interface';
 import { FormGroup, FormBuilder, Validators } from '../../../node_modules/@angular/forms';
 import { AlertComponent } from '../alert/alert.component';
+import { sha256, sha224 } from 'js-sha256';
 
 @Component({
   selector: 'app-login',
@@ -52,7 +53,7 @@ export class LoginComponent implements OnInit{
         (result: any) => { 
           localStorage.removeItem("loged");
           if(result["lista"]!=null){
-            if(this.password == result["lista"].password){
+            if(sha256(this.password) == result["lista"].password){
               localStorage.setItem("email", result["lista"].correo.toString());
               localStorage.setItem("perfil", result["lista"].perfil.toString());
               localStorage.setItem("loged", "true");

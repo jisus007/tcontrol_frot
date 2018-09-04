@@ -4,10 +4,12 @@
 <div class="example-container"  >
     <mat-toolbar >
         <div >
+          <br>
           <h2>Agregar Usuario</h2>
           </div>
       </mat-toolbar>
-      <mat-card class="card">
+      <div fxlayout="column" style="background: white;">
+      <mat-card class="card" fxFlex style="height: 100%;">
           <mat-card-content >
         <form   [formGroup]="formAddUsuario" >
             <table class="example-full-width" cellspacing="0"><tr>
@@ -121,6 +123,7 @@
             </form>
            </mat-card-content>
     </mat-card>
+  </div>
   </div>
 
 

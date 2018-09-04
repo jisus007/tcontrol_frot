@@ -30,10 +30,15 @@ export class EditObjetoComponent implements OnInit {
   imagePath: SafeResourceUrl;
   public tipos : Tipo[];
 
+  breakpoint: number;
+
   public grupos : Grupo[];
   constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private objetoService: ObjetoService,private router: Router, private tipoService: TipoService,private _sanitizer: DomSanitizer, private grupoService: GrupoService) { }
 
   ngOnInit() {
+
+    this.breakpoint = (window.innerWidth <= 750) ? 1 : 2;
+
     let loged = localStorage.getItem("loged");
 
     if(loged==null){
@@ -167,5 +172,9 @@ _handleReaderLoaded(readerEvt) {
           this.base64textString= btoa(binaryString);
           console.log(this.base64textString);
           alert("imagen cargada")
+  }
+
+  onResize(event) {
+    this.breakpoint = (event.target.innerWidth <= 750) ? 1 : 2;
   }
 }

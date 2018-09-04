@@ -67,7 +67,7 @@ public destination: any ;
   public dirArr = [];
 
   public dirArrOrder = [];
-  public waypoints: any = []
+  //public waypoints: any = []
   setDataSourceAttributes() {
     this.dataSource.paginator = this.paginator;
     this.dataSource.sort = this.sort;
@@ -87,6 +87,7 @@ public destination: any ;
     this.locationsbuild = [];
     this.locations = [];
    
+    this.someMethodIThinkMightBeSlow();
     let loged = localStorage.getItem("loged");
 
     
@@ -114,10 +115,10 @@ public destination: any ;
   
   public markerOptions = {
     origin: {
-        icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
+       // icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
     },
     destination: {
-        icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
+        //icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
     },
 }
 
@@ -184,7 +185,7 @@ public destination: any ;
         this.locaciones(this.rows);
         this.buildDirection(this.locations);
 
-        this.buildDirectionFinal(this.locationsbuild);
+       // this.buildDirectionFinal(this.locationsbuild);
 
         console.log(this.dirArr);
        
@@ -228,10 +229,14 @@ public destination: any ;
 
 
   locaciones(rows: Array<Ubicacion>){
-    for (let i=0; i < this.rows.length; i++){
-      this.locations.push({ lat:Number(this.rows[i].latitud), lng: Number(this.rows[i].longitud) })
-    }
+    for (let i=1; i < this.rows.length; i++){
+
+      if(this.rows.length-1 != i){
+        this.locations.push({ lat:Number(this.rows[i].latitud), lng: Number(this.rows[i].longitud)})
+      }
     
+    }
+    console.log(this.locations);
   }
 
   buildDirection(any){
@@ -268,5 +273,15 @@ public destination: any ;
         }
         }
     } 
+
+
+    someMethodIThinkMightBeSlow() {
+      const startTime = performance.now();
+  
+      // Do the normal stuff for this function
+  
+      const duration = performance.now() - startTime;
+      console.log(`someMethodIThinkMightBeSlow took ${duration}ms`);
+  }
 
 }

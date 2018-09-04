@@ -1,4 +1,4 @@
-import { Component, OnInit, NgZone,ElementRef,ViewChild } from '@angular/core';
+import { Component, OnInit, NgZone,ElementRef,ViewChild, HostListener, Renderer } from '@angular/core';
 import { MapsAPILoader } from '../../../../node_modules/@agm/core';
 import { Ubicacion } from '../../_interfaces/ubicacion.interface';
 import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '../../../../node_modules/@angular/material';
@@ -29,7 +29,17 @@ export class TrayectoDiaComponent implements OnInit {
     this.paginator = mp;
     this.setDataSourceAttributes();
   }
+  @ViewChild('AgmMap') agmMap: any;
+  @ViewChild('wrapper') wrapper: ElementRef;
 
+//public latitude: number;
+  //public longitude: number;
+  private centerLat: number;
+  private centerLng: number;
+ // public zoom: number;
+
+  private changeLat: number;
+  private changeLng: number;
   //public latitude: number;
   //public longitude: number;
   public maxSpeed: number;
@@ -56,6 +66,12 @@ export class TrayectoDiaComponent implements OnInit {
   public destinos = [];
   
 
+  public origin: any
+public destination: any ;
+ 
+
+ 
+
   public dirArr = [];
   constructor(
     public dialog: MatDialog,
@@ -63,7 +79,8 @@ export class TrayectoDiaComponent implements OnInit {
     private ngZone: NgZone,
     private ubicacionService : UbicacionService,
     private datePipe: DatePipe
-    ,private router: Router
+    ,private router: Router,
+    private renderer: Renderer
   ) {  }
   
   ngOnInit() {
@@ -128,10 +145,10 @@ export class TrayectoDiaComponent implements OnInit {
   
   public markerOptions = {
     origin: {
-        icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
+      //  icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
     },
     destination: {
-        icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
+       // icon: 'https://raw.githubusercontent.com/LuisAntonioCamacho/tcontrol_frot/master/src/assets/Map-Pin.png',
     },
 }
 
@@ -149,12 +166,12 @@ export class TrayectoDiaComponent implements OnInit {
         if(this.rows.length>0){
           this.dataSource.data = result["lista"];
         this.buildLocation(this.rows);
-        this.buildLocation(this.rows);
-       // this.origin = { lat: Number(this.rows[0].latitud), lng: Number(this.rows[0].longitud) }
-       // this.destination = { lat: Number(this.rows[this.rows.length-1].latitud), lng: Number(this.rows[this.rows.length-1].longitud) }
+       // this.buildLocation(this.rows);
+       this.origin = { lat: Number(this.rows[0].latitud), lng: Number(this.rows[0].longitud) }
+       this.destination = { lat: Number(this.rows[this.rows.length-1].latitud), lng: Number(this.rows[this.rows.length-1].longitud) }
 
-        this.locaciones(this.rows);
-        this.buildDirection(this.locations);
+       this.locaciones(this.rows);
+       this.buildDirection(this.locations);
 
         this.buildDirectionFinal(this.locationsbuild);
 
@@ -196,11 +213,16 @@ export class TrayectoDiaComponent implements OnInit {
     
       }
 
+
       locaciones(rows: Array<Ubicacion>){
-        for (let i=0; i < this.rows.length; i++){
-          this.locations.push({ lat:Number(this.rows[i].latitud), lng: Number(this.rows[i].longitud) })
-        }
+        for (let i=1; i < this.rows.length; i++){
+    
+          if(this.rows.length-1 != i){
+            this.locations.push({ lat:Number(this.rows[i].latitud), lng: Number(this.rows[i].longitud)})
+          }
         
+        }
+        console.log(this.locations);
       }
     
       buildDirection(any){
@@ -237,4 +259,5 @@ export class TrayectoDiaComponent implements OnInit {
             }
             }
         } 
-}
+
+      }

@@ -31,7 +31,7 @@ export class ListUsuarioComponent implements OnInit{
     //@ViewChild(MatSort) sort: MatSort;
 
    //declaracion de columnas que se mostraran en la vista html : objeto.component.html
-   displayedColumns: string[] = ['idUsuario','nombre','fecha','curp','tipoLic','vigencia','correo','estatus','perfil','actions']     ;
+   displayedColumns: string[] = ['nombre','fecha','tipoLic','correo','estatus','perfil','actions']     ;
   
    //creamos variable datasource de tipo MatTableDataSource
    dataSource = new MatTableDataSource();
