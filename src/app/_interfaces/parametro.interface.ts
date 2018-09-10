@@ -5,5 +5,5 @@ export interface Parametro {
     valor                    :String
     status                   :String
     fecActualizacion         :Date
-    
+    valorbd                  :String
 }

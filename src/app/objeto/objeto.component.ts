@@ -48,24 +48,14 @@ export class ObjetoComponent implements OnInit {
   isLoged : String;
   perfil : String;
   ngOnInit() {
-    
+    this.validateSesion();
     //localStorage.removeItem("loged");
     let loged = localStorage.getItem("loged");
     let perfil = localStorage.getItem("perfil");
 
-    console.log(loged)
-    
-    this.isLoged = loged;
-    if(loged == "true"){
-      console.log("loged")
-     this.perfil = perfil;
-      this.loged=true;
-    }
-    //this.isloading = false;
-    this.obtenerObjetos();
+    this.perfil = perfil;
 
-    setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
-    setTimeout(() => this.dataSource.sort = this.sort);
+    this.obtenerObjetos();
 
   }
   
@@ -105,6 +95,15 @@ export class ObjetoComponent implements OnInit {
     localStorage.setItem("status", objeto.status.toString());
     this.router.navigate(['app/list-ubicacion']);
   }
+
+  validateSesion(){
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+  }
+  
 
 }
 

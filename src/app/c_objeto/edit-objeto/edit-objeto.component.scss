@@ -16,3 +16,19 @@
    //text-align: right;
     top: 0;
 }
+
+.form-web {
+    display: block;
+}
+.form-mobile {
+   display: none;
+}
+  
+@media (max-width:600px) {
+.form-web {
+    display: none;
+ }
+.form-mobile {
+    display: block;
+ }
+}

@@ -1,12 +1,12 @@
 import { Component, OnInit, NgZone, ViewChild } from '@angular/core';
 import { Ubicacion } from '../../_interfaces/ubicacion.interface';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '../../../../node_modules/@angular/material';
-import { MapsAPILoader } from '../../../../node_modules/@agm/core';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
+import { MapsAPILoader } from '@agm/core';
 import { UbicacionService } from '../../_services/ubicacion.service';
-import { FormGroup, FormBuilder, Validators } from '../../../../node_modules/@angular/forms';
-import { DatePipe } from '../../../../node_modules/@angular/common';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { DatePipe } from '@angular/common';
 import { DialogComponent } from '../../dialog/dialog.component';
-import { Router } from '../../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 
 
@@ -83,23 +83,17 @@ public destination: any ;
   ) {  }
   
   ngOnInit() {
+
+    this.validateSesion();
+
+    this.validateForm();
+
     this.dirArr = [];
     this.locationsbuild = [];
     this.locations = [];
    
-    this.someMethodIThinkMightBeSlow();
-    let loged = localStorage.getItem("loged");
-
-    
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
     this.isSearch = false;
-    this.formSearch = this.formBuilder.group({
-      fechaInicio:          ['',Validators.required],
-      fechaFin:             ['',Validators.required],
 
-    });
 
     this.zoom = 12;
     this.maxSpeed = 10;
@@ -275,13 +269,19 @@ public destination: any ;
     } 
 
 
-    someMethodIThinkMightBeSlow() {
-      const startTime = performance.now();
-  
-      // Do the normal stuff for this function
-  
-      const duration = performance.now() - startTime;
-      console.log(`someMethodIThinkMightBeSlow took ${duration}ms`);
+  validateSesion(){
+    let loged = localStorage.getItem("loged");
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+  }
+
+  validateForm(){
+    this.formSearch = this.formBuilder.group({
+      fechaInicio:          ['',Validators.required],
+      fechaFin:             ['',Validators.required],
+
+    });
   }
 
 }

@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { ParametroService } from '../../_services/parametro.service';
 import { first} from "rxjs/operators";
 import { Parametro } from '../../_interfaces/parametro.interface';
-import { MatDialogRef, MatDialog } from '../../../../node_modules/@angular/material';
+import { MatDialogRef, MatDialog } from '@angular/material';
 import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
@@ -24,35 +24,21 @@ export class EditParametroComponent implements OnInit {
   constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private parametroService: ParametroService,private router: Router ) { }
   Id : String
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
-    
-    this.formEditParametro = this.formBuilder.group({
-      idParametro:                 [],
-      codigo:                     ['',Validators.required],
-      valor:                      ['',Validators.required],
-      status:                     ['',Validators.required],
-      fecActualizacion:           ['',Validators.required],
-     
+    this.validateSesion();
 
-      });
+    this.validateFom();
 
-      this.Id = localStorage.getItem("Id");
+   this.Id = localStorage.getItem("Id");
       if(!this.Id) {
-        alert("Invalid action.")
-        this.router.navigate(['app/list-parametro']);
-         return;
-        }
-        console.log("recuperando id")
-        console.log("id"+this.Id);
-        this.parametroService.getParametroById(this.Id).subscribe(data =>{
-    
-          console.log(data)
-          this.formEditParametro.setValue(<Parametro>data["lista"]);
-        })
+            this.router.navigate(['app/list-parametro']);
+            return;
+      }
+
+      this.parametroService.getParametroById(this.Id).subscribe(data =>{
+
+      this.formEditParametro.setValue(<Parametro>data["lista"]);
+     })
   }
 
   get f() { return this.formEditParametro.controls; }
@@ -92,5 +78,30 @@ export class EditParametroComponent implements OnInit {
 
   cancel(){
     this.router.navigate(['app/list-parametro']);
+  }
+
+
+  validateFom(){
+
+    this.formEditParametro = this.formBuilder.group({
+      idParametro:                 [],
+      codigo:                     ['',Validators.required],
+      valor:                      ['',Validators.required],
+      status:                     ['',Validators.required],
+      fecActualizacion:           ['',Validators.required],
+      valorbd:           ['',Validators.required],
+     
+
+      });
+  
+  }
+
+
+  validateSesion(){
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
   }
 }

@@ -4,7 +4,7 @@ import { FlexLayoutModule} from '@angular/flex-layout';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { RouterModule, Routes } from '@angular/router';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { CommonModule, DatePipe }   from '@angular/common';
 import { AgmCoreModule } from '@agm/core';
 import { AgmDirectionModule } from 'agm-direction' 
@@ -30,16 +30,12 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
 
 import { AppComponent } from './app.component';
-import { DirectorioComponent } from './directorio/directorio.component';
 import { LoginComponent } from './login/login.component';
-import { AppRountigModule } from './/app-rountig.module';
+import { AppRountigModule } from './app-rountig.module';
 import { MainComponent } from './main/main.component';
-import { TcontrolComponent } from './tcontrol/tcontrol.component';
 import { MatDialogModule } from '@angular/material';
 import { DialogComponent } from './dialog/dialog.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DirectorioService } from './_services/directorio.service';
-import { PersonalComponent } from './personal/personal.component';
 import { ObjetoComponent } from './objeto/objeto.component';
 import { AddObjetoComponent } from './c_objeto/add-objeto/add-objeto.component';
 import { EditObjetoComponent } from './c_objeto/edit-objeto/edit-objeto.component';
@@ -56,23 +52,19 @@ import { EditParametroComponent } from './c_parametro/edit-parametro/edit-parame
 import { ListParametroComponent } from './c_parametro/list-parametro/list-parametro.component';
 import { AddParametroComponent } from './c_parametro/add-parametro/add-parametro.component';
 import { ListUbicacionComponent } from './c_ubicacion/list-ubicacion/list-ubicacion.component';
-import { AddUbicacionComponent } from './c_ubicacion/add-ubicacion/add-ubicacion.component';
-import { EditUbicacionComponent } from './c_ubicacion/edit-ubicacion/edit-ubicacion.component';
 import { LastUbicacionComponent } from './c_ubicacion/last-ubicacion/last-ubicacion.component';
 import { TrayectoDiaComponent } from './c_ubicacion/trayecto-dia/trayecto-dia.component';
 import { TrayectoFechasComponent } from './c_ubicacion/trayecto-fechas/trayecto-fechas.component';
 import { AlertComponent } from './alert/alert.component';
+import { CustomHttpInterceptor } from './customHttpInterceptor';
 
 
 @NgModule({
   declarations: [
     AppComponent,
-    DirectorioComponent,
     LoginComponent,
     MainComponent,
-    TcontrolComponent,
     DialogComponent,
-    PersonalComponent,
     ObjetoComponent,
     AddObjetoComponent,
     EditObjetoComponent,
@@ -89,8 +81,6 @@ import { AlertComponent } from './alert/alert.component';
     ListParametroComponent,
     AddParametroComponent,
     ListUbicacionComponent,
-    AddUbicacionComponent,
-    EditUbicacionComponent,
     LastUbicacionComponent,
     TrayectoDiaComponent,
     TrayectoFechasComponent,
@@ -132,9 +122,15 @@ import { AlertComponent } from './alert/alert.component';
       apiKey: 'AIzaSyDukpIc-86ezs8umS8kOxxRz5yc8HpxVWg'
     })
 
-
   ],
-  providers: [DirectorioService,DialogComponent,AlertComponent,MatDatepickerModule,{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},DatePipe],
+  providers: [DialogComponent,AlertComponent,MatDatepickerModule,{provide: MAT_DATE_LOCALE, useValue: 'en-GB'},DatePipe,
+ CustomHttpInterceptor,
+ {
+  provide: HTTP_INTERCEPTORS,
+  useClass: CustomHttpInterceptor,
+   multi: true
+ }
+],
   bootstrap: [AppComponent],
   exports: [ DialogComponent,AlertComponent ],
   entryComponents: [DialogComponent,AlertComponent]

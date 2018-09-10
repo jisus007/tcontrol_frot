@@ -20,16 +20,11 @@ export class AddTipoComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private tipoService: TipoService,private router: Router ) { }
 
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
-    this.formAddTipo = this.formBuilder.group({
-      idTipo:                  ['',Validators.required],
-      descripcion:             ['',Validators.required],
+    this.validateSesion();
 
-});
+    this.validateFom();
+    
   }
 
   get f() { return this.formAddTipo.controls; }
@@ -44,17 +39,30 @@ export class AddTipoComponent implements OnInit {
   };
 
 
-  onSubmit() {
-    if (this.formAddTipo.invalid) {
-      return;
-  }
-    console.log(this.formAddTipo.value);
+    onSubmit() {
+      if (this.formAddTipo.invalid) {
+        return;
+    }
+
     this.tipoService.createTipo(<Tipo>this.formAddTipo.value)
       .subscribe( data => {
         this.router.navigate(['app/list-tipo']);
       });
     }
 
-
+    validateFom(){
+      this.formAddTipo = this.formBuilder.group({
+        idTipo:                  ['',Validators.required],
+        descripcion:             ['',Validators.required],
+      });
+    }
+  
+  
+    validateSesion(){
+      let loged = localStorage.getItem("loged");
+      if(loged==null){
+        this.router.navigate(['login']);
+      }
+    }
     
 }

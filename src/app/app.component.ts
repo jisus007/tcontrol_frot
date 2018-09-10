@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -16,30 +16,13 @@ export class AppComponent implements OnInit{
   perfil : String;
   constructor(private router: Router) { }
   ngOnInit() {
-    //alert("init")
-    console.log("onInit")
-    //localStorage.removeItem("loged");
-    let loged = localStorage.getItem("loged");
-    let perfil = localStorage.getItem("perfil");
-    this.loged = false;
-   // this.isLoged = loged;
-    if(loged == "true"){
-      console.log("loged")
-     this.perfil = perfil;
-      this.loged=true;
-    }else{
-      this.loged=false;
-      this.loged=false;
-      this.router.navigate(['login']);
-    }
+
+    this.verificaSesion();
   
   }
 
   logout(){
     this.loged=false;
-    
-    //localStorage.setItem("loged", undefined);
-    //localStorage.setItem("perfil", undefined);
     localStorage.removeItem("perfil");
     localStorage.removeItem("loged");
 
@@ -49,14 +32,24 @@ export class AppComponent implements OnInit{
   checkValue(): void {
     let loged = localStorage.getItem("loged");
     if(loged == "true"){
-      console.log("loged in checkValue")
-      this.logedAux=true;
       this.loged=true;
     }else{
-      this.loged=false;
       this.loged=false;
     }
   }
 
+  verificaSesion(){
+    let loged = localStorage.getItem("loged");
+    let perfil = localStorage.getItem("perfil");
+
+    this.loged = false;
+    
+    if(loged == "true"){
+      this.perfil = perfil;
+      this.loged=true;
+    }else{
+      this.loged=false;
+    }
+  }
 
 }

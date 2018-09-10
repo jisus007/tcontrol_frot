@@ -41,11 +41,9 @@ dataSource = new MatTableDataSource();
   constructor(private tipoService: TipoService, private router:Router ) { }
 
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
+    this.validateSesion();
+
     this.obtenerTipos();
     //setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
     //setTimeout(() => this.dataSource.sort = this.sort);
@@ -84,6 +82,13 @@ dataSource = new MatTableDataSource();
         console.log("eliminando grupo");
         this.tipoService.deleteTipo(tipo);
         this.router.navigate(['app/list-tipo']);
+    }
+
+    validateSesion(){
+      let loged = localStorage.getItem("loged");
+      if(loged==null){
+        this.router.navigate(['login']);
+      }
     }
 
 }

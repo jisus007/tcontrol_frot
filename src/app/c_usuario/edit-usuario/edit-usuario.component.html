@@ -1,7 +1,7 @@
 
 <br><br><br><br><br>
 
-<div class="example-container"  >
+<div class="form-web"  >
     <mat-toolbar >
         <div >
           <h2>Editar Usuario</h2>
@@ -14,19 +14,23 @@
         <mat-card >
           <mat-card-content >
             
-        <form  [formGroup]="editFormUser" >
+        <form   fxLayout="column" [formGroup]="editFormUser" >
             <table class="example-full-width" cellspacing="0"><tr>
           <td>   
-          <mat-form-field>
-                 <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
-              </mat-form-field>
+            
+                 <mat-form-field>
+                     <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
+                  </mat-form-field>
+
             </td> 
             <td> 
+               
               <mat-form-field>
                 <input matInput [matDatepicker]="pickerfecha" readonly placeholder="Fecha" type="fecha" formControlName="fecha"  name="fecha" class="form-control" id="fecha">
                 <mat-datepicker-toggle matSuffix [for]="pickerfecha"></mat-datepicker-toggle>
                 <mat-datepicker #pickerfecha></mat-datepicker>
               </mat-form-field>
+
             </td> 
           </tr></table>
           <table class="example-full-width" cellspacing="0"><tr>
@@ -139,4 +143,150 @@
      </mat-grid-tile>
  </mat-grid-list>
 </div>
-  
+<div class="form-mobile">
+    <mat-toolbar >
+        <div >
+          <h2>Editar Usuario mobile</h2>
+          </div>
+      </mat-toolbar>
+    <mat-card >
+        <mat-card-content >
+          
+      <form   fxLayout="column" [formGroup]="editFormUser" >
+          <table class="example-full-width" cellspacing="0"><tr>
+        <td>   
+           <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+        <mat-form-field  fxFlex>
+               <input matInput placeholder="Nombre" type="nombre" formControlName="nombre"  name="nombre" class="form-control" id="nombre">
+            </mat-form-field>
+          </div>
+          </td> 
+        </tr>
+        <tr>
+            <td> 
+                <div class="input-row" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+              <mat-form-field fxFlex>
+                <input matInput [matDatepicker]="pickerfecham" readonly placeholder="Fecha" type="fecha" formControlName="fecha"  name="fecha" class="form-control" id="fecha">
+                <mat-datepicker-toggle matSuffix [for]="pickerfecham"></mat-datepicker-toggle>
+                <mat-datepicker #pickerfecham></mat-datepicker>
+              </mat-form-field>
+            </div>
+            </td> 
+        </tr></table>
+        <table class="example-full-width" cellspacing="0"><tr>
+            <td> 
+          <mat-form-field>
+            <input matInput placeholder="Curp"   type="curp" maxlength="18" minlength="18" formControlName="curp"  name="curp" class="form-control" id="curp">
+          </mat-form-field>
+          </td>
+
+        </tr>
+        <tr>
+            <td> 
+                <mat-form-field>
+                        <input matInput placeholder="RFC" type="rfc" maxlength="13" minlength="13" formControlName="rfc"  name="rfc" class="form-control" id="rfc">
+                </mat-form-field>
+              </td>
+        </tr></table>
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td> 
+          <mat-form-field>
+                  <input matInput placeholder="numero licencia"  type="numeroLic" maxlength="10" minlength="10" formControlName="numeroLic"  name="numeroLic" class="form-control" id="numeroLic">
+          </mat-form-field>
+          </td>
+         </tr>
+         <tr>
+            <td>
+                <mat-form-field>
+                    <mat-select placeholder="Tipo licencia" type="tipoLic" formControlName="tipoLic"  name="tipoLic" class="form-control" id="tipoLic">
+                        <mat-option *ngFor="let tl of tipo" [value]="tl">
+                          {{tl}}
+                        </mat-option>
+                    </mat-select>
+                </mat-form-field>
+               </td>
+        </tr></table>
+
+        <table class="example-full-width" cellspacing="0"><tr>
+          <td>
+              <mat-form-field>
+                  <input matInput placeholder="Correo" type="correo" formControlName="correo"  name="correo" class="form-control" id="correo">
+          </mat-form-field>
+
+        </td>
+
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field>
+                    <input matInput [matDatepicker]="picker2" readonly placeholder="Vigencia" type="vigencia" formControlName="vigencia"  name="vigencia" class="form-control" id="vigencia">
+                    <mat-datepicker-toggle matSuffix [for]="picker2"></mat-datepicker-toggle>
+                    <mat-datepicker #picker2></mat-datepicker>
+                  </mat-form-field>
+            </td>
+        </tr></table>
+
+        <table class="example-full-width" cellspacing="0"><tr>
+         
+         <td>
+          <mat-form-field>
+              <mat-select placeholder="Estatus" type="estatus" formControlName="estatus"  name="estatus" class="form-control" id="estatus" >
+                  <mat-option *ngFor="let stat of status" [value]="stat">
+                      {{stat}}
+                    </mat-option>
+         </mat-select>
+         </mat-form-field>
+        </td>
+
+        </tr>
+        <tr>
+            <td>
+                <mat-form-field>
+                        <input matInput placeholder="Password" type="password" formControlName="password"  name="password" class="form-control" id="password">
+                </mat-form-field>
+              </td>
+        </tr></table>
+          <mat-form-field>
+              <mat-select placeholder="Perfil" type="perfil" formControlName="perfil"  name="perfil" class="form-control" id="perfil" >
+                  <mat-option *ngFor="let option of options" [value]="option">
+                      {{option}}
+                    </mat-option>
+          </mat-select>
+              </mat-form-field>
+       
+        <br>
+          <mat-card-actions >
+              <button mat-raised-button (click)="onSubmit()" color="theme">Actualizar</button>
+               &nbsp;
+              <button mat-raised-button (click)="cancel()" color="theme">Cancelar</button>
+               &nbsp;
+                      </mat-card-actions>
+                      </form>
+                      </mat-card-content>
+              </mat-card>
+              <mat-card class="example-card">
+                  <mat-card-header>
+                     <div mat-card-avatar class="example-header-image"></div>
+                      <mat-card-title>{{nombreUser}}</mat-card-title>
+                      <mat-card-subtitle></mat-card-subtitle>
+                    </mat-card-header>
+                    <img *ngIf="imageOn" mat-card-image [src]="imagePath"  >
+                    <mat-card-content>
+                        <p>
+                        Perfil: {{perfilUser}}
+                        </p>
+
+
+                        <td>
+
+                            <mat-icon style="color: rgb(128, 128, 128)">camera_alt</mat-icon>
+                            <label class="fileContainer">
+                                modificar imagen
+                              <input type="file" (change)="handleFileSelect($event)" accept=".png, .jpg, .jpeg" />
+                              </label>
+                      
+                        </td>
+
+                      </mat-card-content>
+                  </mat-card>
+</div>

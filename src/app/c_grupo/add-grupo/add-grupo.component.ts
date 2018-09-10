@@ -20,37 +20,54 @@ export class AddGrupoComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private grupoService: GrupoService,private router: Router ) { }
 
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
+    
+    //valida la sesion
+    this.validateSesion();
+    
+    //valida form
+    this.validateFom();
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
-    this.formAddGrupo = this.formBuilder.group({
-      idGrupo:                 ['',Validators.required],
-      descripcion:             ['',Validators.required],
-
-});
   }
 
+
   get f() { return this.formAddGrupo.controls; }
+
 
   cancel(): void {
     this.router.navigate(['app/list-grupo']);
   };
 
+  
   clean(): void {
     this.router.navigate(['app/list-grupo']);
   };
 
 
   onSubmit() {
+    
     if (this.formAddGrupo.invalid) {
       return;
-  }
-    console.log(this.formAddGrupo.value);
+    }
+
     this.grupoService.createGrupo(<Grupo>this.formAddGrupo.value)
       .subscribe( data => {
         this.router.navigate(['app/list-grupo']);
       });
+    }
+
+    validateFom(){
+      this.formAddGrupo = this.formBuilder.group({
+        idGrupo:                 ['',Validators.required],
+        descripcion:             ['',Validators.required],
+  
+       });
+    }
+
+
+    validateSesion(){
+      let loged = localStorage.getItem("loged");
+      if(loged==null){
+        this.router.navigate(['login']);
+      }
     }
 }

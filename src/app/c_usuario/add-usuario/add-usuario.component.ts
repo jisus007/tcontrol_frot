@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { UsuarioService } from '../../_services/usuario.service';
 import {first} from "rxjs/operators";
 import { Usuario } from '../../_interfaces/usuario.interface';
-import { MatDialog } from '../../../../node_modules/@angular/material';
+import { MatDialog } from '@angular/material';
 
 @Component({
   selector: 'app-add-usuario',
@@ -31,26 +31,8 @@ export class AddUsuarioComponent implements OnInit {
   constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private usuarioService: UsuarioService,private router: Router) { }
 
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
-
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
-    this.formAddUsuario = this.formBuilder.group({
-      idUsuario:          [],
-      nombre:             ['',Validators.required],
-      fecha:              ['',Validators.required],
-      curp:               ['',Validators.required,Validators.maxLength(18)],
-      rfc:                ['',Validators.required,Validators.maxLength(13)],
-      numeroLic:          ['',Validators.required,Validators.maxLength(10)],
-      tipoLic:            ['',Validators.required],
-      vigencia:           ['',Validators.required],
-      correo:             ['',Validators.required],
-      foto:               [''],
-      estatus:            ['',Validators.required],
-      password:           ['',Validators.required],
-      perfil:             ['',Validators.required],
-});
+    this.validateSesion();
+    this.validateFom();
   }
 
   get f() { return this.formAddUsuario.controls; }
@@ -69,8 +51,8 @@ export class AddUsuarioComponent implements OnInit {
     // stop here if form is invalid
     if (this.formAddUsuario.invalid) {
       return;
-  }
-    console.log(this.formAddUsuario.value);
+    }
+
     this.formAddUsuario.value.foto = this.base64textString;
     this.usuarioService.createUser(<Usuario>this.formAddUsuario.value)
       .subscribe( data => {
@@ -78,17 +60,19 @@ export class AddUsuarioComponent implements OnInit {
       });
     }
 
-    handleFileSelect(evt){
+  handleFileSelect(evt){
       var files = evt.target.files;
       var file = files[0];
 
-    if (files && file) {
-        var reader = new FileReader();
+      if (files && file) {
 
+        var reader = new FileReader();
+        
         reader.onload =this._handleReaderLoaded.bind(this);
 
         reader.readAsBinaryString(file);
     }
+
   }
 
 
@@ -99,4 +83,34 @@ export class AddUsuarioComponent implements OnInit {
             console.log(this.base64textString);
             alert("imagen cargada")
     }
+
+
+    
+  validateFom(){
+    this.formAddUsuario = this.formBuilder.group({
+      idUsuario:          [],
+      nombre:             ['',Validators.required],
+      fecha:              ['',Validators.required],
+      curp:               ['',Validators.required,Validators.maxLength(18)],
+      rfc:                ['',Validators.required,Validators.maxLength(13)],
+      numeroLic:          ['',Validators.required,Validators.maxLength(10)],
+      tipoLic:            ['',Validators.required],
+      vigencia:           ['',Validators.required],
+      correo:             ['',Validators.required],
+      foto:               [''],
+      estatus:            ['',Validators.required],
+      password:           ['',Validators.required],
+      perfil:             ['',Validators.required],
+});
+  }
+
+
+  validateSesion(){
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+
+  }
 }

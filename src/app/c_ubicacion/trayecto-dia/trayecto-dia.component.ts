@@ -1,10 +1,10 @@
 import { Component, OnInit, NgZone,ElementRef,ViewChild, HostListener, Renderer } from '@angular/core';
-import { MapsAPILoader } from '../../../../node_modules/@agm/core';
+import { MapsAPILoader } from '@agm/core';
 import { Ubicacion } from '../../_interfaces/ubicacion.interface';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '../../../../node_modules/@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
 import { UbicacionService } from '../../_services/ubicacion.service';
-import { DatePipe } from '../../../../node_modules/@angular/common';
-import { Router } from '../../../../node_modules/@angular/router';
+import { DatePipe } from '@angular/common';
+import { Router } from '@angular/router';
 import { AlertComponent } from '../../alert/alert.component';
 
 
@@ -84,60 +84,23 @@ public destination: any ;
   ) {  }
   
   ngOnInit() {
+
+    this.validateSesion();
+
+
     this.dirArr = [];
     this.locationsbuild = [];
     this.locations = [];
-    console.log("maps");
-    let loged = localStorage.getItem("loged");
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
-    //set google maps defaults
+ 
     this.zoom = 12;
     this.maxSpeed = 10;
-    //this.latitude = 20.6122851;
-    //this.longitude = -100.4033382;
+
 
     let objId = localStorage.getItem("objId");
 
     this.getByDay(objId);
-    /*
-    this.polyline = [
-    {
-        latitude:  20.6122851,
-        longitude: -100.4033382,
-        speed: 50
-    },
-    {
-        latitude:  20.6179661,
-        longitude: -100.4125606,
-        speed: 50
-    },
-    {
-        latitude: 20.6116701,
-        longitude: -100.445911,
-        speed: 100
-    },
-    {
-      latitude: 21.3198211,
-      longitude: -101.1149297,
-      speed: 50
-    },
-    {
-      latitude: 20.9150524,
-      longitude: -100.762212,
-      speed: 50
-    },
 
-  
-    ]*/
- 
-    
-    //set current position
-    ///this.setCurrentPosition();
-    
-    //load Places Autocomplete
     this.mapsAPILoader.load().then(() => {
 
     });
@@ -198,9 +161,6 @@ public destination: any ;
       rows.forEach(item=>{
           this.latitude = <number>item.latitud;
           this.longitude = <number>item.longitud;
-     //     this.polyline.push(item);
-
-       //   console.log(this.polyline);
       })
     }
 
@@ -259,5 +219,13 @@ public destination: any ;
             }
             }
         } 
+
+
+        validateSesion(){
+          let loged = localStorage.getItem("loged");
+          if(loged==null){
+            this.router.navigate(['login']);
+          }
+        }
 
       }

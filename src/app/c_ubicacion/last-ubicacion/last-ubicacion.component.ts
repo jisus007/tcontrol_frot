@@ -1,11 +1,11 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '../../../../node_modules/@angular/material';
+import { MatTableDataSource, MatPaginator, MatSort, MatDialogRef, MatDialog } from '@angular/material';
 import { UbicacionService } from '../../_services/ubicacion.service';
-import { Router } from '../../../../node_modules/@angular/router';
+import { Router } from '@angular/router';
 import { Ubicacion } from '../../_interfaces/ubicacion.interface';
-import { DatePipe } from '../../../../node_modules/@angular/common';
+import { DatePipe } from '@angular/common';
 import { AlertComponent } from '../../alert/alert.component';
-import { AgmMap } from '../../../../node_modules/@agm/core';
+import { AgmMap } from '@agm/core';
 
 @Component({
   selector: 'app-last-ubicacion',
@@ -53,13 +53,9 @@ export class LastUbicacionComponent implements OnInit {
 
   ngOnInit() {
     
-    //this.resizeMap();
 
-    let loged = localStorage.getItem("loged");
+    this.validateSesion();
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
     this.isloading = true;
     this.zoom = 12;
     let objId = localStorage.getItem("objId");
@@ -105,11 +101,17 @@ resizeMap() {
 
     ConvertString(value){
       return parseFloat(value)
-      }
+    }
 
       
-      convertDate(fecha : Date){
+    convertDate(fecha : Date){
         return this.fechaCovert = this.datePipe.transform(fecha, 'dd/MM/yyyy HH:mm:ss');
-    
+    }
+
+    validateSesion(){
+        let loged = localStorage.getItem("loged");
+        if(loged==null){
+          this.router.navigate(['login']);
+        }
       }
 }

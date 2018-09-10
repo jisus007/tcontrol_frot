@@ -24,7 +24,7 @@ export class ListParametroComponent implements OnInit {
     this.setDataSourceAttributes();
   }
  //declaracion de columnas que se mostraran en la vista html : objeto.component.html
- displayedColumns: string[] = ['idParametro','codigo','valor','status','fecActualizacion','actions'];
+ displayedColumns: string[] = ['idParametro','codigo','status','fecActualizacion','actions'];
  
  //creamos variable datasource de tipo MatTableDataSource
  dataSource = new MatTableDataSource();
@@ -39,14 +39,12 @@ export class ListParametroComponent implements OnInit {
    constructor(private parametroService: ParametroService, private router:Router ) { }
 
    ngOnInit() {
-    let loged = localStorage.getItem("loged");
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
+    this.validateSesion();
+
     this.obtenerParametro();
-    //setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
-    //setTimeout(() => this.dataSource.sort = this.sort);
+
+    
   }
 
   public obtenerParametro(){
@@ -82,6 +80,17 @@ applyFilter(filterValue: string) {
       console.log("eliminando grupo");
       this.parametroService.deleteParametro(parametro);
       this.router.navigate(['app/list-parametro']);
+  }
+
+
+
+
+  validateSesion(){
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
   }
 
 }

@@ -1,5 +1,5 @@
 
-<div  style="height: 5%; top: 0%; width: 100%;" *ngIf="!isSearch">
+<div  class="form-web" style="height: 5%; top: 0%; width: 100%; overflow: auto" *ngIf="!isSearch">
     <mat-card class="form-fechas" style="height: 5%;top: 0%">
         <mat-card-content class="form-fechas">
       <form   [formGroup]="formSearch" >
@@ -25,6 +25,40 @@
               </span>
             </button>  
       </td>
+      </tr></table>
+          </form>
+         </mat-card-content>
+  </mat-card>
+</div>
+
+<div  class="form-mobile" style="height: 5%; top: 0%; width: 100%; overflow: auto" *ngIf="!isSearch">
+    <mat-card class="form-fechas" style="height: 5%;top: 0%">
+        <mat-card-content class="form-fechas">
+      <form   [formGroup]="formSearch" >
+        <table><tr>
+          <td>
+        <mat-form-field>
+          <input matInput [matDatepicker]="picker1m" placeholder="Fecha inicio" readonly type="fechaInicio" formControlName="fechaInicio"  name="fechaInicio" class="form-control" id="fechaInicio">
+          <mat-datepicker-toggle matSuffix [for]="picker1m"></mat-datepicker-toggle>
+          <mat-datepicker #picker1m></mat-datepicker>
+        </mat-form-field>
+      </td>
+      </tr>
+      <tr>
+          <td>
+              <mat-form-field>
+               <input matInput [matDatepicker]="pickerm" placeholder="Fecha Fin" type="fechaFin" readonly formControlName="fechaFin"  name="fechaFin" class="form-control" id="fechaFin" (blur)="compareTwoDates()">
+               <mat-datepicker-toggle matSuffix [for]="pickerm"></mat-datepicker-toggle>
+               <mat-datepicker #pickerm></mat-datepicker>
+             </mat-form-field>
+           </td>
+           <td> &nbsp;
+               <button mat-icon-button (click)="onSearch()">
+                   <span matTooltip="Buscar">
+                     <mat-icon>youtube_searched_for</mat-icon>
+                   </span>
+                 </button>  
+           </td>
       </tr></table>
           </form>
          </mat-card-content>

@@ -21,20 +21,11 @@ export class AddParametroComponent implements OnInit {
   constructor(private formBuilder: FormBuilder,private parametroService: ParametroService,private router: Router ) { }
 
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
-    this.formAddParametro = this.formBuilder.group({
-      idParametro:                 [],
-      codigo:             ['',Validators.required],
-      valor:             ['',Validators.required],
-      status:             ['',Validators.required],
-      fecActualizacion:             ['',Validators.required],
-     
+    this.validateSesion();
 
-      });
+    this.validateFom();
+
   }
 
   get f() { return this.formAddParametro.controls; }
@@ -60,5 +51,24 @@ export class AddParametroComponent implements OnInit {
       });
     }
 
+    validateFom(){
 
+      this.formAddParametro = this.formBuilder.group({
+        idParametro:        [],
+        codigo:             ['',Validators.required],
+        valor:              ['',Validators.required],
+        status:             ['',Validators.required],
+        fecActualizacion:   ['',Validators.required],
+        });
+    
+    }
+  
+  
+    validateSesion(){
+      let loged = localStorage.getItem("loged");
+  
+      if(loged==null){
+        this.router.navigate(['login']);
+      }
+    }
 }

@@ -31,39 +31,34 @@ dataSource = new MatTableDataSource();
 
 //creamos la varible isLoading para ver spinner
    isloading: boolean = false;
-   setDataSourceAttributes() {
-    this.dataSource.paginator = this.paginator;
-    this.dataSource.sort = this.sort;
 
+   //seteamos propiedades del datasource
+   setDataSourceAttributes() {
+     this.dataSource.paginator = this.paginator;
+    this.dataSource.sort = this.sort;
   }
   constructor(private grupoService: GrupoService, private router:Router ) { }
 
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
+    //valida la sesion
+    this.validateSesion();
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
-    this.obtenerUsuarios();
-   // setTimeout(() => this.dataSource.paginator = this.paginator);//se agrego el metodo setTimeout() ya que no estaba funcionando
-    //setTimeout(() => this.dataSource.sort = this.sort);
+    this.obtenerGrupos();
   }
 
-  public obtenerUsuarios(){
+  public obtenerGrupos(){
     this.isloading = true;
     this.grupoService.obtenerTodo()
     .subscribe((data:any[])=> {
       this.dataSource.data = data["lista"];
     }
    );
-
-
-   this.isloading = false;
+    this.isloading = false;
 }
 
   //metodo applyFilter, sirve para aplicar filtros en la pantalla
   applyFilter(filterValue: string) {
-    this.dataSource.filter = filterValue.trim().toLowerCase();
+      this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
     //metodo para ir a ventana de agregar objeto
@@ -72,20 +67,21 @@ dataSource = new MatTableDataSource();
     };
   
     editGrupo(grupo: Grupo): void{
-
-      console.log("grupo")
-      console.log(grupo)
-
-      console.log(grupo.idGrupo.toString());
-
       localStorage.removeItem("Id");
       localStorage.setItem("Id", grupo.idGrupo.toString());
       this.router.navigate(['app/edit-grupo']);
     }
 
     eliminarGrupo(grupo: Grupo): void{
-        console.log("eliminando grupo");
-        this.grupoService.deleteGrupo(grupo);
-        this.router.navigate(['app/list-grupo']);
+      this.grupoService.deleteGrupo(grupo);
+      this.router.navigate(['app/list-grupo']);
+    }
+
+
+    validateSesion(){
+      let loged = localStorage.getItem("loged");
+      if(loged==null){
+        this.router.navigate(['login']);
+      }
     }
 }

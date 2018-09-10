@@ -4,9 +4,9 @@ import { FormBuilder, FormGroup, Validators} from "@angular/forms";
 import { UsuarioService } from '../../_services/usuario.service';
 import {first} from "rxjs/operators";
 import { Usuario } from '../../_interfaces/usuario.interface';
-import { DatePipe } from '../../../../node_modules/@angular/common';
-import { DomSanitizer, SafeResourceUrl } from '../../../../node_modules/@angular/platform-browser';
-import { MatDialog,MatDialogRef } from '../../../../node_modules/@angular/material';
+import { DatePipe } from '@angular/common';
+import { DomSanitizer, SafeResourceUrl } from '@angular/platform-browser';
+import { MatDialog,MatDialogRef } from '@angular/material';
 import { DialogComponent } from '../../dialog/dialog.component';
 
 @Component({
@@ -38,35 +38,17 @@ export class EditUsuarioComponent implements OnInit {
 
   ngOnInit() {
 
+
+    this.validateSesion();
+
+    this.validateFom();
+
     this.breakpoint = (window.innerWidth <= 750) ? 1 : 2;
 
+    this.imageOn = false;
 
-    let loged = localStorage.getItem("loged");
-
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
-    
-    this.editFormUser = this.formBuilder.group({
-      idUsuario:          [],
-      nombre:             ['',Validators.required],
-      fecha:              ['',Validators.required],
-      curp:               ['',Validators.required],
-      rfc:                ['',Validators.required],
-      numeroLic:          ['',Validators.required],
-      tipoLic:            ['',Validators.required],
-      vigencia:           ['',Validators.required],
-      correo:             ['',Validators.required],
-      foto:               [''],
-      estatus:            ['',Validators.required],
-      password:           ['',Validators.required],
-      perfil:             ['',Validators.required],
-});
-
-this.imageOn = false;
-
-let userId = localStorage.getItem("userId");
-  if(!userId) {
+    let userId = localStorage.getItem("userId");
+    if(!userId) {
     alert("Invalid action.")
     this.router.navigate(['objeto']);
      return;
@@ -75,26 +57,18 @@ let userId = localStorage.getItem("userId");
 
     this.usuarioService.getUserById(+userId).subscribe(data =>{
 
-      console.log(data);
-      console.log("chec log")
-      console.log(this.editFormUser.value.foto);
-      console.log("fin log")
+
       this.editFormUser.setValue(<Usuario>data["lista"]);
+
       if(this.editFormUser.value.foto!=null){
-        console.log("cumple validacion");
         this.imageOn = true;
         this.imagePath = this._sanitizer.bypassSecurityTrustResourceUrl('data:image/jpg;base64,' 
         + this.editFormUser.value.foto)
       }
-      
-                
-
+             
       this.nombreUser = this.editFormUser.value.nombre;
 
       this.perfilUser = this.editFormUser.value.perfil;
-
-      console.log("path");
-      console.log(this.imagePath);
       
     })
 
@@ -120,15 +94,10 @@ let userId = localStorage.getItem("userId");
 
     this.dialogRef.afterClosed().subscribe(result => {
       if(result) {
-        // do confirmation actions
-        console.log("data");
-        console.log(this.base64textString);
+
         if(this.base64textString!=undefined){
-          console.log("se modifico la imagen");
+        
           this.editFormUser.value.foto = this.base64textString;
-        }else{
-          console.log("no se modifico imagen");
-          console.log(this.editFormUser.value.foto);
         }
         this.usuarioService.updateUser(<Usuario>this.editFormUser.value)
           .pipe(first())
@@ -151,11 +120,6 @@ let userId = localStorage.getItem("userId");
     this.router.navigate(['app/list-usuario']);
   }
 
-
- // checkDate() {
-  //  const dateSendingToServer = new DatePipe('en-US').transform(this.usuario.vigencia, 'dd/MM/yyyy')
-   // console.log(dateSendingToServer);
-  //}
 
   handleFileSelect(evt){
     var files = evt.target.files;
@@ -184,5 +148,34 @@ _handleReaderLoaded(readerEvt) {
 
   onResize(event) {
     this.breakpoint = (event.target.innerWidth <= 750) ? 1 : 2;
+  }
+
+
+  validateFom(){
+    this.editFormUser = this.formBuilder.group({
+      idUsuario:          [],
+      nombre:             ['',Validators.required],
+      fecha:              ['',Validators.required],
+      curp:               ['',Validators.required],
+      rfc:                ['',Validators.required],
+      numeroLic:          ['',Validators.required],
+      tipoLic:            ['',Validators.required],
+      vigencia:           ['',Validators.required],
+      correo:             ['',Validators.required],
+      foto:               [''],
+      estatus:            ['',Validators.required],
+      password:           ['',Validators.required],
+      perfil:             ['',Validators.required],
+  });
+
+  }
+
+
+  validateSesion(){
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
   }
 }

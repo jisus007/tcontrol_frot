@@ -24,12 +24,6 @@ export class ListUsuarioComponent implements OnInit{
     this.setDataSourceAttributes();
   }
 
-    //Creamos paginator de MatPaginator
-  //  @ViewChild(MatPaginator) paginator: MatPaginator;
-
-    //Creamos sort de tipo MatSort
-    //@ViewChild(MatSort) sort: MatSort;
-
    //declaracion de columnas que se mostraran en la vista html : objeto.component.html
    displayedColumns: string[] = ['nombre','fecha','tipoLic','correo','estatus','perfil','actions']     ;
   
@@ -46,16 +40,10 @@ export class ListUsuarioComponent implements OnInit{
   constructor(private usuarioService: UsuarioService, private router:Router) { }
 
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
+   // this.validateSesion();
 
     this.obtenerUsuarios();
-   // setTimeout(() => {this.dataSource.paginator = this.paginator});//se agrego el metodo setTimeout() ya que no estaba funcionando
-    //setTimeout(() => this.dataSource.sort = this.sort);
-
 
   }  
   public obtenerUsuarios(){
@@ -86,4 +74,11 @@ export class ListUsuarioComponent implements OnInit{
       this.router.navigate(['app/edit-usuario']);
     }
 
+    validateSesion(){
+      let loged = localStorage.getItem("loged");
+  
+      if(loged==null){
+        this.router.navigate(['login']);
+      }
+    }
 }

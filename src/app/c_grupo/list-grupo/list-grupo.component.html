@@ -11,24 +11,21 @@
       </mat-form-field>
       <mat-table #table [dataSource]="dataSource" matSort class="mat-elevation-z8"  [class.isMobile]="isMobile" style="width: 100%;" > 
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
 
-  <!-- idObjeto -->
   <ng-container matColumnDef="idGrupo">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Identificador Grupo</mat-header-cell>
       <mat-cell *matCellDef="let element">
           <span class="mobile-label">Id:</span>
         {{element.idGrupo}}  </mat-cell>
   </ng-container>
-  <!-- Nombre -->
+
   <ng-container matColumnDef="descripcion">
       <mat-header-cell *matHeaderCellDef mat-sort-header> Descripcion </mat-header-cell>
       <mat-cell *matCellDef="let element">
           <span class="mobile-label">Descripcion:</span>
         {{element.descripcion}}</mat-cell>
   </ng-container>
-   <!-- Acciones -->
+
   <ng-container matColumnDef="actions">
         <mat-header-cell *matHeaderCellDef> <br>Acciones</mat-header-cell>
         <mat-cell *matCellDef="let row" style="white-space: nowrap">  

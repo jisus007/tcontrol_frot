@@ -5,7 +5,7 @@ import { TipoService } from '../../_services/tipo.service';
 import {first} from "rxjs/operators";
 import { Tipo } from '../../_interfaces/tipo.interface';
 import { DialogComponent } from '../../dialog/dialog.component';
-import { MatDialog, MatDialogRef } from '../../../../node_modules/@angular/material';
+import { MatDialog, MatDialogRef } from '@angular/material';
 
 @Component({
   selector: 'app-edit-tipo',
@@ -22,28 +22,19 @@ export class EditTipoComponent implements OnInit {
   constructor(public dialog: MatDialog,private formBuilder: FormBuilder,private tipoService: TipoService,private router: Router ) { }
   Id : String;
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
-    this.formEditTipo = this.formBuilder.group({
-      idTipo:                  ['',Validators.required],
-      descripcion:             ['',Validators.required],
+    this.validateSesion();
 
-    });
+    this.validateFom();
 
     this.Id = localStorage.getItem("Id");
-  if(!this.Id) {
-    alert("Invalid action.")
-    this.router.navigate(['app/list-tipo']);
+    if(!this.Id) {
+        this.router.navigate(['app/list-tipo']);
      return;
     }
-    console.log("recuperando id")
-    console.log("id"+this.Id);
+
     this.tipoService.getTipoById(this.Id).subscribe(data =>{
 
-      console.log(data)
       this.formEditTipo.setValue(<Tipo>data["lista"]);
     })
   }
@@ -54,16 +45,16 @@ export class EditTipoComponent implements OnInit {
 
     if (this.formEditTipo.invalid) {
       return;
-  }
-  this.dialogRef = this.dialog.open(DialogComponent, {
-    disableClose: false
-  });
+    }
+    this.dialogRef = this.dialog.open(DialogComponent, {
+        disableClose: false
+    });
 
-  this.dialogRef.componentInstance.confirmMessage = "¿Desea realizar la actualización?"
+    this.dialogRef.componentInstance.confirmMessage = "¿Desea realizar la actualización?"
 
-  this.dialogRef.componentInstance.title = "Confirmar acción";
+    this.dialogRef.componentInstance.title = "Confirmar acción";
 
-  this.dialogRef.afterClosed().subscribe(result => {
+    this.dialogRef.afterClosed().subscribe(result => {
     if(result) {
     this.tipoService.updateTipo(<Tipo>this.formEditTipo.value)
       .pipe(first())
@@ -85,8 +76,20 @@ export class EditTipoComponent implements OnInit {
     this.router.navigate(['app/list-tipo']);
   }
 
-  
+  validateFom(){
+    this.formEditTipo = this.formBuilder.group({
+      idTipo:                  ['',Validators.required],
+      descripcion:             ['',Validators.required],
+
+    });
+  }
 
 
+  validateSesion(){
+    let loged = localStorage.getItem("loged");
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+  }
 
 }

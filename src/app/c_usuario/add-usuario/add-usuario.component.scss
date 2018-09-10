@@ -24,3 +24,24 @@
     max-height: 500px;
     min-width: 300px;
   }
+
+  .mobile-label {
+    display: none;
+  }
+
+
+.form-web {
+    display: block;
+}
+.form-mobile {
+   display: none;
+}
+  
+@media (max-width:600px) {
+.form-web {
+    display: none;
+ }
+.form-mobile {
+    display: block;
+ }
+}

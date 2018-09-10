@@ -29,40 +29,30 @@ export class AddObjetoComponent implements OnInit {
 
   public grupos : Grupo[];
 
+  breakpoint: number;
+
+  showDiv : boolean = false;
+
   constructor(private formBuilder: FormBuilder,private objetoService: ObjetoService,private router: Router, private tipoService: TipoService,  private grupoService: GrupoService) { }
 
 
-  //obj: Objeto = {nombre: '', descripcion: 0, serie: 0,fecAlta: '14/08/2018'};
 
-  
   
   ngOnInit() {
-    let loged = localStorage.getItem("loged");
 
-    if(loged==null){
-      this.router.navigate(['login']);
-    }
+    
+    this.showDiv = false;
+
+    //valida la sesion
+    this.validateSesion();
+    
+    //valida form
+    this.validateFom();
+
     this.obtenerTipos();
 
     this.obtenerGrupos();
 
-    this.formAddObjeto = this.formBuilder.group({
-           idObjeto: [],
-           nombre:           ['', Validators.required],
-           descripcion:      ['', Validators.required],
-           serie:            ['', Validators.required],
-           fecAlta:          ['', Validators.required],
-           fecActualizacion: ['', Validators.required],
-           status:           ['', Validators.required],
-           placas:           ['', Validators.required, Validators.maxLength(9), Validators.minLength(9)],
-           tipo:             ['', Validators.required],
-           grupo:            ['', Validators.required],
-           foto:             [''],
-    });
-
-    
-    console.log(this.tipos);
-    this.tipos;
   }
 
   //metodo para ir a ventana de agregar objeto
@@ -78,9 +68,9 @@ export class AddObjetoComponent implements OnInit {
   onSubmit() {
 
     if (this.formAddObjeto.invalid) {
-      return;
-  }
-    console.log(this.formAddObjeto.value);
+        return;
+    }
+    
     this.formAddObjeto.value.foto = this.base64textString;
     this.objetoService.createObjeto(<Objeto>this.formAddObjeto.value)
       .subscribe( data => {
@@ -119,12 +109,49 @@ export class AddObjetoComponent implements OnInit {
   }
 }
 
-
-
 _handleReaderLoaded(readerEvt) {
    var binaryString = readerEvt.target.result;
           this.base64textString= btoa(binaryString);
           console.log(this.base64textString);
           alert("imagen cargada")
   }
+
+  validateFom(){
+
+    this.formAddObjeto = this.formBuilder.group({
+      idObjeto: [],
+      nombre:           ['', Validators.required],
+      descripcion:      ['', Validators.required],
+      serie:            ['', Validators.required],
+      fecAlta:          ['', Validators.required],
+      fecActualizacion: ['', Validators.required],
+      status:           ['', Validators.required],
+      placas:           ['', Validators.required, Validators.maxLength(9), Validators.minLength(9)],
+      tipo:             ['', Validators.required],
+      grupo:            ['', Validators.required],
+      foto:             [''],
+    });
+  
+  }
+
+
+  validateSesion(){
+    let loged = localStorage.getItem("loged");
+
+    if(loged==null){
+      this.router.navigate(['login']);
+    }
+  }
+
+    //metodo para aplicar responsividad 
+    onResize(event) {
+    console.log("onResize")
+      if(event.target.innerWidth <= 500){
+          console.log("hablitando contenido");  
+        this.showDiv = true;
+      }else{
+        this.showDiv = false;
+      }
+    }
+    
 }

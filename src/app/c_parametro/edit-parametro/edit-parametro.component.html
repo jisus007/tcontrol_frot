@@ -19,7 +19,6 @@
              </mat-form-field>
              <br>
              <mat-form-field>
-              
                <mat-select placeholder="Estatus" type="status" formControlName="status"  name="status" class="form-control" id="status" >
                     <mat-option *ngFor="let stat of status" [value]="stat">
                         {{stat}}
@@ -29,7 +28,7 @@
            <br>
            <td>
                <mat-form-field>
-                   <input matInput [matDatepicker]="picker" placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
+                   <input matInput [matDatepicker]="picker" readonly placeholder="Fecha Actualizacion" type="fecActualizacion" formControlName="fecActualizacion"  name="fecActualizacion" class="form-control" id="fecActualizacion">
                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                    <mat-datepicker #picker></mat-datepicker>
                  </mat-form-field>
@@ -38,7 +37,6 @@
                  <button mat-raised-button (click)="onSubmit()" color="theme">Guardar</button>
                   &nbsp;
                  <button mat-raised-button (click)="cancel()" color="theme">Cancelar</button>
- 
              </mat-card-actions>
              </form>
             </mat-card-content>

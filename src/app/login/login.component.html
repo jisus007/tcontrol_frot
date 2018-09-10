@@ -1,5 +1,5 @@
 <br><br><br>
-<div style="margin-top: 10%;margin-left: 40%; margin-right: 40%">
+<div class="form-web" style="margin-top: 10%;margin-left: 30%; margin-right: 40%">
     <mat-toolbar color="primary" class="main-menu class.mat-elevation-z10">
         <div >
           <h2>Login</h2>
@@ -8,9 +8,9 @@
  <mat-card class="example-card">
    <mat-card-header>
    </mat-card-header>
-   <mat-card-content fxFlex="100%;" fxFlex.xs="100%">
-     <form [formGroup]="formLogin" fxLayout="column" >
-        <div class="input-row example-container" fxLayout="row" fxLayout.lt-md="column" fxLayoutGap="20px" fxLayoutGap.lt-md="0px">
+   <mat-card-content >
+     <form [formGroup]="formLogin"  >
+        <div class="input-row example-container" >
                       <mat-form-field fxFlex>
                            <input matInput placeholder="Usuario" type="username" [(ngModel)]="username" formControlName="username"  name="username" class="form-control" id="username" >
                       </mat-form-field>
@@ -18,6 +18,35 @@
         <div class="input-row example-container" fxLayout="row" fxLayout.lt-md="column">          
                   <mat-form-field fxFlex>
                          <input matInput  placeholder="Password" type="password" [(ngModel)]="password" formControlName="password"  name="password" class="form-control" id="password" >
+                  </mat-form-field> 
+        </div>
+    </form>
+     <mat-card-actions fxLayoutAlign="center" >
+        <button mat-raised-button (click)="login()" color="primary" >Login</button>
+      </mat-card-actions>
+   </mat-card-content>
+
+ </mat-card>
+</div>
+<div class="form-mobile">
+    <mat-toolbar color="primary" class="main-menu class.mat-elevation-z10">
+        <div >
+          <h2>Login</h2>
+          </div>
+      </mat-toolbar>
+ <mat-card class="example-card">
+   <mat-card-header>
+   </mat-card-header>
+   <mat-card-content >
+     <form [formGroup]="formLogin" fxLayout="column" >
+        <div class="example-container" >
+                      <mat-form-field fxFlex>
+                           <input matInput placeholder="Usuario" type="username" [(ngModel)]="username" formControlName="username"  name="username" class="form-control"  >
+                      </mat-form-field>
+                    </div>
+        <div class="example-container" >          
+                  <mat-form-field fxFlex>
+                         <input matInput  placeholder="Password" type="password" [(ngModel)]="password" formControlName="password"  name="password" class="form-control"  >
                   </mat-form-field> 
         </div>
     </form>
