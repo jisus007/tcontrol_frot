@@ -32,10 +32,7 @@ agm-map {
     }
   }
 
-  .form-fechas {
-    white-space: nowrap;
-    overflow: auto;
-  }
+
 
   .form-web {
     display: block;
@@ -49,6 +46,8 @@ agm-map {
       display: none;
     }
     .form-mobile {
+      background-color:blue;
       display: block;
+      height: 100%;
     }
   }
