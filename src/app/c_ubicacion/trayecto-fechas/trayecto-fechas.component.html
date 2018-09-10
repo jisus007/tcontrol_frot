@@ -68,7 +68,7 @@
 <div *ngIf="error.isError" class="alert alert-danger">
     {{ error.errorMessage }}
  </div>
-<div class="mat-elevation-z8" *ngIf="dataSource.data.length && *ngIf="!isSearch"" >
+<div class="mat-elevation-z8" *ngIf="dataSource.data.length && !isSearch" >
 
     <mat-table #table [dataSource]="dataSource" matSort class="mat-elevation-z8" style="width: 100%;" > 
         <!--- Note that these columns can be defined in any order.
