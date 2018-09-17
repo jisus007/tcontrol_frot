@@ -9,7 +9,7 @@ import { Usuario } from '../_interfaces/usuario.interface';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { AlertComponent } from '../alert/alert.component';
 import { sha256, sha224 } from 'js-sha256';
-import { BehaviorSubject } from '../../../node_modules/rxjs';
+import { BehaviorSubject, Observable } from '../../../node_modules/rxjs';
 import { Injectable } from '@angular/core';
 
 @Component({
@@ -25,11 +25,15 @@ export class LoginComponent implements OnInit{
   password : string
   dialogResult : string
   loged  : boolean
+  public isloading: boolean = false;
   
   private loggedIn = new BehaviorSubject<boolean>(false); 
+
+  private LoadIn = new BehaviorSubject<boolean>(false); 
   
   dialogRef: MatDialogRef<AlertComponent>;
   formLogin: FormGroup;
+  isLoad$: Observable<boolean>; 
   constructor(private formBuilder: FormBuilder,
     private usuarioService: UsuarioService,
     private router : Router, 
@@ -39,6 +43,7 @@ export class LoginComponent implements OnInit{
   }
   ngOnInit() {
 
+   
     localStorage.removeItem("loged");
 
     this.validateForm();          
@@ -49,20 +54,31 @@ export class LoginComponent implements OnInit{
     return this.loggedIn.asObservable(); // {2}
   }
 
+  get isLoad() {
+    return this.LoadIn.asObservable(); // {2}
+  }
+
+
  
 
-     login()  {
+   public  login()  {
+    this.authService.onloading();
+    
+
       if (this.formLogin.invalid) {
         return;
       }
       
+      this.isloading = true;
+      
       //obtenemos el token y lo subimos a sesion
       this.authService.getToken();
 
-     
-      
+      this.isLoad$ = this.authService.isLoading;
+      console.log(this.isLoad$);
       this.usuarioService.getUserByEmail(this.username).subscribe(
         (result: any) => { 
+          this.isloading = true;
           localStorage.removeItem("loged");
           if(result["lista"]!=null){
             if(sha256(this.password) == result["lista"].password){
@@ -96,11 +112,16 @@ export class LoginComponent implements OnInit{
           this.dialogRef = this.dialog.open(AlertComponent, {
             disableClose: false
           });
-          
+
+          this.isloading = false;
+      this.authService.falseLoading();
+      this.isLoad$ = this.authService.isLoading;
           this.dialogRef.componentInstance.title = "Notificación";
           this.dialogRef.componentInstance.confirmMessage = "El servicio no esta disponible "
         },
       )
+      
+      console.log(this.isLoad$._isScalar);
   }
 
   validateForm(){

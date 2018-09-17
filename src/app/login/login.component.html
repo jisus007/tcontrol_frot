@@ -24,6 +24,7 @@
      <mat-card-actions fxLayoutAlign="center" >
         <button mat-raised-button (click)="login()" color="primary" >Login</button>
       </mat-card-actions>
+      <mat-progress-bar *ngIf="isLoad$ && isloading" mode="indeterminate"></mat-progress-bar>
    </mat-card-content>
 
  </mat-card>
@@ -53,6 +54,7 @@
      <mat-card-actions fxLayoutAlign="center" >
         <button mat-raised-button (click)="login()" color="primary" >Login</button>
       </mat-card-actions>
+      <mat-progress-bar *ngIf="isLoad$ && isloading" mode="indeterminate"></mat-progress-bar>
    </mat-card-content>
 
  </mat-card>

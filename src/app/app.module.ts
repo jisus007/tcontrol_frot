@@ -28,6 +28,7 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatTabsModule} from '@angular/material/tabs';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatMenuModule} from '@angular/material/menu';
+import {MatProgressBarModule} from '@angular/material/progress-bar';
 
 import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
@@ -118,6 +119,7 @@ import { CustomHttpInterceptor } from './customHttpInterceptor';
     AgmDirectionModule,
     MatSidenavModule,
     MatMenuModule,
+    MatProgressBarModule,
     AgmCoreModule.forRoot({
       apiKey: 'AIzaSyDukpIc-86ezs8umS8kOxxRz5yc8HpxVWg'
     })

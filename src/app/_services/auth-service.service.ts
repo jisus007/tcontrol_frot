@@ -10,7 +10,7 @@ import { Usuario } from '../_interfaces/usuario.interface';
 export class AuthServiceService {
 
 
-   public API = 'https://access-token-web.herokuapp.com';
+  public API = 'https://app-rastreo-services.herokuapp.com';
 
    constructor(private http:HttpClient,private router: Router) { }
 
@@ -25,10 +25,15 @@ export class AuthServiceService {
 
   private loggedIn = new BehaviorSubject<boolean>(false); 
 
+  private Loading = new BehaviorSubject<boolean>(false); 
+
   get isLoggedIn() {
     return this.loggedIn.asObservable(); 
   }
 
+  get isLoading() {
+    return this.Loading.asObservable(); 
+  }
 
 
   login(){
@@ -44,6 +49,16 @@ export class AuthServiceService {
   }
 
 
+  onloading(){
+    this.Loading.next(true);
+    //this.router.navigate(['/']);
+
+}
+
+  falseLoading(){
+    this.Loading.next(false);
+  //this.router.navigate(['/']);
+  }
 }
 
 
